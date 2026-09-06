@@ -513,102 +513,122 @@ const DAYS = [
     ]
   },
   {
-    id: 5, label: 'D5', date: '9月29日（周一）', title: '凯里 → 安顺美食 → 兴义（不赶路了）',
+    id: 5, label: 'D5', date: '9月29日（周一）', title: '凯里 → 安顺 · 小吃之都 · 不赶路',
     color: '#ff2d55',
     locations: [
       {
         name: '凯里早餐·苗家糯米饭', lat: 26.588, lng: 107.982,
-        type: 'food', time: '07:00',
+        type: 'food', time: '08:00',
         desc: '苗族特色早餐，糯米饭配腊肉酸汤',
-        budget: '人均15-20元',
-        detail: '推荐：糯米饭、腊肉、酸汤\n苗族人早餐吃糯米饭，抗饿\n配腊肉和酸汤，味道独特\n市区有多家早餐店\n人均15-20元'
+        budget: '人均15-20元 | ⏰ 07:00-11:00',
+        detail: '推荐：糯米饭、腊肉、酸汤\n苗族人早餐吃糯米饭，抗饿\n配腊肉和酸汤，味道独特\n市区有多家早餐店\n人均15-20元\n💡 D5不赶路，9点出发即可'
       },
       {
         name: '凯里→安顺', lat: 26.588, lng: 107.982,
-        type: 'transport', time: '08:00',
-        desc: '经沪昆高速到安顺，约280km · 约3.5小时 | 不用赶路了，8点出发'
+        type: 'transport', time: '09:00',
+        desc: '经沪昆高速到安顺，约280km · 约3.5小时 | ☀️ 不赶路，9点出发'
       },
       {
         name: '龙里服务区·休息加油', lat: 26.460, lng: 107.010,
-        type: 'transport', time: '09:00',
+        type: 'transport', time: '10:00',
         desc: '⛽ 出发1小时后休息站，加油+上厕所+买水',
         detail: '龙里服务区是沪昆高速大站\n有中石化加油站、便利店、快餐\n建议休息15分钟\n检查油量，不够就加满'
       },
       {
         name: '安顺老城·小吃之旅', lat: 26.195, lng: 105.932,
-        type: 'food', time: '10:30',
+        type: 'food', time: '12:30',
         desc: '⭐推荐：儒林路小吃街 / 顾府街小吃一带',
-        budget: '人均30-50元 | ⏰ 全天（建议10:00-13:00）',
-        detail: '【推荐去处】\n1. 儒林路小吃街 - 安顺最集中的小吃街，一站吃遍\n2. 顾府街一带 - 本地人吃早餐的地方\n3. 南门大桥头 - 老字号聚集地\n\n必吃清单：\n· 裹卷（薄饼卷配菜+辣椒水）- 安顺独有\n· 夺夺粉（酸辣火锅粉）- 5元一份\n· 冲冲糕（糯米糕+玫瑰糖）- 3元一份\n· 油炸粑+豆浆 - 经典搭配\n· 破酥包 - 安顺特色包子\n\n⏰ 很多小吃摊中午就收摊，建议10:30前到！'
+        budget: '人均30-50元 | ⏰ 全天（建议12:00-14:00）',
+        detail: '【推荐去处】\n1. 儒林路小吃街 - 安顺最集中的小吃街，一站吃遍\n2. 顾府街一带 - 本地人吃早餐的地方\n3. 南门大桥头 - 老字号聚集地\n\n必吃清单：\n· 裹卷（薄饼卷配菜+辣椒水）- 安顺独有\n· 夺夺粉（酸辣火锅粉）- 5元一份\n· 冲冲糕（糯米糕+玫瑰糖）- 3元一份\n· 油炸粑+豆浆 - 经典搭配\n· 破酥包 - 安顺特色包子\n\n⏰ 很多小吃摊下午就收摊，建议12:30前到！'
       },
       {
-        name: '安顺→兴义', lat: 26.195, lng: 105.932,
-        type: 'transport', time: '12:00',
-        desc: '经晴兴高速到兴义，约200km · 约2.5小时'
+        name: '安顺老城·city walk', lat: 26.195, lng: 105.932,
+        type: 'spot', time: '14:30',
+        desc: '安顺老城漫步，600年屯堡文化，不是景区',
+        detail: '午餐后在老城散步消食\n安顺有600年历史的屯堡文化\n老房子、石板路、古城墙\n没有过度开发，很真实\n本地人在这里喝茶、打牌\n感受贵州小城的慢生活\n\n推荐路线：儒林路→顾府街→南门→古城墙'
       },
       {
-        name: '盘州服务区·休息', lat: 25.590, lng: 104.680,
-        type: 'transport', time: '15:30',
-        desc: '⛽ 安顺到兴义中途休息站，加油+活动',
-        detail: '盘州服务区是中途大站\n有加油站、便利店\n建议休息15分钟\n这段路隧道多，注意疲劳驾驶'
+        name: '安顺下午茶·冲冲糕+破酥包', lat: 26.196, lng: 105.933,
+        type: 'food', time: '15:30',
+        desc: '安顺特色下午茶，边走边吃',
+        budget: '人均10-15元',
+        detail: '冲冲糕：糯米糕+玫瑰糖，3元一份\n破酥包：安顺特色包子，皮酥馅多\n街边小摊就有，问本地人哪里买\n边走边吃，很惬意'
       },
       {
-        name: '兴义晚餐·羊肉粉', lat: 25.089, lng: 104.907,
-        type: 'food', time: '17:30',
-        desc: '⭐推荐：马岭河边羊肉粉 / 兴义老字号羊肉粉',
-        budget: '人均20-30元 | ⏰ 07:00-21:00',
-        detail: '【推荐店铺】\n1. 马岭河边羊肉粉 - 兴义本地人最爱\n2. 兴义老字号羊肉粉(老街) - 30年老店\n3. 砂锅羊肉粉(桔山大道) - 汤底浓郁\n\n贵州四大粉之一，汤鲜粉滑\n加个煎蛋、加份羊肉\n人均20-30元\n💡 D5不赶路了，吃完慢慢回酒店休息'
+        name: '安顺晚餐·安顺裹卷+丝娃娃', lat: 26.194, lng: 105.931,
+        type: 'food', time: '18:00',
+        desc: '⭐推荐：安顺老城裹卷王 / 丝娃娃专卖店',
+        budget: '人均30-50元 | ⏰ 17:00-21:00',
+        detail: '【推荐店铺】\n1. 老城裹卷王(儒林路) - 安顺最有名的裹卷摊\n2. 丝娃娃专卖店(顾府街) - 安顺版"春卷"\n3. 南门桥烧烤 - 本地人夜宵去处\n\n裹卷：薄饼卷各种配菜+辣椒水\n丝娃娃：薄饼卷蔬菜丝，像襁褓婴儿\n人均30-50元，吃到撑\n\n💡 吃完早点休息，明天还要走最后一段路'
       },
       {
-        name: '全季酒店（兴义桔山广场安贞路店）', lat: 25.090, lng: 104.898,
-        type: 'hotel', time: '18:30',
-        desc: '⭐首选 | 携程9.5分 | 🅿️免费停车 | 🍳含早 | 📞0859-3366666',
-        budget: '约¥150-200/晚 | 退房12:00',
-        detail: '华住旗下，品质稳定\n携程评分9.5/10\n🅿️ 免费停车场\n🍳 含双人早餐（7:00-10:00）\n📞 0859-3366666\n🕐 退房12:00\n桔山广场核心位置，周边美食丰富\n💡 D5不用赶路了，好好休息，明天白天走最后一段山路'
+        name: '全季酒店（安顺城区店）', lat: 26.196, lng: 105.934,
+        type: 'hotel', time: '19:00',
+        desc: '⭐首选 | 华住中端 | 🅿️免费停车 | 🍳含早 | 📞0851-3322666',
+        budget: '约¥140-180/晚 | 退房12:00',
+        detail: '华住旗下，品质稳定\n🅿️ 免费停车场\n🍳 含双人早餐（7:00-10:00）\n📞 0851-3322666\n🕐 退房12:00\n城区位置，避开景区溢价\n周边美食丰富，步行可达老城\n💡 D5只开280km，很轻松，好好休息'
       },
       {
-        name: '全季酒店（兴义桔山广场碧云路店）', lat: 25.092, lng: 104.895,
+        name: '安顺百灵温泉花园酒店', lat: 26.198, lng: 105.936,
         type: 'hotel', time: '—',
-        desc: '【备选】2026年新开业，最新设施',
-        budget: '约¥200-260/晚',
-        detail: '2026年最新开业\n设施全新\n同位置另一家全季'
+        desc: '【备选】2022年装修，有温泉',
+        budget: '约¥180-240/晚',
+        detail: '2022年装修，设施较新\n有温泉泡池，开车一天泡温泉很舒服\n免费停车场\n含早餐'
       },
       {
-        name: '兴义富康国际酒店', lat: 25.095, lng: 104.900,
+        name: '维也纳国际酒店（安顺西秀区店）', lat: 26.193, lng: 105.930,
         type: 'hotel', time: '—',
-        desc: '【备选】老牌酒店，房间大',
-        budget: '约¥160-220/晚',
-        detail: '兴义市区老牌酒店\n房间面积大\n早餐丰富'
+        desc: '【备选】锦江中端品牌，房间大',
+        budget: '约¥150-200/晚',
+        detail: '锦江旗下中端品牌\n房间面积大（35㎡+）\n免费停车场\n欧式装修风格'
       }
     ]
   },
   {
-    id: 6, label: 'D6', date: '9月30日（周二）', title: '兴义 → 宣威 · 白天山路 · 宣威烧烤',
+    id: 6, label: 'D6', date: '9月30日（周二）', title: '安顺 → 兴义 → 宣威 · 白天到达 🏁',
     color: '#e60012',
     locations: [
       {
-        name: '兴义早餐', lat: 25.090, lng: 104.898,
-        type: 'food', time: '08:00',
-        desc: '酒店含早，或去街边吃碗剪粉',
-        budget: '人均10-15元',
-        detail: '酒店早餐7:00-10:00\n或者试试兴义特色剪粉\n剪粉是兴义独有的小吃，薄如纸、口感滑嫩\n配辣椒水，当地人的早餐\n人均5-10元'
+        name: '安顺早餐', lat: 26.196, lng: 105.934,
+        type: 'food', time: '07:30',
+        desc: '酒店含早，或去街边吃碗安顺米粉',
+        budget: '人均10-15元 | ⏰ 07:00-10:00',
+        detail: '酒店早餐7:00-10:00\n或者试试安顺本地米粉\n安顺米粉和桂林米粉不同\n汤底更浓郁，配菜更多\n人均5-10元\n💡 吃饱出发，今天400km但全程白天'
       },
       {
-        name: '兴义出发', lat: 25.089, lng: 104.907,
-        type: 'transport', time: '09:00',
-        desc: '白天出发！经曲靖到宣威，约200km · 约2.5小时 | ☀️ 全程白天，山路也安心'
+        name: '安顺→兴义', lat: 26.195, lng: 105.932,
+        type: 'transport', time: '08:00',
+        desc: '经晴兴高速到兴义，约200km · 约2.5小时 | ☀️ 白天出发，山路安心'
+      },
+      {
+        name: '盘州服务区·休息加油', lat: 25.590, lng: 104.680,
+        type: 'transport', time: '09:30',
+        desc: '⛽ 安顺到兴义中途休息站，加油+活动',
+        detail: '盘州服务区是中途大站\n有中石化加油站、便利店\n建议休息15分钟\n这段路隧道桥梁多，注意限速\n进入云南前加满油'
+      },
+      {
+        name: '兴义午餐·羊肉粉', lat: 25.089, lng: 104.907,
+        type: 'food', time: '10:30',
+        desc: '⭐推荐：马岭河边羊肉粉 / 兴义老字号羊肉粉',
+        budget: '人均20-30元 | ⏰ 07:00-21:00',
+        detail: '【推荐店铺】\n1. 马岭河边羊肉粉 - 兴义本地人最爱\n2. 兴义老字号羊肉粉(老街) - 30年老店\n3. 砂锅羊肉粉(桔山大道) - 汤底浓郁\n\n贵州四大粉之一，汤鲜粉滑\n加个煎蛋、加份羊肉\n人均20-30元\n💡 吃完休息一会再出发'
+      },
+      {
+        name: '兴义→宣威', lat: 25.089, lng: 104.907,
+        type: 'transport', time: '11:30',
+        desc: '经曲靖到宣威，约200km · 约2.5小时 | ☀️ 中午出发，下午到达'
       },
       {
         name: '曲靖·中途休息', lat: 25.500, lng: 103.800,
-        type: 'transport', time: '10:30',
-        desc: '⛽ 曲靖服务区休息，加油+上厕所',
-        detail: '曲靖是云南第二大城市\n服务区有中石化加油站\n休息15分钟\n这段路进入云南，路况变好'
+        type: 'transport', time: '13:00',
+        desc: '⛽ 曲靖服务区休息，进入云南最后一段',
+        detail: '曲靖是云南第二大城市\n服务区有中石化加油站\n休息15分钟\n这段路进入云南，路况变好\n离宣威还有约100km'
       },
       {
         name: '宣威·姬榔德村', lat: 26.228, lng: 104.098,
-        type: 'spot', time: '12:00',
-        desc: '🏁 中午抵达目的地！一路顺风',
-        detail: '中午到达，阳光正好\n宣威以火腿闻名全国\n先安顿行李，休息一会\n下午可以去市区逛逛\n晚上重头戏：宣威烧烤！'
+        type: 'spot', time: '14:00',
+        desc: '🏁 下午2点抵达目的地！全程白天，一路顺风',
+        detail: '☀️ 下午2点到达，阳光正好！\n全程白天走山路，安全又安心\n\n宣威以火腿闻名全国\n先安顿行李，休息一会\n下午可以去市区逛逛\n晚上重头戏：宣威烧烤！'
       },
       {
         name: '宣威午餐·火腿鸡', lat: 26.228, lng: 104.098,
@@ -684,13 +704,13 @@ function overviewContent() {
     <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 从江香猪 → 酸汤鱼 → 米豆腐 · 🚶 凯里大十字街区city walk</div>
   </div>
   <div class="card" onclick="go(5)" style="margin-bottom:10px">
-    <div class="name"><span class="dot" style="background:#ff2d55"></span>D5 · 凯里→安顺→兴义</div>
-    <div class="desc">9/29（周一）· 约480km · 6h驾驶 · <span style="color:var(--tint-orange)">★★ 中等</span></div>
+    <div class="name"><span class="dot" style="background:#ff2d55"></span>D5 · 凯里→安顺 · 小吃之都</div>
+    <div class="desc">9/29（周一）· 约280km · 3.5h驾驶 · <span style="color:var(--tint-green)">★ 轻松</span></div>
     <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 安顺裹卷夺夺粉 → 兴义羊肉粉 · 🚶 安顺老城美食漫步</div>
   </div>
   <div class="card" onclick="go(6)" style="margin-bottom:10px">
-    <div class="name"><span class="dot" style="background:#e60012"></span>D6 · 兴义→宣威 · 宣威烧烤🔥</div>
-    <div class="desc">9/30（周二）· 约200km · 2.5h驾驶 · <span style="color:var(--tint-green)">★ 轻松 · 全程白天</span></div>
+    <div class="name"><span class="dot" style="background:#e60012"></span>D6 · 安顺→兴义→宣威 · 白天到达🏁</div>
+    <div class="desc">9/30（周二）· 约400km · 5h驾驶 · <span style="color:var(--tint-green)">★ 轻松 · 全程白天</span></div>
     <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 宣威火腿鸡 → 🔥宣威烧烤 · 🚶 宣威小城漫步</div>
   </div>
 </div>
@@ -726,13 +746,13 @@ function overviewContent() {
   <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：全季酒店（万达店·2024）¥180-220 | 亚朵酒店（2024）¥220-280</div>
 </div>
 <div class="card" style="margin-bottom:10px">
-  <div class="time">D5 · 9/29 · 兴义（不赶路，住一晚）</div>
-  <div class="name">全季酒店（兴义桔山安贞路店）⭐首选</div>
-  <div class="desc">携程9.5分，¥200内最佳选择，约¥150-200/晚</div>
-  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：全季碧云路店（2026新开）¥200-260 | 富康国际 ¥160-220</div>
+  <div class="time">D5 · 9/29 · 安顺（小吃之都，住一晚）</div>
+  <div class="name">全季酒店（安顺城区店）⭐首选</div>
+  <div class="desc">华住中端，🅿️免费停车，🍳含早，约¥140-180/晚</div>
+  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：百灵温泉花园酒店（2022装修·有温泉）¥180-240 | 维也纳国际 ¥150-200</div>
 </div>
 <div class="card" style="margin-bottom:10px">
-  <div class="time">D6 · 9/30 · 宣威（目的地·到达）</div>
+  <div class="time">D6 · 9/30 · 宣威（目的地·到达·下午2点到）</div>
   <div class="name">到达目的地·姬榔德村 🏁</div>
   <div class="desc">到达目的地，旅途圆满结束！晚上宣威烧烤收官🔥</div>
 </div>
@@ -763,8 +783,8 @@ function overviewContent() {
 <div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-red)">
   <div class="name" style="color:var(--tint-red)">⚠️ 需要注意的问题</div>
   <div class="desc" style="line-height:1.8">
-    · <strong>D5 不赶路了</strong>：480km到兴义，龙里服务区休息+加油，安顺停留1.5小时吃午餐，盘州服务区休息，兴义晚餐后住酒店<br>
-    · <strong>D6 轻松收官</strong>：200km到宣威，<span style='color:var(--tint-green)'>全程白天走山路</span>，中午到达，下午宣威小城漫步，晚上宣威烧烤大餐<br>
+    · <strong>D5 轻松到安顺</strong>：280km到安顺，龙里服务区休息+加油，安顺老城吃遍小吃，下午city walk，晚上裹卷+丝娃娃<br>
+    · <strong>D6 白天到达</strong>：400km经兴义到宣威，<span style='color:var(--tint-green)'>全程白天走山路</span>，下午2点到达，宣威小城漫步，晚上宣威烧烤大餐<br>
     · <strong>D4 山路多</strong>：三江→从江→凯里段是山区高速，隧道桥梁多，限速频繁<br>
     · <strong>住宿选择</strong>：全部选市区连锁酒店，避开景区溢价，停车方便
   </div>
@@ -773,8 +793,8 @@ function overviewContent() {
 <div class="section-head">注意事项</div>
 <div class="card">
   <div class="desc" style="line-height:1.8">
-    · D5约480km到兴义，不用太早出发；D6约200km白天到宣威<br>
-    · 最后一段山路（兴义→宣威）安排在D6白天，避免夜间山路<br>
+    · D5约280km到安顺，很轻松；D6约400km经兴义到宣威，全程白天<br>
+    · 最后一段山路（兴义→宣威→曲靖→宣威）安排在D6白天，避免夜间山路<br>
     · 贵州山区多弯道，注意行车安全<br>
     · 9月底贵州/广西气温约18-28°C，带薄外套<br>
     · city walk穿舒适运动鞋，古镇石板路多<br>
@@ -893,7 +913,8 @@ function overviewContent() {
     · D1 出发前加满油，黄姚古镇可补给<br>
     · D3 三江→从江段山路加油站少，<strong>三江加满再走</strong><br>
     · D4 凯里出发前加满，安顺沿线加油站充足<br>
-    · D5 凯里出发前加满，贵州进入云南后加油站间隔较远<br>
+    · D5 凯里出发前加满，龙里服务区可补给，到安顺再加满
+    · D6 安顺出发前加满，盘州服务区可补给，进入云南前加满<br>
     · 建议油量低于半箱就加，山区不要等油灯亮
   </div>
 </div>
@@ -907,7 +928,8 @@ function overviewContent() {
     <strong>D2</strong> 阳朔县城内加油，当天不离开县城<br>
     <strong>D3</strong> <span style="color:var(--tint-red)">⚠️ 三江出发前务必加满！</span>三江→从江段120km山路仅1个加油站<br>
     <strong>D4</strong> 凯里出发前加满 → 从江可补给 → 凯里市区加油站多<br>
-    <strong>D5</strong> <span style="color:var(--tint-red)">⚠️ 凯里出发前加满！</span>龙里服务区可补给 → 盘州服务区可补给 → 进入云南后加油站间隔较远<br>
+    <strong>D5</strong> 凯里出发前加满 → 龙里服务区可补给 → 到安顺后加满<br>
+    <strong>D6</strong> <span style="color:var(--tint-red)">⚠️ 安顺出发前加满！</span>盘州服务区可补给 → 进入云南前加满 → 曲靖服务区可补给<br>
     <strong>原则：</strong>油量低于半箱就加，山区不要等油灯亮！贵州山区服务区间距50-80km
   </div>
 </div>
@@ -931,7 +953,8 @@ function overviewContent() {
     <strong>D2 阳朔乡间：</strong>乡道+县道，路面好但窄，注意会车 ⚠️<br>
     <strong>D3 阳朔→兴坪→三江：</strong>部分省道山路，弯道多 ⚠️<br>
     <strong>D4 三江→凯里：</strong><span style="color:var(--tint-red)">隧道桥梁多！限速频繁！</span> 从江→凯里段多山路 🚨<br>
-    <strong>D5 凯里→宣威：</strong>沪昆高速+晴兴高速，路况好但距离长 ⚠️<br>
+    <strong>D5 凯里→安顺：</strong>沪昆高速，路况好 ✅<br>
+    <strong>D6 安顺→宣威：</strong>晴兴高速+沪昆高速，隧道桥梁多，但全程白天 ⚠️<br>
     <strong>通用提醒：</strong>贵州山区多团雾、暗冰（早晚），隧道内开灯减速
   </div>
 </div>
@@ -959,7 +982,7 @@ function overviewContent() {
     · D1-D2 阳朔（2晚）：¥360-440（均价¥180-220/晚）<br>
     · D3 三江（1晚）：¥120-160<br>
     · D4 凯里（1晚）：¥160-200<br>
-    · D5 兴义（1晚）：¥150-200<br>
+    · D5 安顺（1晚）：¥140-180<br>
     <strong>住宿小计：¥790-1,000</strong><br><br>
     <strong>🍜 餐饮费用（5天）</strong><br>
     · D1：黄姚午餐¥70 + 阳朔晚餐¥140 = ¥210<br>
@@ -984,8 +1007,8 @@ function overviewContent() {
   <div class="name">9月底沿途天气参考</div>
   <div class="desc" style="line-height:1.8">
     <strong>广西段（D1-D3）：</strong>25-32°C，偶有阵雨，白天短袖+防晒<br>
-    <strong>贵州段（D4-D5）：</strong>18-26°C，山区早晚凉，需薄外套<br>
-    <strong>云南段（D5到达）：</strong>15-23°C，温差大，早晚需外套<br><br>
+    <strong>贵州段（D4-D6）：</strong>18-26°C，山区早晚凉，需薄外套<br>
+    <strong>云南段（D6到达）：</strong>15-23°C，温差大，早晚需外套<br><br>
     <strong>穿衣建议：</strong><br>
     · 白天：短袖T恤+薄长裤（city walk舒适为主）<br>
     · 早晚/山区：薄冲锋衣或卫衣外套<br>
@@ -1389,7 +1412,7 @@ function downloadPDF() {
 
 // Share trip
 function shareTrip() {
-  const text = '中山→云南宣威 轻松6日 · City Walk+美食\n9/25-9/30\n路线：中山→黄姚古镇→阳朔→三江→凯里→安顺→兴义→宣威\n主打：city walk + 本地美食，不赶热门景区\nD6白天走山路，宣威烧烤收官🔥\n总里程约1600km';
+  const text = '中山→云南宣威 轻松6日 · City Walk+美食\n9/25-9/30\n路线：中山→黄姚古镇→阳朔→三江→凯里→安顺→兴义→宣威\n主打：city walk + 本地美食，不赶热门景区\nD5住安顺吃小吃，D6白天到宣威，宣威烧烤收官🔥\n总里程约1600km';
   if(navigator.share) {
     navigator.share({title:'中山→宣威 轻松5日·City Walk+美食', text: text, url: window.location.href}).catch(()=>{});
   } else {
