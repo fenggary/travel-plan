@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>中山→云南宣威 轻松5日 · City Walk+美食</title>
-<meta name="description" content="广东中山出发，经广西贵州，自驾5日到云南宣威">
+<title>中山→云南宣威 轻松6日 · City Walk+美食</title>
+<meta name="description" content="广东中山出发，经广西贵州，自驾6日到云南宣威，宣威烧烤收官">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -513,7 +513,7 @@ const DAYS = [
     ]
   },
   {
-    id: 5, label: 'D5', date: '9月29日（周一）', title: '凯里 → 安顺美食 → 兴义 → 宣威',
+    id: 5, label: 'D5', date: '9月29日（周一）', title: '凯里 → 安顺美食 → 兴义（不赶路了）',
     color: '#ff2d55',
     locations: [
       {
@@ -525,12 +525,12 @@ const DAYS = [
       },
       {
         name: '凯里→安顺', lat: 26.588, lng: 107.982,
-        type: 'transport', time: '06:30',
-        desc: '经沪昆高速到安顺，约280km · 约3.5小时 | ⚠️ D5赶路日，建议6:30出发'
+        type: 'transport', time: '08:00',
+        desc: '经沪昆高速到安顺，约280km · 约3.5小时 | 不用赶路了，8点出发'
       },
       {
         name: '龙里服务区·休息加油', lat: 26.460, lng: 107.010,
-        type: 'transport', time: '07:30',
+        type: 'transport', time: '09:00',
         desc: '⛽ 出发1小时后休息站，加油+上厕所+买水',
         detail: '龙里服务区是沪昆高速大站\n有中石化加油站、便利店、快餐\n建议休息15分钟\n检查油量，不够就加满'
       },
@@ -555,27 +555,16 @@ const DAYS = [
       {
         name: '兴义晚餐·羊肉粉', lat: 25.089, lng: 104.907,
         type: 'food', time: '17:30',
-        desc: '兴义羊肉粉是贵州四大粉之一，汤鲜粉滑',
-        budget: '人均20-30元',
-        detail: '推荐：兴义羊肉粉\n贵州四大粉之一\n汤鲜粉滑，羊肉鲜嫩\n加个煎蛋、加份羊肉\n老城区有多家老字号\n人均20-30元'
-      },
-      {
-        name: '兴义→宣威', lat: 25.089, lng: 104.907,
-        type: 'transport', time: '18:30',
-        desc: '经曲靖到宣威，约200km · 约2.5小时 | 最后一段，注意夜间行车安全'
-      },
-      {
-        name: '宣威市·姬榔德村', lat: 26.228, lng: 104.098,
-        type: 'spot', time: '21:00',
-        desc: '抵达目的地！旅途圆满结束',
-        detail: '宣威以火腿闻名\n到达后可品尝正宗宣威火腿\n好好休息，旅途辛苦'
+        desc: '⭐推荐：马岭河边羊肉粉 / 兴义老字号羊肉粉',
+        budget: '人均20-30元 | ⏰ 07:00-21:00',
+        detail: '【推荐店铺】\n1. 马岭河边羊肉粉 - 兴义本地人最爱\n2. 兴义老字号羊肉粉(老街) - 30年老店\n3. 砂锅羊肉粉(桔山大道) - 汤底浓郁\n\n贵州四大粉之一，汤鲜粉滑\n加个煎蛋、加份羊肉\n人均20-30元\n💡 D5不赶路了，吃完慢慢回酒店休息'
       },
       {
         name: '全季酒店（兴义桔山广场安贞路店）', lat: 25.090, lng: 104.898,
-        type: 'hotel', time: '18:00',
+        type: 'hotel', time: '18:30',
         desc: '⭐首选 | 携程9.5分 | 🅿️免费停车 | 🍳含早 | 📞0859-3366666',
         budget: '约¥150-200/晚 | 退房12:00',
-        detail: '华住旗下，品质稳定\n携程评分9.5/10\n🅿️ 免费停车场\n🍳 含双人早餐（7:00-10:00）\n📞 0859-3366666\n🕐 退房12:00\n桔山广场核心位置，周边美食丰富\n💡 注意：D5赶路日，此酒店仅作为中转休息备选\n如能赶到宣威建议直接住目的地'
+        detail: '华住旗下，品质稳定\n携程评分9.5/10\n🅿️ 免费停车场\n🍳 含双人早餐（7:00-10:00）\n📞 0859-3366666\n🕐 退房12:00\n桔山广场核心位置，周边美食丰富\n💡 D5不用赶路了，好好休息，明天白天走最后一段山路'
       },
       {
         name: '全季酒店（兴义桔山广场碧云路店）', lat: 25.092, lng: 104.895,
@@ -592,26 +581,82 @@ const DAYS = [
         detail: '兴义市区老牌酒店\n房间面积大\n早餐丰富'
       }
     ]
+  },
+  {
+    id: 6, label: 'D6', date: '9月30日（周二）', title: '兴义 → 宣威 · 白天山路 · 宣威烧烤',
+    color: '#e60012',
+    locations: [
+      {
+        name: '兴义早餐', lat: 25.090, lng: 104.898,
+        type: 'food', time: '08:00',
+        desc: '酒店含早，或去街边吃碗剪粉',
+        budget: '人均10-15元',
+        detail: '酒店早餐7:00-10:00\n或者试试兴义特色剪粉\n剪粉是兴义独有的小吃，薄如纸、口感滑嫩\n配辣椒水，当地人的早餐\n人均5-10元'
+      },
+      {
+        name: '兴义出发', lat: 25.089, lng: 104.907,
+        type: 'transport', time: '09:00',
+        desc: '白天出发！经曲靖到宣威，约200km · 约2.5小时 | ☀️ 全程白天，山路也安心'
+      },
+      {
+        name: '曲靖·中途休息', lat: 25.500, lng: 103.800,
+        type: 'transport', time: '10:30',
+        desc: '⛽ 曲靖服务区休息，加油+上厕所',
+        detail: '曲靖是云南第二大城市\n服务区有中石化加油站\n休息15分钟\n这段路进入云南，路况变好'
+      },
+      {
+        name: '宣威·姬榔德村', lat: 26.228, lng: 104.098,
+        type: 'spot', time: '12:00',
+        desc: '🏁 中午抵达目的地！一路顺风',
+        detail: '中午到达，阳光正好\n宣威以火腿闻名全国\n先安顿行李，休息一会\n下午可以去市区逛逛\n晚上重头戏：宣威烧烤！'
+      },
+      {
+        name: '宣威午餐·火腿鸡', lat: 26.228, lng: 104.098,
+        type: 'food', time: '12:30',
+        desc: '⭐推荐：宣威火腿鸡火锅 / 本地农家菜',
+        budget: '人均50-70元 | ⏰ 11:00-14:00',
+        detail: '【推荐店铺】\n1. 宣威火腿城附近餐馆 - 最正宗的火腿宴\n2. 本地农家菜馆 - 火腿炒各种菜\n\n必点：火腿鸡火锅、火腿蒸蛋、火腿炒青菜\n宣威火腿是国家地理标志产品\n和金华火腿齐名，但更实惠\n人均50-70元，分量足'
+      },
+      {
+        name: '宣威市区·散步消食', lat: 26.230, lng: 104.100,
+        type: 'spot', time: '14:00',
+        desc: '宣威小城漫步，感受云南小城生活',
+        detail: '下午在宣威市区走走\n小城节奏很慢\n看看本地市场、街道\n和贵州、广西完全不同的感觉\n云南的阳光特别舒服'
+      },
+      {
+        name: '宣威晚餐·宣威烧烤', lat: 26.225, lng: 104.095,
+        type: 'food', time: '18:00',
+        desc: '🔥 重头戏！宣威烧烤是云南烧烤天花板',
+        budget: '人均60-100元 | ⏰ 17:00-23:00',
+        detail: '【推荐去处】\n1. 宣威烧烤城(建设街) - 最集中的烧烤一条街\n2. 本地人推荐的街边烧烤摊 - 问酒店前台最靠谱\n3. 火腿烧烤专卖店 - 宣威特色，火腿串烤肉\n\n必点清单：\n· 🔥 火腿串 - 宣威独有，用宣威火腿烤制\n· 🔥 烤豆腐 - 云南烧烤灵魂\n· 🔥 烤洋芋 - 云南小土豆，又糯又香\n· 🔥 烤五花肉 - 配蘸水绝了\n· 🔥 烤猪脚 - 胶原蛋白满满\n· 烤饵块 - 云南特色主食\n\n宣威烧烤和云南其他城市不同\n用炭火慢烤，蘸水是灵魂\n人均60-100元，敞开吃！\n\n💡 这是整趟旅程的收官大餐，好好享受！'
+      },
+      {
+        name: '目的地·到达休息', lat: 26.228, lng: 104.098,
+        type: 'hotel', time: '20:00',
+        desc: '🏁 旅途圆满结束！好好休息',
+        detail: '到达目的地，6天旅程圆满结束\n从广东中山到云南宣威\n一路吃过来：黄姚豆豉→阳朔啤酒鱼→侗族酸鱼→凯里酸汤→安顺小吃→兴义羊肉粉→宣威烧烤\n​好好休息，明天开始新的生活！'
+      }
+    ]
   }
 ];
 
 function overviewContent() {
   return `
-<div class="hero"><h1>中山 → 云南宣威</h1><p class="subtitle">轻松5日 · City Walk + 美食 · 约1,600km</p></div>
+<div class="hero"><h1>中山 → 云南宣威</h1><p class="subtitle">轻松6日 · City Walk + 美食 · 约1,600km</p></div>
 
 <div style="background:linear-gradient(135deg,#34c759 0%,#30d158 100%);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:16px;color:#fff">
   <div style="font-size:13px;font-weight:600;opacity:.8;margin-bottom:8px">🚶 轻松 City Walk + 🍜 美食之旅</div>
   <div style="font-size:14px;line-height:1.7">
     这条路线<strong>不赶热门景区</strong>，主打轻松漫步和本地美食。<br>
     黄姚古镇慢逛、遇龙河乡间散步、凯里苗家街区、安顺小吃之都……<br>
-    每天节奏都很松，边走边吃，享受旅途。<br>
+    每天节奏都很松，边走边吃，享受旅途。<br>D6白天走完最后一段山路，中午到达宣威，晚上宣威烧烤收官！<br>
     <strong>没有黄果树的人挤人，没有西江苗寨的商业化</strong>，只有真实的本地生活。
   </div>
 </div>
 
 <div class="info-grid">
   <div class="info-card"><div class="label">📅 出发</div><div class="value">9/25 中山火炬开发区</div></div>
-  <div class="info-card"><div class="label">🏁 到达</div><div class="value">9/29 宣威姬榔德村</div></div>
+  <div class="info-card"><div class="label">🏁 到达</div><div class="value">9/30 宣威姬榔德村</div></div>
   <div class="info-card"><div class="label">🚗 总里程</div><div class="value">约1,600公里</div></div>
   <div class="info-card"><div class="label">👫 人数</div><div class="value">2位大人</div></div>
 </div>
@@ -639,9 +684,14 @@ function overviewContent() {
     <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 从江香猪 → 酸汤鱼 → 米豆腐 · 🚶 凯里大十字街区city walk</div>
   </div>
   <div class="card" onclick="go(5)" style="margin-bottom:10px">
-    <div class="name"><span class="dot" style="background:#ff2d55"></span>D5 · 凯里→安顺→兴义→宣威</div>
-    <div class="desc">9/29（周一）· 约680km · 8.5h驾驶 · <span style="color:var(--tint-red)">★★★ 赶路日 · 建议6:30出发</span></div>
+    <div class="name"><span class="dot" style="background:#ff2d55"></span>D5 · 凯里→安顺→兴义</div>
+    <div class="desc">9/29（周一）· 约480km · 6h驾驶 · <span style="color:var(--tint-orange)">★★ 中等</span></div>
     <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 安顺裹卷夺夺粉 → 兴义羊肉粉 · 🚶 安顺老城美食漫步</div>
+  </div>
+  <div class="card" onclick="go(6)" style="margin-bottom:10px">
+    <div class="name"><span class="dot" style="background:#e60012"></span>D6 · 兴义→宣威 · 宣威烧烤🔥</div>
+    <div class="desc">9/30（周二）· 约200km · 2.5h驾驶 · <span style="color:var(--tint-green)">★ 轻松 · 全程白天</span></div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 宣威火腿鸡 → 🔥宣威烧烤 · 🚶 宣威小城漫步</div>
   </div>
 </div>
 
@@ -676,10 +726,15 @@ function overviewContent() {
   <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：全季酒店（万达店·2024）¥180-220 | 亚朵酒店（2024）¥220-280</div>
 </div>
 <div class="card" style="margin-bottom:10px">
-  <div class="time">D5 · 9/29 · 兴义（中转休息）</div>
+  <div class="time">D5 · 9/29 · 兴义（不赶路，住一晚）</div>
   <div class="name">全季酒店（兴义桔山安贞路店）⭐首选</div>
   <div class="desc">携程9.5分，¥200内最佳选择，约¥150-200/晚</div>
   <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：全季碧云路店（2026新开）¥200-260 | 富康国际 ¥160-220</div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="time">D6 · 9/30 · 宣威（目的地·到达）</div>
+  <div class="name">到达目的地·姬榔德村 🏁</div>
+  <div class="desc">到达目的地，旅途圆满结束！晚上宣威烧烤收官🔥</div>
 </div>
 
 <div class="section-head">费用预估</div>
@@ -708,7 +763,8 @@ function overviewContent() {
 <div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-red)">
   <div class="name" style="color:var(--tint-red)">⚠️ 需要注意的问题</div>
   <div class="desc" style="line-height:1.8">
-    · <strong>D5 赶路日</strong>：680km是全程最长驾驶，<span style='color:var(--tint-red)'>建议6:30出发</span>，龙里服务区休息+加油，安顺停留1.5小时吃午餐，盘州服务区休息，兴义晚餐后继续赶路<br>
+    · <strong>D5 不赶路了</strong>：480km到兴义，龙里服务区休息+加油，安顺停留1.5小时吃午餐，盘州服务区休息，兴义晚餐后住酒店<br>
+    · <strong>D6 轻松收官</strong>：200km到宣威，<span style='color:var(--tint-green)'>全程白天走山路</span>，中午到达，下午宣威小城漫步，晚上宣威烧烤大餐<br>
     · <strong>D4 山路多</strong>：三江→从江→凯里段是山区高速，隧道桥梁多，限速频繁<br>
     · <strong>住宿选择</strong>：全部选市区连锁酒店，避开景区溢价，停车方便
   </div>
@@ -717,7 +773,8 @@ function overviewContent() {
 <div class="section-head">注意事项</div>
 <div class="card">
   <div class="desc" style="line-height:1.8">
-    · D5路程较长（约680km），建议早出发，两人轮换开车<br>
+    · D5约480km到兴义，不用太早出发；D6约200km白天到宣威<br>
+    · 最后一段山路（兴义→宣威）安排在D6白天，避免夜间山路<br>
     · 贵州山区多弯道，注意行车安全<br>
     · 9月底贵州/广西气温约18-28°C，带薄外套<br>
     · city walk穿舒适运动鞋，古镇石板路多<br>
@@ -898,24 +955,26 @@ function overviewContent() {
     · 高速过路费：约¥600-700（全程高速约1,200km）<br>
     · 停车费：约¥50-80（大部分酒店免费停车）<br>
     <strong>交通小计：¥1,450-1,780</strong><br><br>
-    <strong>🏨 住宿费用（4晚）</strong><br>
+    <strong>🏨 住宿费用（5晚）</strong><br>
     · D1-D2 阳朔（2晚）：¥360-440（均价¥180-220/晚）<br>
     · D3 三江（1晚）：¥120-160<br>
     · D4 凯里（1晚）：¥160-200<br>
-    <strong>住宿小计：¥640-800</strong><br><br>
+    · D5 兴义（1晚）：¥150-200<br>
+    <strong>住宿小计：¥790-1,000</strong><br><br>
     <strong>🍜 餐饮费用（5天）</strong><br>
     · D1：黄姚午餐¥70 + 阳朔晚餐¥140 = ¥210<br>
     · D2：早餐¥25 + 午餐¥100 + 晚餐¥140 + 小吃¥40 = ¥305<br>
     · D3：午餐¥120 + 晚餐¥120 = ¥240<br>
     · D4：午餐¥100 + 晚餐¥130 + 夜市¥45 = ¥275<br>
     · D5：早餐¥35 + 午餐¥90 + 晚餐¥55 = ¥180<br>
-    <strong>餐饮小计：¥1,210</strong><br><br>
+    · D6：早餐¥25 + 午餐¥130 + 晚餐¥180（宣威烧烤大餐！）= ¥335<br>
+    <strong>餐饮小计：¥1,545</strong><br><br>
     <strong>🎫 门票费用</strong><br>
     · 黄姚古镇：¥80（40×2人）| 其他全部免费<br>
     <strong>门票小计：¥80</strong><br><br>
     <div style="background:var(--bg-grouped);border-radius:var(--radius-sm);padding:12px;margin-top:8px">
-      <strong style="font-size:16px">💰 总计：约¥3,380-4,150（2人）</strong><br>
-      <span style="color:var(--text-secondary)">人均约¥1,690-2,075 | 丰俭由人</span>
+      <strong style="font-size:16px">💰 总计：约¥3,830-4,825（2人）</strong><br>
+      <span style="color:var(--text-secondary)">人均约¥1,915-2,413 | 丰俭由人</span>
     </div>
   </div>
 </div>
@@ -1015,7 +1074,7 @@ function icon(color, emoji) {
 if (HOTEL.lat) L.marker([HOTEL.lat, HOTEL.lng], { icon: icon('#ff9500','🏨'), zIndexOffset: 1000 }).addTo(map).bindPopup(`<b>${HOTEL.name}</b>`);
 
 /* ── Route Lines ── */
-const routeColors = ['#ff9500','#34c759','#af52de','#007aff','#ff2d55'];
+const routeColors = ['#ff9500','#34c759','#af52de','#007aff','#ff2d55','#e60012'];
 DAYS.slice(1).forEach((d, i) => {
   const pts = d.locations.filter(l => l.lat && l.time !== '—').map(l => [l.lat, l.lng]);
   if (pts.length > 1) {
@@ -1264,7 +1323,7 @@ function toggleMap() {
   <button class="fab fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
   <button class="fab fab-nav" id="fabMain" onclick="toggleFabMenu()">🧭</button>
   <div class="fab-menu" id="fabMenu">
-    <button class="fab-menu-item" onclick="navToAmap('宣威市姬榔德村',26.228,104.098);closeFabMenu()">🏁 导航到终点</button>
+    <button class="fab-menu-item" onclick="navToAmap('宣威市姬榔德村',26.228,104.098);closeFabMenu()">🏁 导航到宣威</button>
     <button class="fab-menu-item" onclick="navSegment(cur);closeFabMenu()">🧭 导航当天路线</button>
     <button class="fab-menu-item" onclick="go(0);closeFabMenu()">📋 查看总览</button>
     <button class="fab-menu-item" onclick="go(cur);fitDayOnMap(cur);closeFabMenu()">🗺️ 定位当天路线</button>
@@ -1330,7 +1389,7 @@ function downloadPDF() {
 
 // Share trip
 function shareTrip() {
-  const text = '中山→云南宣威 轻松5日 · City Walk+美食\n9/25-9/29\n路线：中山→黄姚古镇→阳朔→三江→凯里→安顺→兴义→宣威\n主打：city walk + 本地美食，不赶热门景区\n总里程约1600km';
+  const text = '中山→云南宣威 轻松6日 · City Walk+美食\n9/25-9/30\n路线：中山→黄姚古镇→阳朔→三江→凯里→安顺→兴义→宣威\n主打：city walk + 本地美食，不赶热门景区\nD6白天走山路，宣威烧烤收官🔥\n总里程约1600km';
   if(navigator.share) {
     navigator.share({title:'中山→宣威 轻松5日·City Walk+美食', text: text, url: window.location.href}).catch(()=>{});
   } else {
