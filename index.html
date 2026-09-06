@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>中山→云南宣威 轻松5日 · City Walk+美食</title>
+<meta name="description" content="广东中山出发，经广西贵州，自驾5日到云南宣威">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+/* ═══════════════════════════════════════════
+   Design System — edit :root to change theme
+   ═══════════════════════════════════════════ */
+:root {
+  --bg-primary:    #ffffff;
+  --bg-secondary:  #f5f5f7;
+  --bg-tertiary:   #fbfbfd;
+  --bg-grouped:    #f2f2f7;
+  --bg-elevated:   #ffffff;
+  --text-primary:   #1d1d1f;
+  --text-secondary: #86868b;
+  --text-tertiary:  #aeaeb2;
+  --accent:        #0071e3;
+  --accent-hover:  #0077ed;
+  --tint-red:    #ff3b30;
+  --tint-orange: #ff9500;
+  --tint-green:  #34c759;
+  --tint-blue:   #007aff;
+  --tint-purple: #af52de;
+  --tint-pink:   #ff2d55;
+  --separator:  rgba(60, 60, 67, .12);
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:  0 4px 14px rgba(0,0,0,.08);
+  --shadow-lg:  0 8px 30px rgba(0,0,0,.12);
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  20px;
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+               "Helvetica Neue", "Arial", sans-serif;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Map ── */
+#map { width: 100%; height: 0; min-height: 0; overflow: hidden; position: relative; z-index: 100; transition: height 0.3s ease; }
+#map.expanded { height: 40vh; min-height: 280px; position: sticky; top: 0; }
+.map-toggle { position: sticky; top: 0; z-index: 101; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); padding: 10px 16px; display: flex; align-items: center; justify-content: center; gap: 8px; border-bottom: .5px solid var(--separator); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.map-toggle:active { background: var(--bg-grouped); }
+.map-toggle-icon { font-size: 18px; transition: transform 0.3s ease; }
+.map-toggle.expanded .map-toggle-icon { transform: rotate(180deg); }
+.map-toggle-text { font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+.locate-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
+  border: none; box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.locate-btn.active { color: #007aff; }
+@keyframes loc-pulse {
+  0%   { transform: scale(1); opacity: .55; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.loc-pulse {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: rgba(0,122,255,.25);
+  animation: loc-pulse 1.6s ease-out infinite;
+}
+
+/* ── Tabs ── */
+.tabs {
+  display: flex; gap: 6px; padding: 12px 16px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  background: rgba(255,255,255,.85); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px); position: sticky; top: 0; z-index: 99;
+  border-bottom: .5px solid var(--separator); scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex-shrink: 0; padding: 7px 16px; border-radius: 980px; border: none;
+  background: var(--bg-grouped); color: var(--text-secondary);
+  font-size: 14px; font-weight: 500; cursor: pointer; transition: all .25s ease;
+  white-space: nowrap; letter-spacing: -0.01em;
+}
+.tab:active { transform: scale(.96); }
+.tab.active { background: var(--accent); color: #fff; }
+
+/* ── Main content ── */
+.content { max-width: 680px; margin: 0 auto; padding: 16px 16px calc(24px + var(--safe-bottom)); }
+
+/* ── Overview ── */
+.hero { text-align: center; padding: 28px 20px 20px; }
+.hero h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; }
+.hero .subtitle { font-size: 17px; color: var(--text-secondary); margin-top: 6px; font-weight: 400; }
+
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.info-card { background: var(--bg-elevated); border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow-sm); }
+.info-card .label { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .02em; margin-bottom: 6px; }
+.info-card .value { font-size: 15px; font-weight: 600; line-height: 1.4; }
+
+/* ── Section headers ── */
+.section-head { font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .03em; padding: 20px 0 8px; }
+
+/* ── Day header ── */
+.day-head { padding: 20px 0 12px; }
+.day-head h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+.day-head p { font-size: 15px; color: var(--text-secondary); margin-top: 2px; }
+
+/* ── Route bar ── */
+.route-bar { background: var(--bg-elevated); border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px; box-shadow: var(--shadow-sm); font-size: 13px; color: var(--text-secondary); line-height: 1.7; white-space: pre-line; }
+.route-bar strong { color: var(--text-primary); }
+
+/* ── Timeline ── */
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 20px; bottom: 20px; width: 1.5px; background: var(--separator); }
+.tl-item { position: relative; margin-bottom: 10px; }
+.tl-dot { position: absolute; left: -20px; top: 18px; width: 10px; height: 10px; border-radius: 50%; z-index: 1; box-shadow: 0 0 0 3px var(--bg-secondary); }
+.tl-dot.food    { background: var(--tint-red); }
+.tl-dot.spot    { background: var(--tint-blue); }
+.tl-dot.hotel   { background: var(--tint-orange); }
+.tl-dot.drink   { background: var(--tint-purple); }
+.tl-dot.transport { background: var(--text-tertiary); }
+
+/* ── Card ── */
+.card { background: var(--bg-elevated); border-radius: var(--radius-md); padding: 14px 16px; box-shadow: var(--shadow-sm); transition: box-shadow .25s ease; cursor: pointer; }
+.card:active { box-shadow: var(--shadow-md); }
+.card .time { font-size: 12px; font-weight: 600; color: var(--text-tertiary); letter-spacing: .01em; }
+.card .name { font-size: 17px; font-weight: 600; margin: 2px 0 4px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 6px; }
+.card .desc { font-size: 14px; color: var(--text-secondary); line-height: 1.45; }
+
+/* Badge */
+.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 4px; }
+.badge.food   { background: rgba(255,59,48,.1);  color: var(--tint-red); }
+.badge.spot   { background: rgba(0,122,255,.1);  color: var(--tint-blue); }
+.badge.drink  { background: rgba(175,82,222,.1); color: var(--tint-purple); }
+
+/* Budget */
+.budget { display: inline-block; margin-top: 6px; padding: 3px 10px; background: var(--bg-grouped); border-radius: var(--radius-sm); font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+
+/* Payment */
+.pays { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.pay { font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 600; }
+.pay.ok  { background: rgba(52,199,89,.1);  color: var(--tint-green); }
+.pay.no  { background: rgba(255,59,48,.08); color: var(--tint-red); }
+.pay.idk { background: rgba(255,149,0,.1);  color: var(--tint-orange); }
+
+/* Links row */
+.links { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 600; border: none; cursor: pointer;
+  text-decoration: none !important; transition: filter .2s;
+}
+.btn:active { filter: brightness(.9); }
+.btn.nav    { background: var(--accent); color: #fff; }
+.btn.xhs    { background: #ff2442; color: #fff; }
+.btn.dp     { background: #ffa700; color: #fff; }
+.btn.rsv    { background: var(--tint-green); color: #fff; }
+
+/* Action Sheet */
+.as-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,.35); backdrop-filter: blur(2px);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.as-overlay.show { opacity: 1; pointer-events: auto; }
+.as-sheet {
+  width: 100%; max-width: 420px;
+  padding: 0 8px 34px;
+  transform: translateY(100%); transition: transform .3s cubic-bezier(.22,1,.36,1);
+}
+.as-overlay.show .as-sheet { transform: translateY(0); }
+.as-group {
+  background: rgba(255,255,255,.88); backdrop-filter: blur(20px);
+  border-radius: 14px; overflow: hidden; margin-bottom: 8px;
+}
+.as-group .as-item {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 16px; font-size: 18px; color: #007aff; font-weight: 500;
+  border: none; background: none; width: 100%; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.as-group .as-item + .as-item { border-top: .5px solid rgba(0,0,0,.12); }
+.as-group .as-item:active { background: rgba(0,0,0,.06); }
+.as-cancel { font-weight: 600; }
+
+/* Details — default open */
+.details {
+  margin-top: 10px; padding-top: 10px;
+  border-top: .5px solid var(--separator);
+  font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+}
+.details.closed { display: none; }
+
+/* ── Overview day list ── */
+.day-list .card { margin-bottom: 8px; }
+.day-list .card .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+
+/* ── Payment summary ── */
+.pay-summary { background: var(--bg-elevated); border-radius: var(--radius-md); padding: 14px 16px; box-shadow: var(--shadow-sm); font-size: 13px; line-height: 1.7; margin-bottom: 10px; }
+.pay-summary h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.pay-summary .warn { color: var(--tint-red); }
+.pay-summary .ok-text { color: var(--tint-green); }
+
+/* ── Legend ── */
+.legend { display: flex; gap: 14px; flex-wrap: wrap; padding: 8px 0; font-size: 12px; color: var(--text-secondary); }
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ── Leaflet overrides ── */
+.leaflet-popup-content-wrapper { border-radius: var(--radius-md) !important; box-shadow: var(--shadow-lg) !important; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif !important; }
+.leaflet-popup-content { font-size: 14px !important; line-height: 1.5 !important; margin: 12px 14px !important; }
+.leaflet-popup-content a { color: var(--accent) !important; }
+.leaflet-popup-tip { background: #fff !important; }
+.leaflet-control-zoom a { width: 34px !important; height: 34px !important; line-height: 34px !important; font-size: 16px !important; border-radius: 10px !important; background: rgba(255,255,255,.85) !important; -webkit-backdrop-filter: blur(10px) !important; backdrop-filter: blur(10px) !important; border: .5px solid var(--separator) !important; color: var(--text-primary) !important; }
+.leaflet-control-zoom { border-radius: 12px !important; overflow: hidden; box-shadow: var(--shadow-md) !important; border: none !important; }
+.leaflet-control-attribution { font-size: 9px !important; opacity: .5; }
+
+/* ── Floating Action Button ── */
+.fab-container { position: fixed; bottom: calc(20px + var(--safe-bottom)); right: 16px; z-index: 9998; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+.fab { width: 50px; height: 50px; border-radius: 50%; border: none; box-shadow: var(--shadow-lg); display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; transition: transform .2s, box-shadow .2s; -webkit-tap-highlight-color: transparent; }
+.fab:active { transform: scale(.92); }
+.fab-nav { background: var(--accent); color: #fff; }
+.fab-top { background: var(--bg-elevated); color: var(--text-primary); width: 40px; height: 40px; font-size: 18px; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.fab-top.show { opacity: 1; pointer-events: auto; }
+.fab-menu { position: absolute; bottom: 60px; right: 0; background: var(--bg-elevated); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); padding: 8px 0; min-width: 160px; opacity: 0; pointer-events: none; transform: translateY(10px); transition: all .25s; }
+.fab-menu.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.fab-menu-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; font-size: 15px; color: var(--text-primary); border: none; background: none; width: 100%; cursor: pointer; text-align: left; }
+.fab-menu-item:active { background: var(--bg-grouped); }
+
+</style>
+</head>
+<body>
+
+<div class="map-toggle" id="mapToggle" onclick="toggleMap()">
+  <span class="map-toggle-icon">▼</span>
+  <span class="map-toggle-text">显示地图</span>
+</div>
+<div id="map"></div>
+<div class="tabs" id="tabs"></div>
+<div class="content" id="content"></div>
+
+<script>
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  REPLACE THIS SECTION — Hotel and Days data                 ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+const HOTEL = { name: '宣威目的地', lat: 26.228, lng: 104.098 };
+
+const DAYS = [
+  { id: 0, label: '总览', color: '#0071e3', locations: [] },
+  {
+    id: 1, label: 'D1', date: '9月25日（周四）', title: '中山 → 黄姚古镇 → 阳朔',
+    color: '#ff9500',
+    locations: [
+      {
+        name: '中山火炬开发区·阳光里花园', lat: 22.552, lng: 113.487,
+        type: 'transport', time: '08:00',
+        desc: '走广昆高速→汕昆高速，轻松出发'
+      },
+      {
+        name: '黄姚古镇', lat: 24.183, lng: 111.567,
+        type: 'spot', time: '11:30',
+        desc: '千年古镇慢逛2h，不是热门景区，人少清静',
+        budget: '门票40元/人',
+        detail: '石板街慢慢走，不带商业气息\n推荐：豆豉蒸排骨、豆腐酿、黄姚米酒\n古镇不大，2小时足够\n比阳朔安静太多，适合拍照'
+      },
+      {
+        name: '黄姚午餐·豆豉排骨', lat: 24.184, lng: 111.568,
+        type: 'food', time: '12:00',
+        desc: '黄姚豆豉是当地特产，古镇内小馆子最正宗',
+        budget: '人均30-40元',
+        detail: '推荐：豆豉蒸排骨、豆腐酿、炒米粉\n古镇内居民开的小店，不是游客餐厅\n人均30-40元，分量足\n配一杯黄姚米酒，很惬意'
+      },
+      {
+        name: '阳朔县城·漓江边散步', lat: 24.774, lng: 110.494,
+        type: 'spot', time: '17:30',
+        desc: '避开西街人潮，沿漓江边散步看日落，本地人的休闲方式',
+        detail: '不去西街主街挤\n沿漓江边走，风景好又安静\n本地人在这里散步、钓鱼\n日落时分最美\n走到叠翠桥看两岸山水'
+      },
+      {
+        name: '阳朔晚餐·啤酒鱼', lat: 24.776, lng: 110.496,
+        type: 'food', time: '18:30',
+        desc: '阳朔招牌菜，选江边本地人去的店',
+        budget: '人均60-80元',
+        detail: '推荐：大师傅或谢三姐啤酒鱼\n选漓江边位置，边吃边看山水\n啤酒鱼用漓江鲜鱼+啤酒焖煮\n配个青菜，人均60-80元\n避开西街主街的高价店'
+      },
+      {
+        name: '欢漫酒店（桂林阳朔西街十里画廊店）', lat: 24.755, lng: 110.490,
+        type: 'hotel', time: '20:00',
+        desc: '⭐首选 | 携程4.9分，2023年开业，性价比之王',
+        budget: '约¥180-220/晚',
+        detail: '携程评分4.9/10，超1100条好评\n2023年新开业，设施新\n十里画廊位置，避开西街溢价\n免费停车场，自驾友好\n到西街约10分钟车程'
+      },
+      {
+        name: '全季酒店（桂林阳朔西街店）', lat: 24.752, lng: 110.495,
+        type: 'hotel', time: '—',
+        desc: '【备选】2024年新开业，华住品质',
+        budget: '约¥200-250/晚',
+        detail: '华住旗下中端品牌\n2024年新开业\n县城位置，比西街内便宜30%\n免费停车场'
+      },
+      {
+        name: '桔子酒店（桂林阳朔西街店）', lat: 24.753, lng: 110.496,
+        type: 'hotel', time: '—',
+        desc: '【备选】设计感强，年轻人首选',
+        budget: '约¥180-230/晚',
+        detail: '华住旗下设计品牌\n智能客房，颜值高\n同样避开西街核心区溢价'
+      }
+    ]
+  },
+  {
+    id: 2, label: 'D2', date: '9月26日（周五）', title: '阳朔整天 · 乡间漫步 · 不赶路',
+    color: '#34c759',
+    locations: [
+      {
+        name: '阳朔早餐·桂林米粉', lat: 24.774, lng: 110.494,
+        type: 'food', time: '07:30',
+        desc: '本地人的早餐，卤菜粉最经典',
+        budget: '人均10-15元',
+        detail: '推荐：卤菜粉（干拌）、酸辣粉\n找本地人排队的店，不要进游客店\n加个卤蛋、锅烧，人均10-15元\n桂林米粉和柳州螺蛳粉完全不同风味'
+      },
+      {
+        name: '遇龙河乡间漫步', lat: 24.790, lng: 110.470,
+        type: 'spot', time: '08:30',
+        desc: '沿遇龙河边乡间小路漫步，不坐竹筏，走路更自由',
+        detail: '路线：骥马村→旧县古村（约3km）\n沿河边走，田园山水如画\n人少安静，比竹筏更自在\n随时停下来拍照、喝水\n全程平路，轻松好走'
+      },
+      {
+        name: '旧县古村午餐·农家菜', lat: 24.760, lng: 110.440,
+        type: 'food', time: '12:00',
+        desc: '1400年历史的古村落，吃地道农家菜',
+        budget: '人均40-60元',
+        detail: '推荐：啤酒鱼、酿菜、野菜\n旧县是1400年历史的古村\n村里有老房子、古井\n农家菜用自家种的菜，新鲜\n人均40-60元，2人点3菜够了'
+      },
+      {
+        name: '福利古镇', lat: 24.770, lng: 110.560,
+        type: 'spot', time: '14:30',
+        desc: '本地小镇，不是景区，没有游客，只有真实的生活',
+        detail: '阳朔到福利约15分钟\n这是个真正的本地小镇\n没有门票，没有商铺\n老街、老房子、本地人\n画扇是当地特产，可以看看\n适合随便走走，感受真实的小镇生活'
+      },
+      {
+        name: '阳朔县城·傍晚江边', lat: 24.774, lng: 110.494,
+        type: 'spot', time: '17:00',
+        desc: '回县城休息后，傍晚再沿漓江边散步',
+        detail: '下午回酒店休息\n傍晚出来走走\n漓江边看日落\n找个江边咖啡馆坐坐\n晚上去县城美食街'
+      },
+      {
+        name: '阳朔晚餐·虾灯蟹', lat: 24.776, lng: 110.492,
+        type: 'food', time: '18:30',
+        desc: '阳朔特色小吃，不是西街游客菜',
+        budget: '人均40-60元',
+        detail: '推荐：虾灯蟹、烤鱼、酿菜\n虾灯蟹是阳朔特色，外酥里嫩\n找县城本地人去的店\n人均40-60元\n配杯本地米酒'
+      },
+      {
+        name: '欢漫酒店（桂林阳朔西街十里画廊店）', lat: 24.755, lng: 110.490,
+        type: 'hotel', time: '20:00',
+        desc: '⭐首选 | 连住两晚，不用搬行李',
+        budget: '约¥180-220/晚',
+        detail: '携程评分4.9/10\n连住两晚，轻松不折腾\n免费停车场\n今天整天在阳朔，不用换酒店'
+      },
+      {
+        name: '全季酒店（桂林阳朔西街店）', lat: 24.752, lng: 110.495,
+        type: 'hotel', time: '—',
+        desc: '【备选】2024年新开业',
+        budget: '约¥200-250/晚',
+        detail: '华住旗下\n2024年新开业\n免费停车场'
+      },
+      {
+        name: '桔子酒店（桂林阳朔西街店）', lat: 24.753, lng: 110.496,
+        type: 'hotel', time: '—',
+        desc: '【备选】设计感强',
+        budget: '约¥180-230/晚',
+        detail: '华住旗下设计品牌\n智能客房，颜值高'
+      }
+    ]
+  },
+  {
+    id: 3, label: 'D3', date: '9月27日（周六）', title: '阳朔 → 兴坪 → 三江 · 侗族老城',
+    color: '#af52de',
+    locations: [
+      {
+        name: '兴坪古镇', lat: 24.910, lng: 110.510,
+        type: 'spot', time: '09:00',
+        desc: '20元人民币背景图取景地，古镇免费，不商业化',
+        detail: '阳朔到兴坪约30分钟\n20元人民币背景就在这里\n古镇免费，不需要门票\n没有过度商业化\n漓江边散步，看山水\n1小时足够，不用赶'
+      },
+      {
+        name: '兴坪·漓江边午餐', lat: 24.910, lng: 110.512,
+        type: 'food', time: '11:30',
+        desc: '漓江边的小馆子，吃鱼看山水',
+        budget: '人均50-70元',
+        detail: '推荐：清蒸漓江鱼、炒虾、野菜\n兴坪的鱼比阳朔便宜\n找江边位置，边吃边看风景\n人均50-70元\n不用去大餐厅，小馆子更地道'
+      },
+      {
+        name: '三江县城·侗族老街', lat: 25.732, lng: 109.608,
+        type: 'spot', time: '16:00',
+        desc: '侗族县城慢逛，体验本地生活，不是景区',
+        detail: '兴坪到三江约170km，3小时\n下午到达后在县城散步\n侗族老街，本地人生活\n看看侗族建筑、鼓楼\n没有门票，没有游客\n感受真实的侗族小城'
+      },
+      {
+        name: '三江晚餐·侗族美食', lat: 25.734, lng: 109.610,
+        type: 'food', time: '18:00',
+        desc: '侗族特色：酸鱼、酸肉、油茶、糯米饭',
+        budget: '人均50-70元',
+        detail: '推荐：酸鱼、酸肉、油茶、糯米饭\n侗族人喜欢酸味，酸鱼酸肉是特色\n油茶是侗族待客必备\n糯米饭配腊肉，很香\n县城餐馆比程阳八寨便宜40%'
+      },
+      {
+        name: '全季酒店（柳州三江鸟巢店）', lat: 25.732, lng: 109.608,
+        type: 'hotel', time: '19:00',
+        desc: '⭐首选 | 携程9.8分，县城位置避开景区溢价',
+        budget: '约¥120-160/晚',
+        detail: '华住旗下，品质稳定\n携程评分9.8/10，超高好评\n县城位置，比程阳八寨内便宜40%\n免费停车场\n距程阳八寨约20分钟车程'
+      },
+      {
+        name: '柳州三江万怡酒店', lat: 25.728, lng: 109.612,
+        type: 'hotel', time: '—',
+        desc: '【备选】万豪旗下，2021年开业',
+        budget: '约¥200-280/晚',
+        detail: '万豪旗下中端品牌\n2021年新开业\n侗族文化主题酒店\n有泳池和健身房'
+      },
+      {
+        name: '三江县城商务酒店', lat: 25.695, lng: 109.605,
+        type: 'hotel', time: '—',
+        desc: '【备选】经济型选择',
+        budget: '约¥100-150/晚',
+        detail: '价格实惠\n设施齐全\n适合预算有限'
+      }
+    ]
+  },
+  {
+    id: 4, label: 'D4', date: '9月28日（周日）', title: '三江 → 凯里 · 苗家美食city walk',
+    color: '#007aff',
+    locations: [
+      {
+        name: '三江出发', lat: 25.732, lng: 109.608,
+        type: 'transport', time: '08:30',
+        desc: '经从江、黎平到凯里，约280km · 约4小时（山路多，不赶路）'
+      },
+      {
+        name: '从江午餐·从江香猪', lat: 25.500, lng: 108.870,
+        type: 'food', time: '12:30',
+        desc: '从江香猪是国家地理标志产品，肉质鲜嫩',
+        budget: '人均40-60元',
+        detail: '推荐：从江香猪、烤猪、香猪肉粉\n从江香猪是当地特产，肉质鲜嫩\n路边小馆子最正宗\n人均40-60元\n配碗本地米粉'
+      },
+      {
+        name: '凯里市区·大十字街区漫步', lat: 26.588, lng: 107.982,
+        type: 'spot', time: '16:00',
+        desc: '凯里老城中心，本地人生活街区，不是景区',
+        detail: '到达后先休息\n下午去大十字街区走走\n这是凯里最热闹的本地街区\n看看苗族市场、本地商铺\n感受苗族城市的日常\n没有门票，没有游客团'
+      },
+      {
+        name: '凯里晚餐·酸汤鱼', lat: 26.586, lng: 107.980,
+        type: 'food', time: '18:30',
+        desc: '凯里酸汤鱼是贵州必吃，用本地番茄发酵酸汤',
+        budget: '人均50-70元',
+        detail: '推荐：酸汤鱼（红酸汤）、酸汤牛肉\n贵州酸汤用番茄发酵，酸辣开胃\n凯里是酸汤鱼发源地\n找本地人多的店\n人均50-70元，2人约100-140元\n配碗米饭，绝了'
+      },
+      {
+        name: '凯里夜市·米豆腐', lat: 26.587, lng: 107.981,
+        type: 'food', time: '20:00',
+        desc: '凯里夜市小吃，米豆腐、烤豆腐、炸洋芋',
+        budget: '人均15-25元',
+        detail: '推荐：米豆腐、烤豆腐、炸洋芋\n凯里夜市在老城区\n小吃种类多，价格便宜\n人均15-25元就能吃饱\n感受本地夜生活'
+      },
+      {
+        name: '维也纳国际酒店（凯里）', lat: 26.590, lng: 107.985,
+        type: 'hotel', time: '19:00',
+        desc: '⭐首选 | 锦江中端品牌，房间大，市区避开苗寨溢价',
+        budget: '约¥160-200/晚',
+        detail: '锦江旗下中端品牌\n欧式装修风格，房间面积大\n市区位置，比苗寨内便宜50%\n免费停车场\n距西江苗寨约40分钟车程'
+      },
+      {
+        name: '全季酒店（凯里大十字万达广场店）', lat: 26.585, lng: 107.978,
+        type: 'hotel', time: '—',
+        desc: '【备选】2024年开业，携程4.8分',
+        budget: '约¥180-220/晚',
+        detail: '华住旗下，品质稳定\n2024年新开业\n万达广场旁，吃饭购物方便\n免费停车场'
+      },
+      {
+        name: '凯里市区刚朵拉亚朵酒店', lat: 26.588, lng: 107.982,
+        type: 'hotel', time: '—',
+        desc: '【备选】亚朵品牌，2024年开业',
+        budget: '约¥220-280/晚',
+        detail: '亚朵品牌，服务优质\n2024年新开业\n携程评分4.8'
+      }
+    ]
+  },
+  {
+    id: 5, label: 'D5', date: '9月29日（周一）', title: '凯里 → 安顺美食 → 兴义 → 宣威',
+    color: '#ff2d55',
+    locations: [
+      {
+        name: '凯里早餐·苗家糯米饭', lat: 26.588, lng: 107.982,
+        type: 'food', time: '07:00',
+        desc: '苗族特色早餐，糯米饭配腊肉酸汤',
+        budget: '人均15-20元',
+        detail: '推荐：糯米饭、腊肉、酸汤\n苗族人早餐吃糯米饭，抗饿\n配腊肉和酸汤，味道独特\n市区有多家早餐店\n人均15-20元'
+      },
+      {
+        name: '凯里→安顺', lat: 26.588, lng: 107.982,
+        type: 'transport', time: '07:30',
+        desc: '经沪昆高速到安顺，约280km · 约3.5小时'
+      },
+      {
+        name: '安顺老城·小吃之旅', lat: 26.195, lng: 105.932,
+        type: 'food', time: '11:30',
+        desc: '安顺是贵州小吃之都，老城漫步+吃遍特色',
+        budget: '人均30-50元',
+        detail: '推荐：裹卷、夺夺粉、冲冲糕、油炸粑\n安顺老城是小吃天堂\n裹卷是安顺特色，薄饼卷各种配菜\n夺夺粉是酸辣粉的一种\n冲冲糕是糯米糕\n人均30-50元，能吃到撑'
+      },
+      {
+        name: '安顺→兴义', lat: 26.195, lng: 105.932,
+        type: 'transport', time: '13:00',
+        desc: '经晴兴高速到兴义，约200km · 约2.5小时'
+      },
+      {
+        name: '兴义晚餐·羊肉粉', lat: 25.089, lng: 104.907,
+        type: 'food', time: '18:00',
+        desc: '兴义羊肉粉是贵州四大粉之一，汤鲜粉滑',
+        budget: '人均20-30元',
+        detail: '推荐：兴义羊肉粉\n贵州四大粉之一\n汤鲜粉滑，羊肉鲜嫩\n加个煎蛋、加份羊肉\n老城区有多家老字号\n人均20-30元'
+      },
+      {
+        name: '兴义→宣威', lat: 25.089, lng: 104.907,
+        type: 'transport', time: '19:00',
+        desc: '经曲靖到宣威，约200km · 约2.5小时'
+      },
+      {
+        name: '宣威市·姬榔德村', lat: 26.228, lng: 104.098,
+        type: 'spot', time: '21:30',
+        desc: '抵达目的地！旅途圆满结束',
+        detail: '宣威以火腿闻名\n到达后可品尝正宗宣威火腿\n好好休息，旅途辛苦'
+      },
+      {
+        name: '全季酒店（兴义桔山广场安贞路店）', lat: 25.090, lng: 104.898,
+        type: 'hotel', time: '18:30',
+        desc: '⭐首选 | 携程9.5分，¥200预算内最佳选择',
+        budget: '约¥150-200/晚',
+        detail: '华住旗下，品质稳定\n携程评分9.5/10\n桔山广场核心位置\n周边美食丰富\n免费停车场'
+      },
+      {
+        name: '全季酒店（兴义桔山广场碧云路店）', lat: 25.092, lng: 104.895,
+        type: 'hotel', time: '—',
+        desc: '【备选】2026年新开业，最新设施',
+        budget: '约¥200-260/晚',
+        detail: '2026年最新开业\n设施全新\n同位置另一家全季'
+      },
+      {
+        name: '兴义富康国际酒店', lat: 25.095, lng: 104.900,
+        type: 'hotel', time: '—',
+        desc: '【备选】老牌酒店，房间大',
+        budget: '约¥160-220/晚',
+        detail: '兴义市区老牌酒店\n房间面积大\n早餐丰富'
+      }
+    ]
+  }
+];
+
+function overviewContent() {
+  return `
+<div class="hero"><h1>中山 → 云南宣威</h1><p class="subtitle">轻松5日 · City Walk + 美食 · 约1,600km</p></div>
+
+<div style="background:linear-gradient(135deg,#34c759 0%,#30d158 100%);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:16px;color:#fff">
+  <div style="font-size:13px;font-weight:600;opacity:.8;margin-bottom:8px">🚶 轻松 City Walk + 🍜 美食之旅</div>
+  <div style="font-size:14px;line-height:1.7">
+    这条路线<strong>不赶热门景区</strong>，主打轻松漫步和本地美食。<br>
+    黄姚古镇慢逛、遇龙河乡间散步、凯里苗家街区、安顺小吃之都……<br>
+    每天节奏都很松，边走边吃，享受旅途。<br>
+    <strong>没有黄果树的人挤人，没有西江苗寨的商业化</strong>，只有真实的本地生活。
+  </div>
+</div>
+
+<div class="info-grid">
+  <div class="info-card"><div class="label">📅 出发</div><div class="value">9/25 中山火炬开发区</div></div>
+  <div class="info-card"><div class="label">🏁 到达</div><div class="value">9/29 宣威姬榔德村</div></div>
+  <div class="info-card"><div class="label">🚗 总里程</div><div class="value">约1,600公里</div></div>
+  <div class="info-card"><div class="label">👫 人数</div><div class="value">2位大人</div></div>
+</div>
+
+<div class="section-head">每日路线</div>
+<div class="day-list">
+  <div class="card" onclick="go(1)" style="margin-bottom:10px">
+    <div class="name"><span class="dot" style="background:#ff9500"></span>D1 · 中山→黄姚古镇→阳朔</div>
+    <div class="desc">9/25（周四）· 约450km · 5.5h驾驶 · <span style="color:var(--tint-green)">★ 轻松</span></div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 黄姚豆豉排骨 → 阳朔啤酒鱼 · 🚶 黄姚古镇city walk + 漓江边散步</div>
+  </div>
+  <div class="card" onclick="go(2)" style="margin-bottom:10px">
+    <div class="name"><span class="dot" style="background:#34c759"></span>D2 · 阳朔整天 · 不赶路</div>
+    <div class="desc">9/26（周五）· 阳朔本地 · <span style="color:var(--tint-green)">★ 最轻松</span></div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 米粉 → 旧县农家菜 → 虾灯蟹 · 🚶 遇龙河乡间漫步 + 福利古镇</div>
+  </div>
+  <div class="card" onclick="go(3)" style="margin-bottom:10px">
+    <div class="name"><span class="dot" style="background:#af52de"></span>D3 · 兴坪→三江 · 侗族老城</div>
+    <div class="desc">9/27（周六）· 约200km · 3h驾驶 · <span style="color:var(--tint-green)">★ 轻松</span></div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 兴坪漓江鱼 → 侗族酸鱼酸肉 · 🚶 兴坪古镇 + 三江侗族老街</div>
+  </div>
+  <div class="card" onclick="go(4)" style="margin-bottom:10px">
+    <div class="name"><span class="dot" style="background:#007aff"></span>D4 · 三江→凯里 · 苗家美食</div>
+    <div class="desc">9/28（周日）· 约280km · 4h驾驶 · <span style="color:var(--tint-orange)">★★ 中等</span></div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 从江香猪 → 酸汤鱼 → 米豆腐 · 🚶 凯里大十字街区city walk</div>
+  </div>
+  <div class="card" onclick="go(5)" style="margin-bottom:10px">
+    <div class="name"><span class="dot" style="background:#ff2d55"></span>D5 · 凯里→安顺→兴义→宣威</div>
+    <div class="desc">9/29（周一）· 约680km · 8.5h驾驶 · <span style="color:var(--tint-red)">★★★ 赶路日</span></div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 安顺裹卷夺夺粉 → 兴义羊肉粉 · 🚶 安顺老城美食漫步</div>
+  </div>
+</div>
+
+<div class="section-head">行程亮点</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="desc" style="line-height:1.8">
+    · <strong>不赶热门景区</strong>：跳过黄果树、西江苗寨等人挤人的地方<br>
+    · <strong>每天city walk</strong>：古镇、乡间、老城，用脚步丈量旅途<br>
+    · <strong>美食为主</strong>：黄姚豆豉、阳朔啤酒鱼、侗族酸鱼、凯里酸汤鱼、安顺小吃<br>
+    · <strong>节奏轻松</strong>：D2整天在阳朔不赶路，每天下午都有自由时间<br>
+    · <strong>真实体验</strong>：福利古镇、三江侗族老街、凯里大十字，都是本地人生活
+  </div>
+</div>
+
+<div class="section-head">住宿推荐（含备选）· 全部2021年后 · 均价¥200左右</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="time">D1-D2 · 9/25-26 · 阳朔（连住2晚）</div>
+  <div class="name">欢漫酒店（西街十里画廊店）⭐首选</div>
+  <div class="desc">携程4.9分，2023年开业，性价比之王，约¥180-220/晚</div>
+  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：全季酒店（2024新开）¥200-250 | 桔子酒店 ¥180-230</div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="time">D3 · 9/27 · 三江</div>
+  <div class="name">全季酒店（柳州三江鸟巢店）⭐首选</div>
+  <div class="desc">携程9.8分，县城避开景区溢价，约¥120-160/晚 · 超值</div>
+  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：万怡酒店（万豪·2021）¥200-280 | 商务酒店 ¥100-150</div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="time">D4 · 9/28 · 凯里</div>
+  <div class="name">维也纳国际酒店（凯里）⭐首选</div>
+  <div class="desc">锦江中端品牌，房间大，市区比苗寨便宜50%，约¥160-200/晚</div>
+  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：全季酒店（万达店·2024）¥180-220 | 亚朵酒店（2024）¥220-280</div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="time">D5 · 9/29 · 兴义（中转休息）</div>
+  <div class="name">全季酒店（兴义桔山安贞路店）⭐首选</div>
+  <div class="desc">携程9.5分，¥200内最佳选择，约¥150-200/晚</div>
+  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：全季碧云路店（2026新开）¥200-260 | 富康国际 ¥160-220</div>
+</div>
+
+<div class="section-head">费用预估</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="desc" style="line-height:1.8">
+    <strong>门票：</strong>约¥80/2人（仅黄姚古镇40×2，其他全部免费）<br>
+    <strong>住宿：</strong>约¥650-850（4晚均价¥170-210，全程连锁酒店）<br>
+    <strong>餐饮：</strong>约¥800-1,000（5天美食之旅，2人）<br>
+    <strong>油费+过路费：</strong>约¥1,200-1,500（全程约1,600km）<br>
+    <strong>合计：</strong>约¥2,730-3,430
+  </div>
+</div>
+
+<div class="section-head">⚠️ 行程建议</div>
+<div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-green)">
+  <div class="name" style="color:var(--tint-green)">✅ 这样安排的好处</div>
+  <div class="desc" style="line-height:1.8">
+    · D1-D2 节奏很松，边走边玩不赶路<br>
+    · D2 整天在阳朔，遇龙河乡间漫步比竹筏更自由<br>
+    · 福利古镇、三江侗族老街，都是真实本地生活，不是景区<br>
+    · 凯里大十字街区city walk，体验苗族城市日常<br>
+    · 安顺是贵州小吃之都，裹卷夺夺粉必吃<br>
+    · 全程门票仅80元，省下的钱吃更多美食
+  </div>
+</div>
+<div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-red)">
+  <div class="name" style="color:var(--tint-red)">⚠️ 需要注意的问题</div>
+  <div class="desc" style="line-height:1.8">
+    · <strong>D5 赶路日</strong>：680km是全程最长驾驶，建议7:00出发，安顺停留1.5小时吃午餐，兴义晚餐后继续赶路<br>
+    · <strong>D4 山路多</strong>：三江→从江→凯里段是山区高速，隧道桥梁多，限速频繁<br>
+    · <strong>住宿选择</strong>：全部选市区连锁酒店，避开景区溢价，停车方便
+  </div>
+</div>
+
+<div class="section-head">注意事项</div>
+<div class="card">
+  <div class="desc" style="line-height:1.8">
+    · D5路程较长（约680km），建议早出发，两人轮换开车<br>
+    · 贵州山区多弯道，注意行车安全<br>
+    · 9月底贵州/广西气温约18-28°C，带薄外套<br>
+    · city walk穿舒适运动鞋，古镇石板路多<br>
+    · 美食偏酸辣，肠胃敏感备药
+  </div>
+</div>
+
+<div class="section-head">🎒 行前准备清单</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="name">📄 证件 & 文件</div>
+  <div class="desc" style="line-height:1.8">
+    ☐ 身份证（必带！住宿/购票都需要）<br>
+    ☐ 驾驶证（自驾必备）<br>
+    ☐ 行驶证（车上必备）<br>
+    ☐ 车辆保险单<br>
+    ☐ 手机提前下载离线地图（贵州山区信号弱）
+  </div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="name">💊 药品 & 防护</div>
+  <div class="desc" style="line-height:1.8">
+    ☐ 晕车药（贵州山路弯多，必备！）<br>
+    ☐ 感冒药 + 退烧药（山区早晚温差大）<br>
+    ☐ 肠胃药（当地饮食偏酸辣）<br>
+    ☐ 创可贴 + 碘伏棉签<br>
+    ☐ 防晒霜 + 墨镜 + 遮阳帽<br>
+    ☐ 驱蚊液（广西贵州蚊虫多）
+  </div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="name">👕 衣物 & 穿戴</div>
+  <div class="desc" style="line-height:1.8">
+    ☐ 薄外套/冲锋衣（山区早晚18°C左右）<br>
+    ☐ 速干T恤 2-3件（白天28°C，走路出汗）<br>
+    ☐ 长裤1条 + 短裤1条<br>
+    ☐ <strong>舒适运动鞋</strong>（city walk必备，古镇石板路多）<br>
+    ☐ 拖鞋（酒店用）
+  </div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="name">📱 电子设备</div>
+  <div class="desc" style="line-height:1.8">
+    ☐ 手机 + 充电器<br>
+    ☐ 车载充电器（长途必备）<br>
+    ☐ 充电宝（走路一天手机耗电快）<br>
+    ☐ 相机/运动相机（古镇/乡间很出片）
+  </div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="name">🚗 自驾相关</div>
+  <div class="desc" style="line-height:1.8">
+    ☐ 出发前检查轮胎气压、机油、冷却液<br>
+    ☐ 备胎 + 千斤顶 + 三角警示牌<br>
+    ☐ 车载手机支架（导航用）<br>
+    ☐ ETC确认正常（全程高速）<br>
+    ☐ 提前加满油再上高速<br>
+    ☐ 下载高德离线地图包（贵州部分路段无信号）
+  </div>
+</div>
+<div class="section-head">⚠️ 旅途注意事项</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="name">🛣️ 行车安全</div>
+  <div class="desc" style="line-height:1.8">
+    · 贵州山区高速弯道多、隧道多，控制车速<br>
+    · 连续驾驶2小时必须休息，两人轮换开车<br>
+    · 雨天路滑，贵州9月仍有阵雨<br>
+    · D5路程最长（~680km），建议7点前出发
+  </div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="name">🍜 饮食注意</div>
+  <div class="desc" style="line-height:1.8">
+    · 广西贵州饮食偏酸辣，肠胃敏感提前备药<br>
+    · 酸汤鱼、酸汤牛肉是贵州特色，值得一试<br>
+    · 路边摊卫生条件参差，选人多翻台快的店<br>
+    · 山区饮用水建议买瓶装水
+  </div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="name">💰 支付 & 通讯</div>
+  <div class="desc" style="line-height:1.8">
+    · 全程微信/支付宝基本覆盖，但备少量现金<br>
+    · 部分侗寨/苗寨信号弱，提前下载好离线内容<br>
+    · 住宿建议提前3天预订，9月底不算旺季
+  </div>
+</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="name">🌤️ 天气 & 穿搭</div>
+  <div class="desc" style="line-height:1.8">
+    · 9月底广西：25-33°C，闷热，注意防晒补水<br>
+    · 9月底贵州：18-28°C，早晚凉爽，带薄外套<br>
+    · 云南宣威：15-25°C，海拔较高，温差更大<br>
+    · 贵州"天无三日晴"，随身带伞<br>
+    · 紫外线强，即使阴天也要防晒
+  </div>
+</div>
+<div class="section-head">🆘 紧急联系</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="desc" style="line-height:1.8">
+    <strong>报警：</strong>110 &nbsp;&nbsp; <strong>急救：</strong>120 &nbsp;&nbsp; <strong>火警：</strong>119<br>
+    <strong>交通事故：</strong>122<br>
+    <strong>高速救援：</strong>12122<br>
+    <strong>保险报案：</strong>出发前记录保险公司电话<br>
+    <strong>沿途主要医院：</strong><br>
+    · 阳朔县人民医院：0773-8822120<br>
+    · 三江侗族自治县人民医院：0772-8612120<br>
+    · 黔东南州人民医院（凯里）：0855-8225555<br>
+    · 安顺市人民医院：0851-33224455<br>
+    · 兴义市人民医院：0859-3222777
+  </div>
+</div>
+
+<div class="section-head">⛽ 加油提醒</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="desc" style="line-height:1.8">
+    · D1 出发前加满油，黄姚古镇可补给<br>
+    · D3 三江→从江段山路加油站少，<strong>三江加满再走</strong><br>
+    · D4 凯里出发前加满，安顺沿线加油站充足<br>
+    · D5 凯里出发前加满，贵州进入云南后加油站间隔较远<br>
+    · 建议油量低于半箱就加，山区不要等油灯亮
+  </div>
+</div>
+
+<div class="section-head">图例</div>
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--tint-red)"></div>餐厅</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--tint-blue)"></div>景点</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--tint-purple)"></div>酒吧</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--tint-orange)"></div>酒店</div>
+</div>`;
+}
+
+const map = L.map('map', { center: [25.2, 108.5], zoom: 6, zoomControl: false, attributionControl: true });
+L.control.zoom({ position: 'topright' }).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+
+/* ── Geolocation ── */
+const LocateControl = L.Control.extend({
+  options: { position: 'bottomright' },
+  onAdd() {
+    const btn = L.DomUtil.create('button', 'locate-btn');
+    btn.innerHTML = '📍';
+    btn.title = '我的位置';
+    L.DomEvent.disableClickPropagation(btn);
+    btn.addEventListener('click', () => {
+      btn.classList.add('active');
+      map.locate({ setView: true, maxZoom: 15 });
+    });
+    this._btn = btn;
+    return btn;
+  }
+});
+new LocateControl().addTo(map);
+let locMarker, locCircle;
+map.on('locationfound', e => {
+  const r = e.accuracy / 2;
+  if (locMarker) { locMarker.setLatLng(e.latlng); locCircle.setLatLng(e.latlng).setRadius(r); }
+  else {
+    locMarker = L.marker(e.latlng, {
+      icon: L.divIcon({ className:'', html:'<div style="width:14px;height:14px;border-radius:50%;background:#007aff;border:2.5px solid #fff;box-shadow:0 0 6px rgba(0,122,255,.5)"></div><div class="loc-pulse" style="position:absolute;top:0;left:0"></div>', iconSize:[14,14], iconAnchor:[7,7] }),
+      zIndexOffset: 2000
+    }).addTo(map);
+    locCircle = L.circle(e.latlng, { radius: r, color: '#007aff', fillColor: '#007aff', fillOpacity: .08, weight: 1 }).addTo(map);
+  }
+});
+map.on('locationerror', () => {});
+
+function icon(color, emoji) {
+  return L.divIcon({ className: '', html: `<div style="width:28px;height:28px;border-radius:50%;background:${color};border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.18)">${emoji||''}</div>`, iconSize: [28,28], iconAnchor: [14,14], popupAnchor: [0,-16] });
+}
+
+if (HOTEL.lat) L.marker([HOTEL.lat, HOTEL.lng], { icon: icon('#ff9500','🏨'), zIndexOffset: 1000 }).addTo(map).bindPopup(`<b>${HOTEL.name}</b>`);
+
+/* ── Route Lines ── */
+const routeColors = ['#ff9500','#34c759','#af52de','#007aff','#ff2d55'];
+DAYS.slice(1).forEach((d, i) => {
+  const pts = d.locations.filter(l => l.lat && l.time !== '—').map(l => [l.lat, l.lng]);
+  if (pts.length > 1) {
+    L.polyline(pts, { color: routeColors[i] || '#007aff', weight: 3, opacity: 0.6, dashArray: '8,6' }).addTo(map);
+    // Add small numbered markers for each stop
+    d.locations.filter(l => l.lat && l.time !== '—').forEach((l, j) => {
+      const emoji = l.type==='food'?'🍜':l.type==='spot'?'📍':l.type==='hotel'?'🏨':'🚗';
+      L.marker([l.lat, l.lng], { icon: icon(routeColors[i] || '#007aff', emoji), zIndexOffset: 500 })
+        .addTo(map).bindPopup(`<b>${l.name}</b><br><span style="color:#86868b">${d.label} · ${l.time}</span><br>${l.desc}`);
+    });
+  }
+});
+
+let markers = [], polylines = [];
+const emojis = { food:'🍽️', spot:'📍', hotel:'🏨', transport:'🚃', drink:'🍺' };
+
+function clearMap() { markers.forEach(m=>map.removeLayer(m)); polylines.forEach(p=>map.removeLayer(p)); markers=[]; polylines=[]; }
+
+function showDay(idx) {
+  clearMap();
+  if (idx === 0) {
+    const pts = [];
+    DAYS.forEach(d => d.locations.forEach(l => { if(l.lat) pts.push([l.lat,l.lng]); }));
+    if(pts.length) map.fitBounds(pts, {padding:[30,30]});
+    DAYS.slice(1).forEach(d => {
+      d.locations.filter(l=>l.time!=='—').forEach(l => {
+        const m = L.circleMarker([l.lat,l.lng], { radius:4, fillColor:d.color, color:'#fff', weight:1.5, fillOpacity:.9 }).addTo(map).bindPopup(`<b>${l.name}</b><br><span style="color:#86868b">${d.label}</span>`);
+        markers.push(m);
+      });
+    });
+    return;
+  }
+  const day = DAYS.find(d=>d.id===idx);
+  if(!day) return;
+  const coords = [];
+  day.locations.forEach(l => {
+    if(!l.lat) return;
+    const m = L.marker([l.lat,l.lng], { icon: icon(day.color, emojis[l.type]||'📌') }).addTo(map);
+    const gmapQ = l.gmap||encodeURIComponent(l.name+' Tokyo');
+    m.bindPopup(`<b>${l.name}</b>${l.time!=='—'?'<br><span style="color:#86868b">'+l.time+'</span>':''}<br>${l.desc}${l.budget?'<br><span style="color:#ff9500">'+l.budget+'</span>':''}<br><a href="#" onclick="event.preventDefault();navToAmap('${l.name.replace(/'/g,"\\'")}',${l.lat},${l.lng})">📍 高德导航</a>${l.xhs?' · <a href="'+l.xhs+'" target="_blank">📕 小红书</a>':''}`);
+    markers.push(m);
+    if(l.time!=='—') coords.push([l.lat,l.lng]);
+  });
+  if(coords.length>1) { const pl = L.polyline(coords, { color:day.color, weight:2.5, opacity:.5, dashArray:'6,5' }).addTo(map); polylines.push(pl); }
+  if(coords.length) map.fitBounds(coords, { padding:[40,40], maxZoom:14 });
+}
+
+// ══════════ RENDER ══════════
+function payChips(pay) {
+  if(!pay) return '';
+  let h = '<div class="pays">';
+  const m = { cash:'💴', card:'💳', suica:'Suica', paypay:'PayPay', alipay:'支付宝', wechat:'微信' };
+  for(const [k,label] of Object.entries(m)) {
+    if(pay[k]!==undefined) { const c = pay[k]===1?'ok':pay[k]===0.5?'idk':'no'; h += `<span class="pay ${c}">${label}</span>`; }
+  }
+  return h+'</div>';
+}
+
+// ── 运行环境检测：在第三方 App 的 WebView 里，自定义 scheme 基本会被拦截 ──
+const IN_APP_WEBVIEW = (() => {
+  const ua = (navigator.userAgent || '').toLowerCase();
+  return /micromessenger|xhs|xhsdiscover|discover\/|tiktok|aweme|weibo|qq\/|qqbrowser|alipayclient|dingtalk|lark|feishu|ucbrowser|baiduboxapp|toutiao|newsarticle/.test(ua);
+})();
+
+function xhsKeyword(loc) {
+  if(loc.xhsKeyword) return loc.xhsKeyword.trim();
+  return (loc.name||'').replace(/⭐.*$/g,'').replace(/（.*?）/g,'').replace(/\(.*?\)/g,'').replace(/\s+/g,' ').trim();
+}
+function xhsAppUrl(loc) { return `xhsdiscover://search/result?keyword=${encodeURIComponent(xhsKeyword(loc))}&target_search=notes&source=deeplink`; }
+function xhsWebUrl(loc) { return `https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(xhsKeyword(loc))}&source=web_explore_feed`; }
+
+function dpKeyword(loc) {
+  if(loc.dianpingKeyword) return loc.dianpingKeyword.trim();
+  return (loc.name||'').replace(/⭐.*$/g,'').replace(/（.*?）/g,'').replace(/\(.*?\)/g,'').replace(/\s+/g,' ').trim();
+}
+function dpAppUrl(loc) { return `dianping://searchshoplist?keyword=${encodeURIComponent(dpKeyword(loc))}`; }
+function dpWebUrl(loc) { return `https://m.dianping.com/searchshop?keyword=${encodeURIComponent(dpKeyword(loc))}`; }
+
+window._extLocs = {};
+DAYS.forEach(d => d.locations.forEach(l => { window._extLocs[`${d.id}::${l.name}`] = l; }));
+window._xhsLocs = window._extLocs;
+
+function openExt(key, kind) {
+  const loc = window._extLocs[key]; if(!loc) return false;
+  if (IN_APP_WEBVIEW) {
+    window.location.href = kind==='dp' ? dpWebUrl(loc) : xhsWebUrl(loc);
+  } else {
+    window.location.href = kind==='dp' ? dpAppUrl(loc) : xhsAppUrl(loc);
+  }
+  return false;
+}
+function openXhs(key) { return openExt(key, 'xhs'); }
+function openDp(key)  { return openExt(key, 'dp'); }
+
+function locCard(loc, dayIdx) {
+  const dot = loc.type==='food'?'food':loc.type==='spot'?'spot':loc.type==='drink'?'drink':loc.type==='hotel'?'hotel':'transport';
+  const bdg = loc.type==='food'?'<span class="badge food">餐</span>':loc.type==='spot'?'<span class="badge spot">景</span>':loc.type==='drink'?'<span class="badge drink">饮</span>':'';
+  const uid = `d${dayIdx}-${loc.name.replace(/\W/g,'')}`;
+  const locKey = `${dayIdx}::${loc.name}`;
+  const gmapQ = loc.gmap||encodeURIComponent(loc.name+' Tokyo');
+  let lnk = `<button class="btn nav" onclick="navToAmap('${loc.name.replace(/'/g,"\\'")}',${loc.lat},${loc.lng})">📍 高德导航</button>`;
+  if(loc.xhs||loc.xhsKeyword) {
+    const xhsHref = IN_APP_WEBVIEW ? xhsWebUrl(loc) : xhsAppUrl(loc);
+    const xhsLabel = IN_APP_WEBVIEW ? '📕 小红书' : '📕 小红书 App';
+    lnk += `<a href="${xhsHref}" onclick="return openXhs('${locKey.replace(/'/g,"\\'")}')" class="btn xhs">${xhsLabel}</a>`;
+  }
+  const dpEnabled = loc.dianping !== false &&
+    (loc.dianping || loc.dianpingKeyword || loc.type==='food' || loc.type==='drink');
+  if(dpEnabled) {
+    const dpHref = IN_APP_WEBVIEW ? dpWebUrl(loc) : dpAppUrl(loc);
+    const dpLabel = IN_APP_WEBVIEW ? '🍜 大众点评' : '🍜 大众点评 App';
+    lnk += `<a href="${dpHref}" onclick="return openDp('${locKey.replace(/'/g,"\\'")}')" class="btn dp">${dpLabel}</a>`;
+  }
+  if(loc.reserve) lnk += `<a href="${loc.reserve}" target="_blank" class="btn rsv">📅 预约</a>`;
+  return `<div class="tl-item"><div class="tl-dot ${dot}"></div><div class="card" onclick="if(!event.target.closest('.btn,.links'))toggle('${uid}')"><div class="time">${loc.time!=='—'?loc.time:'备选'}</div><div class="name">${bdg} ${loc.name}</div><div class="desc">${loc.desc}</div>${loc.budget?'<div class="budget">'+loc.budget+'</div>':''}${payChips(loc.pay)}<div class="links">${lnk}</div>${loc.detail?'<div class="details" id="'+uid+'">'+loc.detail.replace(/\n/g,'<br>')+'</div>':''}</div></div>`;
+}
+
+const dayRoutes = {
+  1: ['中山','→ 黄姚古镇','→ 阳朔','🍴豆豉排骨·啤酒鱼'],
+  2: ['阳朔','🍴米粉·旧县农家菜·虾灯蟹'],
+  3: ['阳朔','→ 兴坪','→ 三江','🍴漓江鱼·侗族酸鱼'],
+  4: ['三江','→ 从江','→ 凯里','🍴从江香猪·酸汤鱼·米豆腐'],
+  5: ['凯里','→ 安顺','🍴裹卷·夺夺粉','→ 兴义','🍴羊肉粉','→ 宣威']
+};
+const dayTips = {
+  1: '🚶 City Walk日：黄姚古镇慢逛2h → 阳朔漓江边散步 · 🍜 豆豉排骨 + 啤酒鱼',
+  2: '🚶 最轻松的一天：遇龙河乡间漫步 + 福利古镇 · 🍜 米粉 + 旧县农家菜 + 虾灯蟹',
+  3: '🚶 City Walk日：兴坪古镇 + 三江侗族老街 · 🍜 漓江鱼 + 侗族酸鱼酸肉',
+  4: '🚶 City Walk日：凯里大十字街区漫步 · 🍜 从江香猪 + 酸汤鱼 + 米豆腐',
+  5: '🚶 赶路日：早起出发，安顺老城美食停留 · 🍜 裹卷夺夺粉 + 羊肉粉'
+};
+
+function renderDay(idx) {
+  const d = DAYS.find(x=>x.id===idx); if(!d) return '';
+  const main = d.locations.filter(l=>l.time!=='—');
+  const alt = d.locations.filter(l=>l.time==='—');
+  const route = dayRoutes[idx] || [];
+  const tip = dayTips[idx] || '';
+  let h = `<div class="day-head"><h2>${d.title}</h2><p>${d.date}</p></div>`;
+  if(tip) {
+    const isWarn = tip.startsWith('🔴');
+    h += `<div style="background:${isWarn?'rgba(255,59,48,.08)':'rgba(52,199,89,.08)'};border-radius:var(--radius-md);padding:12px 14px;margin-bottom:14px;font-size:14px;line-height:1.5;color:${isWarn?'var(--tint-red)':'var(--tint-green)'}">${tip}</div>`;
+  }
+  if(route.length) {
+    h += `<div class="route-bar"><strong>🗺️ 路线：</strong>${route.map(r=>r.startsWith('→')?`<span style="color:var(--text-tertiary);font-size:12px">${r}</span>`:`<strong>${r}</strong>`).join(' ')}</div>`;
+  }
+  if(main.length) { h += '<div class="section-head">行程</div><div class="timeline">'; main.forEach(l => h += locCard(l, idx)); h += '</div>'; }
+  if(alt.length) { h += '<div class="section-head">备选酒店</div><div class="timeline">'; alt.forEach(l => h += locCard(l, idx)); h += '</div>'; }
+  return h;
+}
+
+// ══════════ NAV ══════════
+let cur = 0;
+const tabsEl = document.getElementById('tabs');
+const contentEl = document.getElementById('content');
+
+DAYS.forEach(d => {
+  const btn = document.createElement('button');
+  btn.className = 'tab' + (d.id===0?' active':'');
+  btn.dataset.day = d.id;
+  btn.textContent = d.label;
+  tabsEl.appendChild(btn);
+});
+
+function go(idx) {
+  cur = idx;
+  tabsEl.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', +t.dataset.day===idx));
+  contentEl.innerHTML = idx===0 ? overviewContent() : renderDay(idx);
+  showDay(idx);
+  contentEl.scrollTo({top:0});
+  const tab = tabsEl.querySelector(`[data-day="${idx}"]`);
+  if(tab) tab.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+}
+
+function toggle(id) { const el=document.getElementById(id); if(el) el.classList.toggle('closed'); }
+
+tabsEl.addEventListener('click', e => { const t=e.target.closest('.tab'); if(t) go(+t.dataset.day); });
+
+go(0);
+
+/* ── Action Sheet for Navigation ── */
+const asOverlay = document.createElement('div');
+asOverlay.className = 'as-overlay';
+asOverlay.innerHTML = `<div class="as-sheet">
+  <div class="as-group" id="as-opts"></div>
+  <div class="as-group"><button class="as-item as-cancel" onclick="closeAS()">取消</button></div>
+</div>`;
+document.body.appendChild(asOverlay);
+asOverlay.addEventListener('click', e => { if (e.target === asOverlay) closeAS(); });
+
+const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+function navToAmap(name, lat, lng) {
+  const encName = encodeURIComponent(name);
+  if (IN_APP_WEBVIEW) {
+    // WebView 内使用高德网页版导航，会自动尝试拉起 App
+    const webUrl = `https://uri.amap.com/navigation?from=&to=${lng},${lat}&name=${encName}&mode=car&coordinate=gaode&callnative=1`;
+    window.open(webUrl);
+    return;
+  }
+  // 优先尝试拉起高德地图 App 导航
+  const appScheme = IS_IOS
+    ? `iosamap://navi?sourceApplication=trip&lat=${lat}&lon=${lng}&name=${encName}&dev=0&style=2`
+    : `androidamap://navi?sourceApplication=trip&lat=${lat}&lon=${lng}&name=${encName}&dev=0&style=2`;
+  // 设置超时回退：如果 App 未安装，跳转高德网页版
+  const webUrl = `https://uri.amap.com/navigation?from=&to=${lng},${lat}&name=${encName}&mode=car&coordinate=gaode&callnative=1`;
+  const t = setTimeout(() => { window.location.href = webUrl; }, 1500);
+  window.location.href = appScheme;
+  // 如果页面被隐藏说明 App 已拉起，清除回退定时器
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) clearTimeout(t);
+  }, { once: true });
+}
+
+function openAS(name, lat, lng, gmap) { navToAmap(name, lat, lng); }
+function closeAS() { asOverlay.classList.remove('show'); }
+</script>
+
+<script>
+// Map toggle functionality
+function toggleMap() {
+  const map = document.getElementById('map');
+  const toggle = document.getElementById('mapToggle');
+  const text = toggle.querySelector('.map-toggle-text');
+  
+  if (map.classList.contains('expanded')) {
+    map.classList.remove('expanded');
+    toggle.classList.remove('expanded');
+    text.textContent = '显示地图';
+    // Invalidate map size after transition
+    setTimeout(() => map.invalidateSize(), 300);
+  } else {
+    map.classList.add('expanded');
+    toggle.classList.add('expanded');
+    text.textContent = '收起地图';
+    // Invalidate map size and fit bounds
+    setTimeout(() => {
+      map.invalidateSize();
+      if (typeof fitDayOnMap === 'function') fitDayOnMap(cur);
+    }, 300);
+  }
+}
+</script>
+<!-- Floating Action Buttons -->
+<div class="fab-container">
+  <button class="fab fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <button class="fab fab-nav" id="fabMain" onclick="toggleFabMenu()">🧭</button>
+  <div class="fab-menu" id="fabMenu">
+    <button class="fab-menu-item" onclick="navToAmap('宣威市姬榔德村',26.228,104.098);closeFabMenu()">🏁 导航到终点</button>
+    <button class="fab-menu-item" onclick="go(0);closeFabMenu()">📋 查看总览</button>
+    <button class="fab-menu-item" onclick="go(cur);fitDayOnMap(cur);closeFabMenu()">🗺️ 定位当天路线</button>
+    <button class="fab-menu-item" onclick="shareTrip();closeFabMenu()">📤 分享行程</button>
+  </div>
+</div>
+<script>
+let fabMenuOpen = false;
+function toggleFabMenu() {
+  fabMenuOpen = !fabMenuOpen;
+  document.getElementById('fabMenu').classList.toggle('show', fabMenuOpen);
+  document.getElementById('fabMain').style.transform = fabMenuOpen ? 'rotate(45deg)' : '';
+}
+function closeFabMenu() { fabMenuOpen = false; document.getElementById('fabMenu').classList.remove('show'); document.getElementById('fabMain').style.transform = ''; }
+document.addEventListener('click', e => { if(!e.target.closest('.fab-container')) closeFabMenu(); });
+
+// Show/hide scroll-to-top button
+window.addEventListener('scroll', () => {
+  document.getElementById('fabTop').classList.toggle('show', window.scrollY > 400);
+});
+
+// Fit map to current day's route
+function fitDayOnMap(idx) {
+  if(idx === 0) {
+    map.setView([25.2, 108.5], 6);
+    return;
+  }
+  const d = DAYS.find(x=>x.id===idx);
+  if(!d) return;
+  const pts = d.locations.filter(l=>l.lat && l.time!=='—').map(l=>[l.lat,l.lng]);
+  if(pts.length > 1) map.fitBounds(pts, {padding:[40,40]});
+  else if(pts.length === 1) map.setView(pts[0], 13);
+}
+
+// Share trip
+function shareTrip() {
+  const text = '中山→云南宣威 轻松5日 · City Walk+美食\n9/25-9/29\n路线：中山→黄姚古镇→阳朔→三江→凯里→安顺→兴义→宣威\n主打：city walk + 本地美食，不赶热门景区\n总里程约1600km';
+  if(navigator.share) {
+    navigator.share({title:'中山→宣威 轻松5日·City Walk+美食', text: text, url: window.location.href}).catch(()=>{});
+  } else {
+    // Fallback: copy to clipboard
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('行程信息已复制到剪贴板');
+  }
+}
+
+// Auto-fit map when switching days
+const _origGo = go;
+go = function(idx) {
+  _origGo(idx);
+  setTimeout(() => fitDayOnMap(idx), 100);
+};
+</script>
+
+</body>
+</html>
