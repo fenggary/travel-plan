@@ -625,10 +625,10 @@ const DAYS = [
         detail: '曲靖是云南第二大城市\n服务区有中石化加油站\n休息15分钟\n这段路进入云南，路况变好\n离宣威还有约100km'
       },
       {
-        name: '宣威·姬榔德村', lat: 26.228, lng: 104.098,
+        name: '🏁 目的地·云南省曲靖市宣威市姬榔德村', lat: 26.228, lng: 104.098,
         type: 'spot', time: '14:00',
-        desc: '🏁 下午2点抵达目的地！全程白天，一路顺风',
-        detail: '☀️ 下午2点到达，阳光正好！\n全程白天走山路，安全又安心\n\n宣威以火腿闻名全国\n先安顿行李，休息一会\n下午可以去市区逛逛\n晚上重头戏：宣威烧烤！'
+        desc: '🏁 下午2点抵达最终目的地！全程白天，一路顺风',
+        detail: '☀️ 下午2点到达姬榔德村，阳光正好！\n全程白天走山路，安全又安心\n\n🏁 旅程终点：云南省曲靖市宣威市姬榔德村\n\n宣威以火腿闻名全国\n先安顿行李，休息一会\n下午可以去市区逛逛\n晚上重头戏：宣威烧烤！'
       },
       {
         name: '宣威午餐·火腿鸡', lat: 26.228, lng: 104.098,
@@ -651,9 +651,9 @@ const DAYS = [
         detail: '【推荐去处】\n1. 宣威烧烤城(建设街) - 最集中的烧烤一条街\n2. 本地人推荐的街边烧烤摊 - 问酒店前台最靠谱\n3. 火腿烧烤专卖店 - 宣威特色，火腿串烤肉\n\n必点清单：\n· 🔥 火腿串 - 宣威独有，用宣威火腿烤制\n· 🔥 烤豆腐 - 云南烧烤灵魂\n· 🔥 烤洋芋 - 云南小土豆，又糯又香\n· 🔥 烤五花肉 - 配蘸水绝了\n· 🔥 烤猪脚 - 胶原蛋白满满\n· 烤饵块 - 云南特色主食\n\n宣威烧烤和云南其他城市不同\n用炭火慢烤，蘸水是灵魂\n人均60-100元，敞开吃！\n\n💡 这是整趟旅程的收官大餐，好好享受！'
       },
       {
-        name: '目的地·到达休息', lat: 26.228, lng: 104.098,
+        name: '🏁 姬榔德村·到达休息', lat: 26.228, lng: 104.098,
         type: 'hotel', time: '20:00',
-        desc: '🏁 旅途圆满结束！好好休息',
+        desc: '🏁 抵达终点：云南省曲靖市宣威市姬榔德村！旅途圆满结束',
         detail: '到达目的地，6天旅程圆满结束\n从广东中山到云南宣威\n一路吃过来：黄姚豆豉→阳朔啤酒鱼→侗族酸鱼→凯里酸汤→安顺小吃→兴义羊肉粉→宣威烧烤\n​好好休息，明天开始新的生活！'
       }
     ]
@@ -662,7 +662,7 @@ const DAYS = [
 
 function overviewContent() {
   return `
-<div class="hero"><h1>中山 → 云南宣威</h1><p class="subtitle">轻松6日 · City Walk + 美食 · 约1,600km</p></div>
+<div class="hero"><h1>中山 → 云南宣威姬榔德村</h1><p class="subtitle">轻松6日 · City Walk + 美食 · 约1,600km</p></div>
 
 <div style="background:linear-gradient(135deg,#34c759 0%,#30d158 100%);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:16px;color:#fff">
   <div style="font-size:13px;font-weight:600;opacity:.8;margin-bottom:8px">🚶 轻松 City Walk + 🍜 美食之旅</div>
@@ -676,7 +676,7 @@ function overviewContent() {
 
 <div class="info-grid">
   <div class="info-card"><div class="label">📅 出发</div><div class="value">9/25 中山火炬开发区</div></div>
-  <div class="info-card"><div class="label">🏁 到达</div><div class="value">9/30 宣威姬榔德村</div></div>
+  <div class="info-card"><div class="label">🏁 到达</div><div class="value">9/30 云南曲靖宣威姬榔德村</div></div>
   <div class="info-card"><div class="label">🚗 总里程</div><div class="value">约1,600公里</div></div>
   <div class="info-card"><div class="label">👫 人数</div><div class="value">2位大人</div></div>
 </div>
@@ -1346,7 +1346,7 @@ function toggleMap() {
   <button class="fab fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
   <button class="fab fab-nav" id="fabMain" onclick="toggleFabMenu()">🧭</button>
   <div class="fab-menu" id="fabMenu">
-    <button class="fab-menu-item" onclick="navToAmap('宣威市姬榔德村',26.228,104.098);closeFabMenu()">🏁 导航到宣威</button>
+    <button class="fab-menu-item" onclick="navToAmap('宣威市姬榔德村',26.228,104.098);closeFabMenu()">🏁 导航到姬榔德村</button>
     <button class="fab-menu-item" onclick="navSegment(cur);closeFabMenu()">🧭 导航当天路线</button>
     <button class="fab-menu-item" onclick="go(0);closeFabMenu()">📋 查看总览</button>
     <button class="fab-menu-item" onclick="go(cur);fitDayOnMap(cur);closeFabMenu()">🗺️ 定位当天路线</button>
@@ -1412,7 +1412,7 @@ function downloadPDF() {
 
 // Share trip
 function shareTrip() {
-  const text = '中山→云南宣威 轻松6日 · City Walk+美食\n9/25-9/30\n路线：中山→黄姚古镇→阳朔→三江→凯里→安顺→兴义→宣威\n主打：city walk + 本地美食，不赶热门景区\nD5住安顺吃小吃，D6白天到宣威，宣威烧烤收官🔥\n总里程约1600km';
+  const text = '中山→云南宣威 轻松6日 · City Walk+美食\n9/25-9/30\n路线：中山→黄姚古镇→阳朔→三江→凯里→安顺→兴义→宣威姬榔德村\n主打：city walk + 本地美食，不赶热门景区\nD5住安顺吃小吃，D6白天到宣威，宣威烧烤收官🔥\n总里程约1600km';
   if(navigator.share) {
     navigator.share({title:'中山→宣威 轻松5日·City Walk+美食', text: text, url: window.location.href}).catch(()=>{});
   } else {
