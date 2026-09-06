@@ -590,45 +590,45 @@ const DAYS = [
     locations: [
       {
         name: '安顺早餐', lat: 26.196, lng: 105.934,
-        type: 'food', time: '06:00',
+        type: 'food', time: '08:00',
         desc: '酒店含早，或去街边吃碗安顺米粉',
         budget: '人均10-15元 | ⏰ 07:00-10:00',
         detail: '酒店早餐7:00-10:00\n或者试试安顺本地米粉\n安顺米粉和桂林米粉不同\n汤底更浓郁，配菜更多\n人均5-10元\n💡 吃饱出发，今天400km但全程白天'
       },
       {
         name: '安顺→兴义', lat: 26.195, lng: 105.932,
-        type: 'transport', time: '06:30',
-        desc: '经晴兴高速到兴义，约200km · 约2.5小时 | ☀️ 早起出发，中午到达'
+        type: 'transport', time: '08:30',
+        desc: '经晴兴高速到兴义，约200km · 约2.5小时 | ☀️ 不赶路，8:30出发'
       },
       {
         name: '盘州服务区·休息加油', lat: 25.590, lng: 104.680,
-        type: 'transport', time: '08:00',
+        type: 'transport', time: '10:00',
         desc: '⛽ 安顺到兴义中途休息站，加油+活动',
         detail: '盘州服务区是中途大站\n有中石化加油站、便利店\n建议休息15分钟\n这段路隧道桥梁多，注意限速\n进入云南前加满油'
       },
       {
-        name: '兴义早午餐·羊肉粉', lat: 25.089, lng: 104.907,
-        type: 'food', time: '09:00',
+        name: '兴义午餐·羊肉粉', lat: 25.089, lng: 104.907,
+        type: 'food', time: '11:00',
         desc: '⭐推荐：马岭河边羊肉粉 / 兴义老字号羊肉粉',
-        budget: '人均20-30元 | ⏰ 07:00开门',
+        budget: '人均20-30元 | ⏰ 07:00-21:00',
         detail: '【推荐店铺】\n1. 马岭河边羊肉粉 - 兴义本地人最爱\n2. 兴义老字号羊肉粉(老街) - 30年老店\n3. 砂锅羊肉粉(桔山大道) - 汤底浓郁\n\n贵州四大粉之一，汤鲜粉滑\n加个煎蛋、加份羊肉\n人均20-30元\n💡 吃完休息一会再出发'
       },
       {
         name: '兴义→宣威', lat: 25.089, lng: 104.907,
-        type: 'transport', time: '09:30',
-        desc: '经曲靖到宣威，约200km · 约2小时 | ☀️ 上午出发，11:30到达'
+        type: 'transport', time: '12:00',
+        desc: '经曲靖到宣威，约200km · 约2小时 | ☀️ 中午出发，下午到达'
       },
       {
         name: '曲靖·中途休息', lat: 25.500, lng: 103.800,
-        type: 'transport', time: '10:30',
+        type: 'transport', time: '13:00',
         desc: '⛽ 曲靖服务区休息，进入云南最后一段',
         detail: '曲靖是云南第二大城市\n服务区有中石化加油站\n休息15分钟\n这段路进入云南，路况变好\n离宣威还有约100km'
       },
       {
         name: '🏁 目的地·云南省曲靖市宣威市姬榔德村', lat: 26.228, lng: 104.098,
-        type: 'spot', time: '11:30',
-        desc: '🏁 上午11:30抵达最终目的地！全程白天，一路顺风',
-        detail: '☀️ 上午11:30到达姬榔德村，阳光正好！\n全程白天走山路，安全又安心\n\n🏁 旅程终点：云南省曲靖市宣威市姬榔德村\n\n宣威以火腿闻名全国\n先安顿行李，好好休息'
+        type: 'spot', time: '14:00',
+        desc: '🏁 下午2点抵达最终目的地！全程白天，一路顺风',
+        detail: '☀️ 下午2点到达姬榔德村，阳光正好！\n全程白天走山路，安全又安心\n\n🏁 旅程终点：云南省曲靖市宣威市姬榔德村\n\n宣威以火腿闻名全国\n先安顿行李，好好休息'
       },
       {
         name: '宣威午餐·火腿鸡', lat: 26.228, lng: 104.098,
@@ -703,7 +703,7 @@ function overviewContent() {
   </div>
   <div class="card" onclick="go(6)" style="margin-bottom:10px">
     <div class="name"><span class="dot" style="background:#e60012"></span>D6 · 安顺→兴义→宣威 · 白天到达🏁</div>
-    <div class="desc">9/30（周二）· 约400km · 5h驾驶 · <span style="color:var(--tint-green)">★ 轻松 · 11:30到达</span></div>
+    <div class="desc">9/30（周二）· 约400km · 5h驾驶 · <span style="color:var(--tint-green)">★ 轻松 · 14:00到达</span></div>
     <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 宣威火腿鸡 → 🔥宣威烧烤 · 🚶 宣威小城漫步</div>
   </div>
 </div>
@@ -777,7 +777,7 @@ function overviewContent() {
   <div class="name" style="color:var(--tint-red)">⚠️ 需要注意的问题</div>
   <div class="desc" style="line-height:1.8">
     · <strong>D5 轻松到安顺</strong>：280km到安顺，龙里服务区休息+加油，安顺老城吃遍小吃，下午city walk，晚上裹卷+丝娃娃<br>
-    · <strong>D6 上午到达</strong>：400km经兴义到宣威，<span style='color:var(--tint-green)'>全程白天走山路</span>，<strong>11:30到达姬榔德村</strong><br>
+    · <strong>D6 下午到达</strong>：400km经兴义到宣威，<span style='color:var(--tint-green)'>全程白天走山路</span>，<strong>14:00到达姬榔德村</strong><br>
     · <strong>D4 山路多</strong>：三江→从江→凯里段是山区高速，隧道桥梁多，限速频繁<br>
     · <strong>住宿选择</strong>：全部选市区连锁酒店，避开景区溢价，停车方便
   </div>
@@ -786,8 +786,8 @@ function overviewContent() {
 <div class="section-head">注意事项</div>
 <div class="card">
   <div class="desc" style="line-height:1.8">
-    · D5约280km到安顺，很轻松；D6约400km经兴义到宣威，<strong>11:30到达</strong>，全程白天<br>
-    · 最后一段山路（兴义→宣威）安排在D6上午，<strong>11:30到达姬榔德村</strong>，避免夜间山路<br>
+    · D5约280km到安顺，很轻松；D6约400km经兴义到宣威，<strong>14:00到达</strong>，全程白天<br>
+    · 最后一段山路（兴义→宣威）安排在D6白天，<strong>14:00到达姬榔德村</strong>，避免夜间山路<br>
     · 贵州山区多弯道，注意行车安全<br>
     · 9月底贵州/广西气温约18-28°C，带薄外套<br>
     · city walk穿舒适运动鞋，古镇石板路多<br>
