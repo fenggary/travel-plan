@@ -3,8 +3,8 @@
 <head data-page-node-id="d3PXM7NRqR213ApgrYxMDJ">
 <meta charset="UTF-8" data-page-node-id="JEA64A4udgulR9SaDVvAkG">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-page-node-id="GBytVX5LLeTFiQhrdXZkOH">
-<title>中山→云南宣威 轻松6日 · City Walk+美食</title>
-<meta name="description" content="广东中山出发，经广西贵州，自驾6日到云南宣威，宣威烧烤收官" data-page-node-id="K09AYrpD0nmgCDdi8KpVIP">
+<title>中山→云南宣威 极速2日 · 10/1出发 · 白天走完山路</title>
+<meta name="description" content="10月1日中山出发，2天1,360km直达云南宣威海岱镇姬榔德村，山路全程白天走完" data-page-node-id="K09AYrpD0nmgCDdi8KpVIP">
 <meta name="apple-mobile-web-app-capable" content="yes" data-page-node-id="edHku59NxiVauSGO2ieI2F">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" data-page-node-id="KbsqmwKTx8FYGb3HozPD6F">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" data-page-node-id="daD5RtVwEBBRE7AQD7HEG6" />
@@ -271,369 +271,129 @@ a:hover { text-decoration: underline; }
 // ║  REPLACE THIS SECTION — Hotel and Days data                 ║
 // ╚══════════════════════════════════════════════════════════════╝
 
-const HOTEL = { name: '宣威目的地', lat: 26.228, lng: 104.098 };
+const HOTEL = { name: '姬榔德村（海岱镇）', lat: 26.016, lng: 104.454 };
 
 const DAYS = [
   { id: 0, label: '总览', color: '#0071e3', locations: [] },
   {
-    id: 1, label: 'D1', date: '9月25日（周四）', title: '中山 → 黄姚古镇 → 阳朔',
+    id: 1, label: 'D1', date: '10月1日（周四 · 国庆）', title: '中山 → 百色 · 直插广西腹地 818km',
     color: '#ff9500',
     locations: [
       {
         name: '中山火炬开发区·阳光里花园', lat: 22.552, lng: 113.487,
-        type: 'transport', time: '07:30',
-        desc: '走广昆高速→汕昆高速，07:30准时出发，全程约400km · 约4.5h（广西段限速90）'
+        type: 'transport', time: '05:30',
+        desc: '⚠️ 05:30准时出发 | S26中阳→G2518深岑→G65包茂→G80广昆，818km · 纯驾驶约8.5h',
+        detail: '全程路线：\nS26中阳高速 → G94珠三角环线 → G2518深岑高速 → G65包茂高速 → G80广昆高速 → G7201南宁绕城 → G80广昆 → 百色\n\n全程约818km，纯驾驶约8.5小时\n\n⏰ 为什么必须05:30出发：\n· 10/1 00:00起高速免费，全天车流是平日2-3倍\n· 广东段6:00-11:00是出城高峰，越早越顺\n· 05:30出发 → 15:00到百色，日落约18:35，还有3.5h缓冲\n· 晚1小时出发，可能多堵2小时\n\n💡 04:50起床，车昨晚加满油\n💡 早餐车上吃，带上保温杯\n💡 两人轮换，每2小时换手'
       },
       {
-        name: '黄姚古镇', lat: 24.183, lng: 111.567,
-        type: 'spot', time: '12:00',
-        desc: '千年古镇慢逛2h，不是热门景区，人少清静',
-        budget: '门票40元/人',
-        detail: '石板街慢慢走，不带商业气息\n推荐：豆豉蒸排骨、豆腐酿、黄姚米酒\n古镇不大，2小时足够\n比阳朔安静太多，适合拍照'
+        name: '岑溪服务区·第一次大休息', lat: 22.930, lng: 111.020,
+        type: 'transport', time: '08:00',
+        desc: '⛽ 约250km处 · 加油+上厕所，控制在20分钟内',
+        detail: '广昆高速沿线大服务区，设施齐全\n建议休息20分钟，最长不超过30分钟\n油量低于半箱就加\n\n⚠️ 国庆服务区加油排队很常见\n看到服务区车多就跳过，下一个再加\n\n📍 此时进度：250/818km，约31%'
       },
       {
-        name: '黄姚午餐·豆豉排骨', lat: 24.184, lng: 111.568,
-        type: 'food', time: '12:30',
-        desc: '⭐推荐：黄姚古井豆腐店 / 黄姚人家餐馆',
-        budget: '人均30-40元 | ⏰ 10:30-14:00',
-        detail: '【推荐店铺】\n1. 黄姚古井豆腐店 - 古镇内老字号，豆豉排骨是一绝\n2. 黄姚人家餐馆 - 本地人常去，豆腐酿必点\n3. 兴宁街小吃摊 - 最便宜的本地味道\n\n必点：豆豉蒸排骨、豆腐酿、炒米粉\n配一杯黄姚米酒，很惬意\n⏰ 下午2点后很多店关门，14:00前出发去阳朔'
+        name: '南宁绕城·那容立交（关键转向点）', lat: 22.800, lng: 108.500,
+        type: 'transport', time: '11:00',
+        desc: '⚠️ 约560km处 · G72泉南 → G7201南宁绕城 → G80广昆（百色/昆明方向）',
+        detail: '这是全程最容易走错的地方\n\n✅ 正确：走南宁绕城高速，不进南宁市区\n✅ 路牌关键词：百色 / 昆明 / G80 / 石林\n❌ 错误：跟着"南宁市区/民族大道"走下去\n\n⚠️ 走错进南宁市区至少多花40分钟\n\n💡 高德"避免拥堵"可能会绕路，建议锁定G80\n💡 提前把下一段目的地设为"百色市"'
       },
       {
-        name: '欢漫酒店（桂林阳朔西街十里画廊店）', lat: 24.755, lng: 110.490,
-        type: 'hotel', time: '16:00',
-        desc: '⭐首选 | 携程4.9分 | 🅿️免费停车 | 🍳含早 | 📞0773-8816688 | 16:00前入住 ✅',
-        budget: '约¥180-220/晚 | 退房12:00',
-        detail: '携程评分4.9/10，超1100条好评\n2023年新开业，设施新\n🅿️ 免费地下停车场（30个车位）\n🍳 含双人早餐（7:00-10:00）\n📞 0773-8816688\n🕐 退房12:00，可延迟到14:00\n十里画廊位置，避开西街溢价\n到西街约10分钟车程\n💡 15:30-16:00办理入住，白天到达，不走夜路\n💡 预订提示：携程/美团提前3天预订更便宜'
-      },
-      {
-        name: '阳朔县城·漓江边散步', lat: 24.774, lng: 110.494,
-        type: 'spot', time: '17:30',
-        desc: '放下行李后，沿漓江边散步看日落，本地人的休闲方式',
-        detail: '不去西街主街挤\n沿漓江边走，风景好又安静\n本地人在这里散步、钓鱼\n日落时分最美\n走到叠翠桥看两岸山水'
-      },
-      {
-        name: '阳朔晚餐·啤酒鱼', lat: 24.776, lng: 110.496,
-        type: 'food', time: '18:30',
-        desc: '⭐推荐：谢三姐啤酒鱼(叠翠路店) / 大师傅啤酒鱼(漓江边)',
-        budget: '人均60-80元 | ⏰ 17:00-22:00',
-        detail: '【推荐店铺】\n1. 谢三姐啤酒鱼(叠翠路店) - 本地人推荐，比西街便宜30%\n2. 大师傅啤酒鱼(漓江边) - 江边位置风景好\n3. 刘姐啤酒鱼 - 老店，味道稳定\n\n啤酒鱼用漓江鲜鱼+啤酒焖煮\n点鱼时问清楚价格（按斤称），避免被宰\n⏰ 建议18:00前到，晚了要排队\n避开西街主街的高价店'
-      },
-      {
-        name: '全季酒店（桂林阳朔西街店）', lat: 24.752, lng: 110.495,
-        type: 'hotel', time: '—',
-        desc: '【备选】2024年新开业，华住品质',
-        budget: '约¥200-250/晚',
-        detail: '华住旗下中端品牌\n2024年新开业\n县城位置，比西街内便宜30%\n免费停车场'
-      },
-      {
-        name: '桔子酒店（桂林阳朔西街店）', lat: 24.753, lng: 110.496,
-        type: 'hotel', time: '—',
-        desc: '【备选】设计感强，年轻人首选',
-        budget: '约¥180-230/晚',
-        detail: '华住旗下设计品牌\n智能客房，颜值高\n同样避开西街核心区溢价'
-      }
-    ]
-  },
-  {
-    id: 2, label: 'D2', date: '9月26日（周五）', title: '阳朔整天 · 乡间漫步 · 不赶路',
-    color: '#34c759',
-    locations: [
-      {
-        name: '阳朔早餐·桂林米粉', lat: 24.774, lng: 110.494,
-        type: 'food', time: '07:30',
-        desc: '⭐推荐：崇善米粉(叠翠路) / 日头火米粉(芙蓉路)',
-        budget: '人均10-15元 | ⏰ 06:30-13:00',
-        detail: '【推荐店铺】\n1. 崇善米粉(叠翠路) - 本地人最多的店，卤菜粉一绝\n2. 日头火米粉(芙蓉路) - 连锁品牌，品质稳定\n3. 石马米粉 - 社区老店，价格实惠\n\n必点：卤菜粉（干拌）+ 卤蛋 + 锅烧\n⏰ 米粉店一般下午就关门！一定要早上去\n找本地人排队的店，不要进游客店'
-      },
-      {
-        name: '遇龙河乡间漫步', lat: 24.790, lng: 110.470,
-        type: 'spot', time: '08:30',
-        desc: '沿遇龙河边乡间小路漫步，不坐竹筏，走路更自由',
-        detail: '路线：骥马村→旧县古村（约3km）\n沿河边走，田园山水如画\n人少安静，比竹筏更自在\n随时停下来拍照、喝水\n全程平路，轻松好走'
-      },
-      {
-        name: '旧县古村午餐·农家菜', lat: 24.760, lng: 110.440,
+        name: '隆安服务区·午餐', lat: 23.180, lng: 107.690,
         type: 'food', time: '12:00',
-        desc: '1400年历史的古村落，吃地道农家菜',
-        budget: '人均40-60元',
-        detail: '推荐：啤酒鱼、酿菜、野菜\n旧县是1400年历史的古村\n村里有老房子、古井\n农家菜用自家种的菜，新鲜\n人均40-60元，2人点3菜够了'
+        desc: '约640km处 · 服务区简餐，控制在40分钟内',
+        budget: '人均25-40元 | ⏰ 12:00-12:40',
+        detail: '【为什么在服务区吃】\n下高速吃饭至少多花40分钟\n国庆期间时间更要省\n\n推荐：\n· 广西段服务区基本都有米粉，快且管饱\n· 便利店饭团+水果，车上吃最快\n· 咖啡/功能饮料备一瓶，下午容易犯困\n\n⏰ 12:40前必须上路\n📍 此时进度：640/818km，约78%'
       },
       {
-        name: '福利古镇', lat: 24.770, lng: 110.560,
-        type: 'spot', time: '14:30',
-        desc: '本地小镇，不是景区，没有游客，只有真实的生活',
-        detail: '阳朔到福利约15分钟\n这是个真正的本地小镇\n没有门票，没有商铺\n老街、老房子、本地人\n画扇是当地特产，可以看看\n适合随便走走，感受真实的小镇生活'
+        name: '田东服务区·最后一次休息', lat: 23.600, lng: 107.120,
+        type: 'transport', time: '13:30',
+        desc: '⛽ 约730km处 · 补油+活动筋骨，距百色还有90km',
+        detail: '距百色约90km，1小时车程\n\n⛽ 这里加满油，明天一早直接走不用找加油站\n休息15分钟，下车走一走\n\n📍 此时进度：730/818km，约89%\n💡 进入百色前路况好，但国庆车多保持车距'
       },
       {
-        name: '欢漫酒店（桂林阳朔西街十里画廊店）', lat: 24.755, lng: 110.490,
-        type: 'hotel', time: '16:30',
-        desc: '⭐首选 | 连住两晚 | 16:30回酒店休息，白天到达 ✅',
-        budget: '约¥180-220/晚',
-        detail: '携程评分4.9/10\n连住两晚，轻松不折腾\n免费停车场\n今天整天在阳朔，不用换酒店\n💡 16:30前回酒店休息，天黑前不用赶路'
+        name: '雅斯特国际酒店（百色万景城店）', lat: 23.890, lng: 106.630,
+        type: 'hotel', time: '15:00',
+        desc: '⭐首选 | 携程4.7分 | 2023年开业 | 🅿️免费停车 | 15:00前入住 ✅',
+        budget: '约¥250-350/晚（国庆价）',
+        detail: '携程4.7分 · 1195条好评 · 百色高档酒店榜No.7\n2023年开业，设施新\n🅿️ 免费停车场（自驾友好，点评里高频提到"停车方便"）\n🍳 含早餐 7:00-10:00（明天可打包带走）\n📍 右江区龙景东路与利荷路交汇处（工商银行对面）\n\n☀️ 15:00入住，距日落（约18:35）还有3.5小时缓冲\n\n⚠️ 国庆务必提前3-5天预订，当天基本满房\n💡 入住时跟前台说要打包早餐（明天06:30出发）'
       },
       {
-        name: '阳朔县城·傍晚江边', lat: 24.774, lng: 110.494,
-        type: 'spot', time: '17:30',
-        desc: '休息后，傍晚再沿漓江边散步',
-        detail: '酒店休息到17:00\n傍晚出来走走\n漓江边看日落\n找个江边咖啡馆坐坐\n晚上去县城美食街'
-      },
-      {
-        name: '阳朔晚餐·虾灯蟹', lat: 24.776, lng: 110.492,
-        type: 'food', time: '18:30',
-        desc: '阳朔特色小吃，不是西街游客菜',
-        budget: '人均40-60元',
-        detail: '推荐：虾灯蟹、烤鱼、酿菜\n虾灯蟹是阳朔特色，外酥里嫩\n找县城本地人去的店\n人均40-60元\n配杯本地米酒'
-      },
-      {
-        name: '全季酒店（桂林阳朔西街店）', lat: 24.752, lng: 110.495,
-        type: 'hotel', time: '—',
-        desc: '【备选】2024年新开业',
-        budget: '约¥200-250/晚',
-        detail: '华住旗下\n2024年新开业\n免费停车场'
-      },
-      {
-        name: '桔子酒店（桂林阳朔西街店）', lat: 24.753, lng: 110.496,
-        type: 'hotel', time: '—',
-        desc: '【备选】设计感强',
-        budget: '约¥180-230/晚',
-        detail: '华住旗下设计品牌\n智能客房，颜值高'
-      }
-    ]
-  },
-  {
-    id: 3, label: 'D3', date: '9月27日（周六）', title: '阳朔 → 兴坪 → 三江 · 侗族老城',
-    color: '#af52de',
-    locations: [
-      {
-        name: '兴坪古镇', lat: 24.910, lng: 110.510,
-        type: 'spot', time: '09:00',
-        desc: '20元人民币背景图取景地，古镇免费，不商业化',
-        detail: '阳朔到兴坪约30分钟\n20元人民币背景就在这里\n古镇免费，不需要门票\n没有过度商业化\n漓江边散步，看山水\n1小时足够，不用赶'
-      },
-      {
-        name: '兴坪·漓江边午餐', lat: 24.910, lng: 110.512,
-        type: 'food', time: '11:30',
-        desc: '漓江边的小馆子，吃鱼看山水',
-        budget: '人均50-70元',
-        detail: '推荐：清蒸漓江鱼、炒虾、野菜\n兴坪的鱼比阳朔便宜\n找江边位置，边吃边看风景\n人均50-70元\n不用去大餐厅，小馆子更地道'
-      },
-      {
-        name: '三江县城·侗族老街', lat: 25.732, lng: 109.608,
-        type: 'spot', time: '16:00',
-        desc: '侗族县城慢逛，体验本地生活，不是景区',
-        detail: '兴坪到三江约170km，3小时\n下午到达后在县城散步\n侗族老街，本地人生活\n看看侗族建筑、鼓楼\n没有门票，没有游客\n感受真实的侗族小城'
-      },
-      {
-        name: '全季酒店（柳州三江鸟巢店）', lat: 25.732, lng: 109.608,
-        type: 'hotel', time: '16:30',
-        desc: '⭐首选 | 携程9.8分 | 🅿️免费停车 | 🍳含早 | 📞0772-8618888 | 16:30前入住 ✅',
-        budget: '约¥120-160/晚 | 退房12:00',
-        detail: '华住旗下，品质稳定\n携程评分9.8/10，超高好评\n🅿️ 免费停车场（20个车位）\n🍳 含双人早餐（7:00-10:00）\n📞 0772-8618888\n🕐 退房12:00\n县城位置，比程阳八寨内便宜40%\n💡 16:30前办理入住，白天到达，日落约18:30还有缓冲\n💡 华住会员可享88折'
-      },
-      {
-        name: '三江晚餐·侗族美食', lat: 25.734, lng: 109.610,
+        name: '百色晚餐·本地特色', lat: 23.900, lng: 106.620,
         type: 'food', time: '18:00',
-        desc: '侗族特色：酸鱼、酸肉、油茶、糯米饭',
-        budget: '人均50-70元',
-        detail: '推荐：酸鱼、酸肉、油茶、糯米饭\n侗族人喜欢酸味，酸鱼酸肉是特色\n油茶是侗族待客必备\n糯米饭配腊肉，很香\n县城餐馆比程阳八寨便宜40%'
+        desc: '百色卷筒粉 · 烤香猪 · 五色糯米饭',
+        budget: '人均50-80元',
+        detail: '【推荐】\n1. 百色卷筒粉 - 米皮裹馅料淋酱汁，本地招牌\n2. 烤香猪 - 广西西部特色，皮脆肉嫩\n3. 五色糯米饭 - 壮族传统，天然植物染色\n4. 田阳芒果 - 百色特产，季节对的话必吃\n\n📍 文明街、城乡路一带本地餐馆集中\n人均50-80元\n\n💡 吃完早点睡，明天06:30出发\n💡 睡前检查：油满、胎压、ETC/现金'
       },
       {
-        name: '柳州三江万怡酒店', lat: 25.728, lng: 109.612,
+        name: '雅特斯美途酒店（百色四塘店）', lat: 23.870, lng: 106.780,
         type: 'hotel', time: '—',
-        desc: '【备选】万豪旗下，2021年开业',
-        budget: '约¥200-280/晚',
-        detail: '万豪旗下中端品牌\n2021年新开业\n侗族文化主题酒店\n有泳池和健身房'
+        desc: '【备选】就在高速出口旁，纯赶路最省时间',
+        budget: '约¥150-220/晚',
+        detail: '📍 百色大道与经三路交叉口（百东新区）\n就在高速出口附近，上下高速几分钟\n携程4.3分，点评高频："自驾路过百色的完美歇脚点"\n🅿️ 免费停车场，宽敞\n\n💡 适合：只想睡一觉、明早最快上高速\n💡 缺点：周边吃饭选择少'
       },
       {
-        name: '三江县城商务酒店', lat: 25.695, lng: 109.605,
+        name: '梦之源大酒店（百色万景城不夜街店）', lat: 23.880, lng: 106.625,
         type: 'hotel', time: '—',
-        desc: '【备选】经济型选择',
-        budget: '约¥100-150/晚',
-        detail: '价格实惠\n设施齐全\n适合预算有限'
+        desc: '【备选】携程4.8分 · 百色高档酒店榜No.1',
+        budget: '约¥280-420/晚（国庆价）',
+        detail: '携程4.8分 · 7986条好评 · 百色高档酒店榜No.1\n独栋花园式酒店，毗邻网红美食城\n充电桩 + 🅿️免费停车场 + 自助早餐\n\n💡 预算充足、想住好一点选这个\n💡 不夜街吃饭方便，走路就到'
+      },
+      {
+        name: '🆘 应急预案：南宁中转', lat: 22.817, lng: 108.366,
+        type: 'hotel', time: '—',
+        desc: '⚠️ 若14:00仍未通过南宁，直接住南宁，别硬撑到百色',
+        budget: '约¥250-350/晚（国庆价）',
+        detail: '【触发条件】\n14:00时导航显示到百色还需2小时以上\n或已连续驾驶超过8小时\n\n【应急住南宁后的D2调整】\n南宁 → 宣威 704km + 宣威 → 姬榔德村 65km = 769km\n约8.7h纯驾驶 + 1.3h休息 = 10h\n06:00出发 → 16:00到达姬榔德村\n日落约18:48，仍有2.8小时缓冲 ✅\n\n✅ 这个备案同样能保证白天到达，不用慌\n⚠️ 但D2会非常累，务必两人轮换\n\n💡 南宁连锁酒店多（全季/亚朵/城市便捷），\n选"近绕城高速口"的，避免第二天进城堵车'
       }
     ]
   },
   {
-    id: 4, label: 'D4', date: '9月28日（周日）', title: '三江 → 凯里 · 苗家美食city walk',
-    color: '#007aff',
-    locations: [
-      {
-        name: '三江出发', lat: 25.732, lng: 109.608,
-        type: 'transport', time: '08:30',
-        desc: '经从江、黎平到凯里，约280km · 约4小时（山路多，不赶路）'
-      },
-      {
-        name: '从江午餐·从江香猪', lat: 25.500, lng: 108.870,
-        type: 'food', time: '11:30',
-        desc: '从江香猪是国家地理标志产品，肉质鲜嫩',
-        budget: '人均40-60元',
-        detail: '推荐：从江香猪、烤猪、香猪肉粉\n从江香猪是当地特产，肉质鲜嫩\n路边小馆子最正宗\n人均40-60元\n配碗本地米粉'
-      },
-      {
-        name: '凯里市区·大十字街区漫步', lat: 26.588, lng: 107.982,
-        type: 'spot', time: '16:00',
-        desc: '凯里老城中心，本地人生活街区，不是景区',
-        detail: '到达后先休息\n下午去大十字街区走走\n这是凯里最热闹的本地街区\n看看苗族市场、本地商铺\n感受苗族城市的日常\n没有门票，没有游客团'
-      },
-      {
-        name: '维也纳国际酒店（凯里）', lat: 26.590, lng: 107.985,
-        type: 'hotel', time: '16:30',
-        desc: '⭐首选 | 锦江中端 | 🅿️免费停车 | 🍳含早 | 📞0855-8266666 | 16:30前入住 ✅',
-        budget: '约¥160-200/晚 | 退房12:00',
-        detail: '锦江旗下中端品牌\n欧式装修风格，房间面积大（35㎡+）\n🅿️ 免费地下停车场\n🍳 含双人早餐（7:00-10:00）\n📞 0855-8266666\n🕐 退房12:00\n市区位置，比苗寨内便宜50%\n💡 16:30前办理入住，白天到达，日落约19:00缓冲充足\n💡 锦江会员可享85折'
-      },
-      {
-        name: '凯里晚餐·酸汤鱼', lat: 26.586, lng: 107.980,
-        type: 'food', time: '18:30',
-        desc: '⭐推荐：快活林酸汤鱼(大十字) / 老凯里酸汤鱼(北京路)',
-        budget: '人均50-70元 | ⏰ 17:00-22:30',
-        detail: '【推荐店铺】\n1. 快活林酸汤鱼(大十字) - 凯里老字号，本地人首选\n2. 老凯里酸汤鱼(北京路) - 20年老店，红酸汤最正宗\n3. 毛家酸汤鱼 - 社区店，性价比最高\n\n必点：红酸汤鱼（选江团或黄辣丁）+ 豆腐 + 时蔬\n2人点一条鱼+配菜约100-140元\n⏰ 建议18:00前到，晚了排队久'
-      },
-      {
-        name: '凯里夜市·米豆腐', lat: 26.587, lng: 107.981,
-        type: 'food', time: '20:00',
-        desc: '凯里夜市小吃，米豆腐、烤豆腐、炸洋芋',
-        budget: '人均15-25元',
-        detail: '推荐：米豆腐、烤豆腐、炸洋芋\n凯里夜市在老城区\n小吃种类多，价格便宜\n人均15-25元就能吃饱\n感受本地夜生活'
-      },
-      {
-        name: '全季酒店（凯里大十字万达广场店）', lat: 26.585, lng: 107.978,
-        type: 'hotel', time: '—',
-        desc: '【备选】2024年开业，携程4.8分',
-        budget: '约¥180-220/晚',
-        detail: '华住旗下，品质稳定\n2024年新开业\n万达广场旁，吃饭购物方便\n免费停车场'
-      },
-      {
-        name: '凯里市区刚朵拉亚朵酒店', lat: 26.588, lng: 107.982,
-        type: 'hotel', time: '—',
-        desc: '【备选】亚朵品牌，2024年开业',
-        budget: '约¥220-280/晚',
-        detail: '亚朵品牌，服务优质\n2024年新开业\n携程评分4.8'
-      }
-    ]
-  },
-  {
-    id: 5, label: 'D5', date: '9月29日（周一）', title: '凯里 → 安顺 · 小吃之都 · 不赶路',
-    color: '#ff2d55',
-    locations: [
-      {
-        name: '凯里早餐·苗家糯米饭', lat: 26.588, lng: 107.982,
-        type: 'food', time: '08:00',
-        desc: '苗族特色早餐，糯米饭配腊肉酸汤',
-        budget: '人均15-20元 | ⏰ 07:00-11:00',
-        detail: '推荐：糯米饭、腊肉、酸汤\n苗族人早餐吃糯米饭，抗饿\n配腊肉和酸汤，味道独特\n市区有多家早餐店\n人均15-20元\n💡 D5不赶路，9点出发即可'
-      },
-      {
-        name: '凯里→安顺', lat: 26.588, lng: 107.982,
-        type: 'transport', time: '09:00',
-        desc: '经沪昆高速到安顺，约280km · 约3.5小时 | ☀️ 不赶路，9点出发'
-      },
-      {
-        name: '龙里服务区·休息加油', lat: 26.460, lng: 107.010,
-        type: 'transport', time: '10:00',
-        desc: '⛽ 出发1小时后休息站，加油+上厕所+买水',
-        detail: '龙里服务区是沪昆高速大站\n有中石化加油站、便利店、快餐\n建议休息15分钟\n检查油量，不够就加满'
-      },
-      {
-        name: '安顺老城·小吃之旅', lat: 26.195, lng: 105.932,
-        type: 'food', time: '12:30',
-        desc: '⭐推荐：儒林路小吃街 / 顾府街小吃一带',
-        budget: '人均30-50元 | ⏰ 全天（建议12:00-14:00）',
-        detail: '【推荐去处】\n1. 儒林路小吃街 - 安顺最集中的小吃街，一站吃遍\n2. 顾府街一带 - 本地人吃早餐的地方\n3. 南门大桥头 - 老字号聚集地\n\n必吃清单：\n· 裹卷（薄饼卷配菜+辣椒水）- 安顺独有\n· 夺夺粉（酸辣火锅粉）- 5元一份\n· 冲冲糕（糯米糕+玫瑰糖）- 3元一份\n· 油炸粑+豆浆 - 经典搭配\n· 破酥包 - 安顺特色包子\n\n⏰ 很多小吃摊下午就收摊，建议12:30前到！'
-      },
-      {
-        name: '全季酒店（安顺城区店）', lat: 26.196, lng: 105.934,
-        type: 'hotel', time: '14:00',
-        desc: '⭐首选 | 华住中端 | 🅿️免费停车 | 🍳含早 | 📞0851-3322666 | 14:00前入住 ✅',
-        budget: '约¥140-180/晚 | 退房12:00',
-        detail: '华住旗下，品质稳定\n🅿️ 免费停车场\n🍳 含双人早餐（7:00-10:00）\n📞 0851-3322666\n🕐 退房12:00\n城区位置，避开景区溢价\n周边美食丰富，步行可达老城\n💡 中午12:30就到安顺，吃完小吃先办入住放行李，再轻松逛吃\n💡 D5只开280km，全程白天，非常轻松'
-      },
-      {
-        name: '安顺老城·city walk', lat: 26.195, lng: 105.932,
-        type: 'spot', time: '14:30',
-        desc: '安顺老城漫步，600年屯堡文化，不是景区',
-        detail: '午餐后在老城散步消食\n安顺有600年历史的屯堡文化\n老房子、石板路、古城墙\n没有过度开发，很真实\n本地人在这里喝茶、打牌\n感受贵州小城的慢生活\n\n推荐路线：儒林路→顾府街→南门→古城墙'
-      },
-      {
-        name: '安顺下午茶·冲冲糕+破酥包', lat: 26.196, lng: 105.933,
-        type: 'food', time: '15:30',
-        desc: '安顺特色下午茶，边走边吃',
-        budget: '人均10-15元',
-        detail: '冲冲糕：糯米糕+玫瑰糖，3元一份\n破酥包：安顺特色包子，皮酥馅多\n街边小摊就有，问本地人哪里买\n边走边吃，很惬意'
-      },
-      {
-        name: '安顺晚餐·安顺裹卷+丝娃娃', lat: 26.194, lng: 105.931,
-        type: 'food', time: '18:00',
-        desc: '⭐推荐：安顺老城裹卷王 / 丝娃娃专卖店',
-        budget: '人均30-50元 | ⏰ 17:00-21:00',
-        detail: '【推荐店铺】\n1. 老城裹卷王(儒林路) - 安顺最有名的裹卷摊\n2. 丝娃娃专卖店(顾府街) - 安顺版"春卷"\n3. 南门桥烧烤 - 本地人夜宵去处\n\n裹卷：薄饼卷各种配菜+辣椒水\n丝娃娃：薄饼卷蔬菜丝，像襁褓婴儿\n人均30-50元，吃到撑\n\n💡 吃完早点休息，明天走最后一段路'
-      },
-      {
-        name: '安顺百灵温泉花园酒店', lat: 26.198, lng: 105.936,
-        type: 'hotel', time: '—',
-        desc: '【备选】2022年装修，有温泉',
-        budget: '约¥180-240/晚',
-        detail: '2022年装修，设施较新\n有温泉泡池，开车一天泡温泉很舒服\n免费停车场\n含早餐'
-      },
-      {
-        name: '维也纳国际酒店（安顺西秀区店）', lat: 26.193, lng: 105.930,
-        type: 'hotel', time: '—',
-        desc: '【备选】锦江中端品牌，房间大',
-        budget: '约¥150-200/晚',
-        detail: '锦江旗下中端品牌\n房间面积大（35㎡+）\n免费停车场\n欧式装修风格'
-      }
-    ]
-  },
-  {
-    id: 6, label: 'D6', date: '9月30日（周二）', title: '安顺 → 曲靖 → 宣威 · 白天到达 🏁',
+    id: 2, label: 'D2', date: '10月2日（周五）', title: '百色 → 兴义 → 宣威 → 姬榔德村 🏁 540km',
     color: '#e60012',
     locations: [
       {
-        name: '安顺早餐', lat: 26.196, lng: 105.934,
-        type: 'food', time: '07:00',
-        desc: '酒店含早（7:00开餐），吃饱出发',
-        budget: '人均10-15元 | ⏰ 07:00-07:50',
-        detail: '酒店早餐7:00-10:00\n或去街边吃碗安顺米粉/裹卷\n💡 今天最后一段路，7:50前出发最稳妥\n💡 全程约380km，08:00出发 → 16:30前到达姬榔德村'
+        name: '百色出发', lat: 23.890, lng: 106.630,
+        type: 'transport', time: '06:30',
+        desc: 'G78汕昆 → S77水兴 → G60沪昆 → S13富宣，540km · 纯驾驶约7.5h · 山路全白天',
+        detail: '今天走完全部山路，全部安排在白天 ✅\n\n分段：\n· 百色 → 兴义 260km / 3.2h（G78汕昆，隧道群约27个）\n· 兴义 → 宣威 215km / 2.9h（S77水兴 + G60沪昆 + S13富宣）\n· 宣威 → 姬榔德村 65km / 1.7h（县道山路）\n\n☀️ 06:30出发 → 15:15到达\n日落约18:48，缓冲3.5小时\n\n💡 酒店早餐7:00才开，让前台打包或路上服务区吃\n💡 最晚不超过07:30出发\n💡 出发前加满油（昨晚已加，确认一下）'
       },
       {
-        name: '安顺出发→曲靖（沪昆高速G60）', lat: 26.195, lng: 105.932,
-        type: 'transport', time: '08:00',
-        desc: '沪昆高速直达曲靖，约270km · 约3h | ☀️ 全程白天高速，不绕兴义'
+        name: '田林服务区·早餐', lat: 24.300, lng: 106.220,
+        type: 'food', time: '08:00',
+        desc: '约90km处 · 早餐+补油，进入山区前最后大站',
+        budget: '人均15-25元 | ⏰ 08:00-08:30',
+        detail: 'G78汕昆高速进入山区前的大服务区\n有中石化加油站、便利店、简餐\n\n⛽ 务必加满油！\n之后进入黔桂交界山区，服务区间距拉大\n\n⏰ 停留不超过30分钟\n📍 此时进度：90/540km'
       },
       {
-        name: '盘州服务区·休息加油', lat: 25.700, lng: 104.700,
-        type: 'transport', time: '09:30',
-        desc: '⛽ 出发1.5h后大站休息，加油+买水 | 进入云南前加满油',
-        detail: '盘州服务区是沪昆高速大站\n有中石化加油站、便利店\n建议休息15分钟\n这段路隧道桥梁多，注意限速\n进入云南前加满油'
+        name: '兴义东互通·转S77水兴高速（关键转向点）', lat: 25.090, lng: 104.900,
+        type: 'transport', time: '09:45',
+        desc: '⚠️ 约260km处 · G78汕昆 → S77水兴高速（盘州/六盘水方向）',
+        detail: '兴义东互通立交，路牌朝"盘州 / 六盘水"方向\n\n⚠️ 全程第二个容易走错的点\n不要跟着"昆明/罗平"一直走G78\n要转S77水兴高速往盘州方向\n\n⛽ 兴义东有加油站，建议补满\n之后S77水兴是山区高速，服务区少\n\n☀️ 此时才上午，时间非常宽裕\n📍 此时进度：260/540km，约48%\n\n💡 可以下车活动10分钟，看看万峰林方向的山景'
       },
       {
-        name: '曲靖午餐·蒸饵丝', lat: 25.501, lng: 103.797,
-        type: 'food', time: '11:30',
-        desc: '⭐下高速15分钟即到，曲靖蒸饵丝是云南名小吃',
-        budget: '人均15-30元',
-        detail: '【推荐】\n1. 老浦家蒸饵丝(麒麟区) - 曲靖蒸饵丝代表\n2. 文昌街一带蒸饵丝小店 - 本地人排队\n\n蒸饵丝：曲靖独有，软糯筋道+韭菜豆芽+油辣子\n配一碗酸汤或木瓜水\n人均15-30元，半小时吃完上路\n⏰ 12:30前必须出发！'
+        name: '富源·胜境关（进入云南）', lat: 25.620, lng: 104.300,
+        type: 'transport', time: '11:30',
+        desc: '🏔️ 约390km处 · 云贵交界，转S13富宣高速直达宣威',
+        detail: '胜境关是云贵交界的历史关隘，过了这里就是云南\n\n路线变化：\nS77水兴高速 → G60沪昆高速（盘州→富源）→ S13富宣高速 → 宣威\n\n⚠️ S13富宣高速路况好但隧道多，注意限速变化\n⚠️ 云南段山路多团雾，开雾灯、降速\n\n距宣威还有约85km，1小时车程\n📍 此时进度：390/540km，约72%'
       },
       {
-        name: '曲靖→宣威（宣曲高速）', lat: 25.501, lng: 103.797,
-        type: 'transport', time: '12:30',
-        desc: '宣曲高速+宣天一级公路，约100km · 约1.75-2h | ☀️ 下午到达'
+        name: '宣威市区·午餐（宣威火腿）', lat: 26.228, lng: 104.098,
+        type: 'food', time: '12:30',
+        desc: '⭐宣威火腿！国家地理标志产品，与金华火腿齐名但更实惠',
+        budget: '人均50-80元 | ⏰ 12:30-13:30',
+        detail: '【推荐】\n1. 宣威火腿城一带餐馆 - 最正宗的火腿宴\n2. 本地农家菜馆 - 火腿炒各种菜\n3. 建设街/榕城老街一带 - 本地人常去\n\n必点：\n· 宣威火腿（可买整只带走，比金华火腿实惠很多）\n· 火腿鸡火锅 - 鲜到掉眉毛\n· 火腿蒸蛋 / 火腿炒青菜\n· 宣威小炒肉\n\n人均50-80元，分量足\n\n⏰ 13:30前必须出发！最后65km是山路县道\n💡 想买火腿手信可以在这里买，真空包装好带'
       },
       {
-        name: '宣威市区·火腿城停留', lat: 26.230, lng: 104.100,
-        type: 'spot', time: '14:30',
-        desc: '途经宣威市区，买火腿手信+短暂休息（可选）',
-        detail: '宣威以火腿闻名全国\n火腿城可买正宗宣威火腿带回家\n顺便休息补水上厕所\n停留30-40分钟，15:15前出发去姬榔德村\n💡 宣威火腿是国家地理标志产品，和金华火腿齐名但更实惠'
+        name: '宣威 → 海岱镇 → 姬榔德村（最后山路）', lat: 26.130, lng: 104.280,
+        type: 'transport', time: '13:30',
+        desc: '⚠️ 最后65km县道山路 · 约1.7h · 全程白天，慢慢开',
+        detail: '路线：宣威市区 → 宣天一级公路 → 鸡田公路 → S205 → 海岱镇 → 姬榔德村\n约65km，县道+乡道，山路弯多\n\n⚠️ 注意事项：\n· 弯道多、坡度大，限速40-60，别急\n· 沿途村庄多，注意行人和散养牲畜\n· 雨后路滑，更要减速\n· 部分路段手机信号弱，提前下好离线地图\n· 会车时靠右慢行，山路盲弯多\n\n☀️ 13:30出发 → 15:15到达\n日落约18:48，即使耽搁2小时也还是白天\n\n📍 官方数据：宣威市区到海岱镇57.7km，车程约77分钟'
       },
       {
-        name: '宣威→姬榔德村（海岱镇）', lat: 26.220, lng: 104.140,
-        type: 'transport', time: '15:15',
-        desc: '县道乡道约40km · 约50-60分钟 | ⚠️ 最后一段慢点开，仍在白天'
-      },
-      {
-        name: '🏁 目的地·姬榔德村（海岱镇）', lat: 26.228, lng: 104.098,
-        type: 'spot', time: '16:30',
-        desc: '🏁 16:30前抵达！距日落（约18:55）还有2.5小时缓冲，全程白天到达 ✅',
-        detail: '☀️ 16:30前到达姬榔德村，阳光正好！\n日落约18:55，即使途中耽搁2小时也能白天到达\n\n🏁 旅程终点：云南省曲靖市宣威市海岱镇姬榔德村\n\n6天美食路线复盘：\n黄姚豆豉 → 阳朔啤酒鱼 → 侗族酸鱼 → 凯里酸汤 → 安顺小吃 → 曲靖蒸饵丝 → 宣威火腿\n\n好好休息，晚上宣威火腿+烧烤收官！'
+        name: '🏁 目的地·姬榔德村（海岱镇）', lat: 26.016, lng: 104.454,
+        type: 'spot', time: '15:15',
+        desc: '🏁 15:15抵达！距日落（约18:48）还有3.5小时缓冲，全程白天 ✅',
+        detail: '☀️ 下午3点15分到达姬榔德村，阳光正好！\n\n🏁 旅程终点：\n云南省曲靖市宣威市海岱镇腊谷村委会姬榔德村\n📍 坐标：26.016, 104.454\n\n🚗 2天全程回顾：\nD1 中山 → 百色 818km（广东广西高速，8.5h）\nD2 百色 → 兴义 → 富源 → 宣威 → 姬榔德村 540km（山路全白天）\n\n总里程约1,360km，2天走完\n所有山路都在白天跑完，一滴夜路没走 ✅\n\n🎉 到家了，好好休息！'
       }
     ]
   }
@@ -641,158 +401,140 @@ const DAYS = [
 
 function overviewContent() {
   return `
-<div class="hero"><h1>中山 → 云南宣威姬榔德村</h1><p class="subtitle">轻松6日 · City Walk + 美食 · 约1,600km</p></div>
+<div class="hero"><h1>中山 → 云南宣威姬榔德村</h1><p class="subtitle">极速2日 · 10/1出发 · 约1,360km · 山路全白天</p></div>
 
-<div style="background:linear-gradient(135deg,#34c759 0%,#30d158 100%);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:16px;color:#fff">
-  <div style="font-size:13px;font-weight:600;opacity:.8;margin-bottom:8px">🚶 轻松 City Walk + 🍜 美食之旅</div>
+<div style="background:linear-gradient(135deg,#ff9500 0%,#ff6b00 100%);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:16px;color:#fff">
+  <div style="font-size:13px;font-weight:600;opacity:.85;margin-bottom:8px">⚡ 2天直达 · 白天走完所有山路</div>
   <div style="font-size:14px;line-height:1.7">
-    这条路线<strong>不赶热门景区</strong>，主打轻松漫步和本地美食。<br>
-    黄姚古镇慢逛、遇龙河乡间散步、凯里苗家街区、安顺小吃之都……<br>
-    每天节奏都很松，边走边吃，享受旅途。<br>D6全程白天行驶（沪昆高速+宣天一级公路），<strong>16:30前到达姬榔德村</strong>（日落约18:55，缓冲约2.5小时），晚上宣威烧烤收官！<br>
-    <strong>没有黄果树的人挤人，没有西江苗寨的商业化</strong>，只有真实的本地生活。
+    砍掉绕行贵州的北线，改走<strong>南线：广昆高速 → 汕昆高速 → 水兴高速 → 富宣高速</strong>。<br>
+    总里程从原来的 <strong>1,650km 降到 1,360km，少开 290km</strong>，6天压缩成2天。<br>
+    D1 跑完广东广西平原高速（818km），D2 一整天走山路，<strong>15:15 到达姬榔德村</strong>。<br>
+    日落约 18:48，<strong>最后一段山路有 3.5 小时缓冲</strong>，绝对不走夜路。
+  </div>
+</div>
+
+<div style="background:rgba(255,59,48,.08);border-left:3px solid var(--tint-red);border-radius:var(--radius-md);padding:14px 16px;margin-bottom:16px">
+  <div style="font-size:15px;font-weight:700;color:var(--tint-red);margin-bottom:6px">🔴 最大风险：10/1 是国庆首日 + 高速免费</div>
+  <div style="font-size:13px;line-height:1.75;color:var(--text-secondary)">
+    10/1 00:00 起全国高速免费，出城车流是平日的 2-3 倍。<br>
+    <strong style="color:var(--text-primary)">对策只有一条：05:30 准时出发</strong>，把广东段高峰甩在后面。<br>
+    晚 1 小时出发，路上可能多堵 2 小时。<br>
+    <span style="color:var(--tint-green)">已备好应急预案：若 14:00 仍未过南宁，就住南宁，D2 调整后仍能在 16:00 前白天到达。</span>
   </div>
 </div>
 
 <div class="info-grid">
-  <div class="info-card"><div class="label">📅 出发</div><div class="value">9/25 中山火炬开发区</div></div>
-  <div class="info-card"><div class="label">🏁 到达</div><div class="value">9/30 云南曲靖宣威姬榔德村</div></div>
-  <div class="info-card"><div class="label">🚗 总里程</div><div class="value">约1,600公里</div></div>
-  <div class="info-card"><div class="label">👫 人数</div><div class="value">2位大人</div></div>
+  <div class="info-card"><div class="label">📅 出发</div><div class="value">10/1 05:30<br>中山火炬开发区</div></div>
+  <div class="info-card"><div class="label">🏁 到达</div><div class="value">10/2 15:15<br>宣威海岱镇姬榔德村</div></div>
+  <div class="info-card"><div class="label">🚗 总里程</div><div class="value">约1,360km<br>2天 / 约16h驾驶</div></div>
+  <div class="info-card"><div class="label">💰 过路费</div><div class="value" style="color:var(--tint-green)">¥0<br>国庆高速免费</div></div>
 </div>
 
 <div class="section-head">每日路线</div>
 <div class="day-list">
   <div class="card" onclick="go(1)" style="margin-bottom:10px">
-    <div class="name"><span class="dot" style="background:#ff9500"></span>D1 · 中山→黄姚古镇→阳朔</div>
-    <div class="desc">9/25（周四）· 约510km · 约6.5h驾驶 · <span style="color:var(--tint-green)">★ 全天最长 · 16:00前入住</span></div>
-    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 黄姚豆豉排骨 → 阳朔啤酒鱼 · 🚶 黄姚古镇city walk + 漓江边散步</div>
+    <div class="name"><span class="dot" style="background:#ff9500"></span>D1 · 中山 → 百色</div>
+    <div class="desc">10/1（周四·国庆）· 818km · 约8.5h驾驶 · <span style="color:var(--tint-orange)">★★★ 全程最长</span></div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">05:30出发 → 15:00入住百色 · 广东广西平原高速 · 🍜 服务区快午餐 + 百色卷筒粉</div>
   </div>
   <div class="card" onclick="go(2)" style="margin-bottom:10px">
-    <div class="name"><span class="dot" style="background:#34c759"></span>D2 · 阳朔整天 · 不赶路</div>
-    <div class="desc">9/26（周五）· 阳朔本地 · <span style="color:var(--tint-green)">★ 最轻松</span></div>
-    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 米粉 → 旧县农家菜 → 虾灯蟹 · 🚶 遇龙河乡间漫步 + 福利古镇</div>
-  </div>
-  <div class="card" onclick="go(3)" style="margin-bottom:10px">
-    <div class="name"><span class="dot" style="background:#af52de"></span>D3 · 兴坪→三江 · 侗族老城</div>
-    <div class="desc">9/27（周六）· 约200km · 3h驾驶 · <span style="color:var(--tint-green)">★ 轻松</span></div>
-    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 兴坪漓江鱼 → 侗族酸鱼酸肉 · 🚶 兴坪古镇 + 三江侗族老街</div>
-  </div>
-  <div class="card" onclick="go(4)" style="margin-bottom:10px">
-    <div class="name"><span class="dot" style="background:#007aff"></span>D4 · 三江→凯里 · 苗家美食</div>
-    <div class="desc">9/28（周日）· 约280km · 4h驾驶 · <span style="color:var(--tint-orange)">★★ 中等</span></div>
-    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 从江香猪 → 酸汤鱼 → 米豆腐 · 🚶 凯里大十字街区city walk</div>
-  </div>
-  <div class="card" onclick="go(5)" style="margin-bottom:10px">
-    <div class="name"><span class="dot" style="background:#ff2d55"></span>D5 · 凯里→安顺 · 小吃之都</div>
-    <div class="desc">9/29（周一）· 约280km · 3.5h驾驶 · <span style="color:var(--tint-green)">★ 轻松</span></div>
-    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 安顺裹卷·夺夺粉·丝娃娃 · 🚶 安顺老城美食漫步 · ☀️ 14:00前入住</div>
-  </div>
-  <div class="card" onclick="go(6)" style="margin-bottom:10px">
-    <div class="name"><span class="dot" style="background:#e60012"></span>D6 · 安顺→曲靖→宣威 · 白天到达🏁</div>
-    <div class="desc">9/30（周二）· 约380km · 约5.5h驾驶（含休息）· <span style="color:var(--tint-green)">★ 轻松 · 16:30前到达</span></div>
-    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🍜 曲靖蒸饵丝 → 宣威火腿·烧烤 · ☀️ 日落约18:55，缓冲近3小时</div>
+    <div class="name"><span class="dot" style="background:#e60012"></span>D2 · 百色 → 兴义 → 宣威 → 🏁</div>
+    <div class="desc">10/2（周五）· 540km · 约7.5h驾驶 · <span style="color:var(--tint-green)">★ 15:15到达 · 山路全白天</span></div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">06:30出发 → 15:15到姬榔德村 · 🍜 宣威火腿午餐 · ☀️ 日落18:48，缓冲3.5h</div>
   </div>
 </div>
 
 <div class="section-head">🌅 白天到达保障表</div>
 <div class="card" style="margin-bottom:10px">
-  <div class="name">全程原则：每天驾驶全部安排在白天，抵达酒店/目的地不晚于17:00</div>
+  <div class="name">核心原则：山路全部安排在白天，绝对不走夜路</div>
   <div class="desc" style="line-height:1.9;margin-top:6px">
-    <strong>D1</strong> 阳朔酒店 <strong>16:00前入住</strong>（日落约18:30 · 缓冲2.5h）✅<br>
-    <strong>D2</strong> 同一酒店连住，<strong>16:30回酒店休息</strong>，傍晚散步天黑前回 ✅<br>
-    <strong>D3</strong> 三江酒店 <strong>16:30前入住</strong>（日落约18:30 · 缓冲2h）✅<br>
-    <strong>D4</strong> 凯里酒店 <strong>16:30前入住</strong>（日落约19:00 · 缓冲2.5h）✅<br>
-    <strong>D5</strong> 安顺酒店 <strong>14:00前入住</strong>，当天下午全程休息逛吃 ✅<br>
-    <strong>D6</strong> <strong>16:30前到达姬榔德村</strong>（日落约18:55 · 缓冲约2.5h）✅<br><br>
-    <span style="color:var(--tint-green)">☀️ 即使某天耽搁1-2小时，也能在天黑前到达，全程不走夜路</span>
+    <strong>D1</strong> 百色酒店 <strong>15:00入住</strong>（日落约18:35 · 缓冲3.5h）✅<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;全程广东广西高速，无山路，风险低<br>
+    <strong>D2</strong> 姬榔德村 <strong>15:15到达</strong>（日落约18:48 · 缓冲3.5h）✅<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;山路段分解：<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;· 08:30-09:45 汕昆高速隧道群（山区高速，白天）<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;· 10:00-11:30 S77水兴高速（山区高速，白天）<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;· 11:30-12:30 G60沪昆 + S13富宣（白天）<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;· <strong>13:30-15:15 宣威→海岱县道山路（白天，最险的一段）</strong><br><br>
+    <span style="color:var(--tint-green)">☀️ 最险的县道山路安排在下午2点前跑完，即使全程耽搁2小时，天也还是亮的</span>
   </div>
 </div>
 
-<div class="section-head">行程亮点</div>
+<div class="section-head">🗺️ 为什么选这条线</div>
 <div class="card" style="margin-bottom:10px">
-  <div class="desc" style="line-height:1.8">
-    · <strong>不赶热门景区</strong>：跳过黄果树、西江苗寨等人挤人的地方<br>
-    · <strong>每天city walk</strong>：古镇、乡间、老城，用脚步丈量旅途<br>
-    · <strong>美食为主</strong>：黄姚豆豉、阳朔啤酒鱼、侗族酸鱼、凯里酸汤鱼、安顺小吃<br>
-    · <strong>节奏轻松</strong>：D2整天在阳朔不赶路，每天下午都有自由时间<br>
-    · <strong>真实体验</strong>：福利古镇、三江侗族老街、凯里大十字，都是本地人生活<br>
-    · <strong>全程白天到达</strong>：每天入住不晚于16:30，最后一天16:30前到目的地，预留日落缓冲
+  <div class="desc" style="line-height:1.85">
+    <strong>南线（本方案）· 1,360km ✅</strong><br>
+    <span style="color:var(--text-secondary)">G80广昆高速 → 南宁绕城 → G80 → G78汕昆高速 → 兴义东 → S77水兴高速 → G60沪昆 → S13富宣高速 → 宣威</span><br>
+    · 全程高速为主，只最后65km是县道<br>
+    · 比北线近约290km，2天可完成<br><br>
+    <strong>北线（原6日方案）· 1,650km ❌</strong><br>
+    <span style="color:var(--text-secondary)">中山 → 黄姚 → 阳朔 → 三江 → 从江 → 凯里 → 安顺 → 曲靖 → 宣威</span><br>
+    · 绕行贵州中段，多290km、多4天<br>
+    · 凯里→安顺段隧道桥梁密集，限速频繁<br><br>
+    <strong style="color:var(--tint-green)">结论：赶时间就走南线，路况更好、里程更短、山路更少。</strong>
   </div>
 </div>
 
-<div class="section-head">住宿推荐（含备选）· 全部2021年后 · 均价¥200左右</div>
+<div class="section-head">⚠️ 三个关键决策点</div>
 <div class="card" style="margin-bottom:10px">
-  <div class="time">D1-D2 · 9/25-26 · 阳朔（连住2晚）</div>
-  <div class="name">欢漫酒店（西街十里画廊店）⭐首选</div>
-  <div class="desc">携程4.9分，2023年开业，性价比之王，约¥180-220/晚</div>
-  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：全季酒店（2024新开）¥200-250 | 桔子酒店 ¥180-230</div>
-</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="time">D3 · 9/27 · 三江</div>
-  <div class="name">全季酒店（柳州三江鸟巢店）⭐首选</div>
-  <div class="desc">携程9.8分，县城避开景区溢价，约¥120-160/晚 · 超值</div>
-  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：万怡酒店（万豪·2021）¥200-280 | 商务酒店 ¥100-150</div>
-</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="time">D4 · 9/28 · 凯里</div>
-  <div class="name">维也纳国际酒店（凯里）⭐首选</div>
-  <div class="desc">锦江中端品牌，房间大，市区比苗寨便宜50%，约¥160-200/晚</div>
-  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：全季酒店（万达店·2024）¥180-220 | 亚朵酒店（2024）¥220-280</div>
-</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="time">D5 · 9/29 · 安顺（小吃之都，住一晚）</div>
-  <div class="name">全季酒店（安顺城区店）⭐首选</div>
-  <div class="desc">华住中端，🅿️免费停车，🍳含早，约¥140-180/晚</div>
-  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：百灵温泉花园酒店（2022装修·有温泉）¥180-240 | 维也纳国际 ¥150-200</div>
-</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="time">D6 · 9/30 · 宣威（目的地·16:30前到达）</div>
-  <div class="name">到达目的地·姬榔德村 🏁</div>
-  <div class="desc">16:30前到达，日落（约18:55）前还有2.5小时缓冲，晚上宣威烧烤收官🔥</div>
-</div>
-
-<div class="section-head">费用预估</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="desc" style="line-height:1.8">
-    <strong>门票：</strong>约¥80/2人（仅黄姚古镇40×2，其他全部免费）<br>
-    <strong>住宿：</strong>约¥650-850（4晚均价¥170-210，全程连锁酒店）<br>
-    <strong>餐饮：</strong>约¥800-1,000（5天美食之旅，2人）<br>
-    <strong>油费+过路费：</strong>约¥1,200-1,500（全程约1,600km）<br>
-    <strong>合计：</strong>约¥2,730-3,430
+  <div class="desc" style="line-height:1.85">
+    <strong>① 10/1 05:30 必须出发</strong><br>
+    <span style="color:var(--text-secondary)">国庆首日+高速免费，广东段6:00-11:00是出城高峰。早走1小时，路上省2小时。</span><br><br>
+    <strong>② 11:00 南宁绕城别走错</strong><br>
+    <span style="color:var(--text-secondary)">G72泉南 → G7201南宁绕城 → G80广昆（百色/昆明方向）。误入南宁市区至少多花40分钟。</span><br><br>
+    <strong>③ 09:45 兴义东转 S77 水兴高速</strong><br>
+    <span style="color:var(--text-secondary)">别跟着"昆明/罗平"继续走G78，要转往盘州/六盘水方向的 S77 水兴高速。</span>
   </div>
 </div>
 
-<div class="section-head">⚠️ 行程建议</div>
-<div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-green)">
-  <div class="name" style="color:var(--tint-green)">✅ 这样安排的好处</div>
-  <div class="desc" style="line-height:1.8">
-    · D1-D2 节奏很松，边走边玩不赶路<br>
-    · D2 整天在阳朔，遇龙河乡间漫步比竹筏更自由<br>
-    · 福利古镇、三江侗族老街，都是真实本地生活，不是景区<br>
-    · 凯里大十字街区city walk，体验苗族城市日常<br>
-    · 安顺是贵州小吃之都，裹卷夺夺粉必吃<br>
-    · 全程门票仅80元，省下的钱吃更多美食
+<div class="section-head">🆘 应急预案（堵车怎么办）</div>
+<div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-orange)">
+  <div class="name" style="color:var(--tint-orange)">如果 14:00 还没过南宁</div>
+  <div class="desc" style="line-height:1.85">
+    <strong>不要硬撑到百色</strong>，直接在南宁住下。<br><br>
+    南宁 → 宣威 704km + 宣威 → 姬榔德村 65km = <strong>769km</strong><br>
+    约 8.7h 纯驾驶 + 1.3h 休息 = 10h<br>
+    <strong>06:00 出发 → 16:00 到达姬榔德村</strong><br>
+    <span style="color:var(--tint-green)">日落约18:48，仍有 2.8 小时缓冲，白天到达依然成立 ✅</span><br><br>
+    ⚠️ 但 D2 会非常累，务必两人轮换，每2小时换手。<br>
+    💡 南宁选"近绕城高速口"的连锁酒店，避免第二天进城堵车。
   </div>
 </div>
+
+<div class="section-head">住宿推荐 · 国庆务必提前订</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="time">D1 · 10/1 · 百色（住1晚）</div>
+  <div class="name">雅斯特国际酒店（百色万景城店）⭐首选</div>
+  <div class="desc">携程4.7分 · 2023年开业 · 🅿️免费停车 · 约¥250-350/晚（国庆价）</div>
+  <div class="desc" style="margin-top:4px;color:var(--text-tertiary)">备选：雅特斯美途（四塘店，高速口旁，¥150-220）| 梦之源大酒店（4.8分高档No.1，¥280-420）</div>
+  <div class="desc" style="margin-top:6px;color:var(--tint-red)">⚠️ 国庆当天基本满房，提前3-5天预订。入住时跟前台预约打包早餐。</div>
+</div>
+
+<div class="section-head">费用预估（2人）</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="desc" style="line-height:1.9">
+    <strong>⛽ 油费：</strong>约¥820-1,000（1,360km，按8L/100km、油价7.5元/L）<br>
+    <strong>🛣️ 过路费：</strong><span style="color:var(--tint-green);font-weight:600">¥0（国庆高速免费，省下约¥600-700）</span><br>
+    <strong>🏨 住宿：</strong>约¥250-400（百色1晚，国庆溢价约50%）<br>
+    <strong>🍜 餐饮：</strong>约¥250-400（2天，含宣威火腿午餐）<br>
+    <strong>🅿️ 停车/杂费：</strong>约¥50<br>
+    <div style="background:var(--bg-grouped);border-radius:var(--radius-sm);padding:12px;margin-top:10px">
+      <strong style="font-size:16px">💰 总计：约¥1,370-1,850（2人）</strong><br>
+      <span style="color:var(--text-secondary)">人均约¥685-925 | 比6日方案省一半以上</span>
+    </div>
+  </div>
+</div>
+
+<div class="section-head">⚠️ 行程强度提示</div>
 <div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-red)">
-  <div class="name" style="color:var(--tint-red)">⚠️ 需要注意的问题</div>
-  <div class="desc" style="line-height:1.8">
-    · <strong>D5 轻松到安顺</strong>：280km到安顺，中午12:30即到，龙里服务区休息+加油，安顺老城吃遍小吃，14:00办入住，下午city walk，晚上裹卷+丝娃娃<br>
-    · <strong>D6 白天到达</strong>：约380km走沪昆高速经曲靖到宣威（不绕兴义，省100km），<span style='color:var(--tint-green)'>全程白天走高速+一级公路</span>，<strong>16:30前到达姬榔德村</strong>（日落约18:55，缓冲约2.5小时）<br>
-    · <strong>D4 山路多</strong>：三江→从江→凯里段是山区高速，隧道桥梁多，限速频繁<br>
-    · <strong>住宿选择</strong>：全部选市区连锁酒店，避开景区溢价，停车方便
-  </div>
-</div>
-
-<div class="section-head">注意事项</div>
-<div class="card">
-  <div class="desc" style="line-height:1.8">
-    · D5约280km到安顺，很轻松；D6约380km经曲靖到宣威，<strong>16:30前到达</strong>，全程白天<br>
-    · 最后一段（曲靖→宣威高速 + 宣威→海岱县道）安排在D6白天，<strong>16:30前到达姬榔德村</strong>，日落约18:55，避免夜间行车<br>
-    · 贵州山区多弯道，注意行车安全<br>
-    · 9月底贵州/广西气温约18-28°C，带薄外套<br>
-    · city walk穿舒适运动鞋，古镇石板路多<br>
-    · 美食偏酸辣，肠胃敏感备药
+  <div class="name" style="color:var(--tint-red)">这是一趟"赶路型"行程，不是度假</div>
+  <div class="desc" style="line-height:1.85">
+    · <strong>D1 单日 818km / 约10小时</strong>，是整趟最累的一天<br>
+    · <strong>D2 单日 540km / 约9小时</strong>，但全是山路，精神消耗更大<br>
+    · <span style="color:var(--tint-red);font-weight:600">强烈建议两人轮换驾驶</span>，单人硬撑风险高<br>
+    · 每驾驶2小时必须休息，哪怕只停10分钟下车走走<br>
+    · 沿途景点全部砍掉——这次的目标只有一个：安全、快速、白天到家<br>
+    · 如果想慢慢玩，请回到6日轻松版路线
   </div>
 </div>
 
@@ -800,235 +542,107 @@ function overviewContent() {
 <div class="card" style="margin-bottom:10px">
   <div class="name">📄 证件 & 文件</div>
   <div class="desc" style="line-height:1.8">
-    ☐ 身份证（必带！住宿/购票都需要）<br>
-    ☐ 驾驶证（自驾必备）<br>
-    ☐ 行驶证（车上必备）<br>
-    ☐ 车辆保险单<br>
-    ☐ 手机提前下载离线地图（贵州山区信号弱）
+    ☐ 身份证（住宿必带）<br>
+    ☐ 驾驶证 + 行驶证<br>
+    ☐ 车辆保险单 / 保险公司救援电话存手机<br>
+    ☐ 酒店预订截图（山区可能无信号）
   </div>
 </div>
 <div class="card" style="margin-bottom:10px">
   <div class="name">💊 药品 & 防护</div>
   <div class="desc" style="line-height:1.8">
-    ☐ 晕车药（贵州山路弯多，必备！）<br>
-    ☐ 感冒药 + 退烧药（山区早晚温差大）<br>
-    ☐ 肠胃药（当地饮食偏酸辣）<br>
-    ☐ 创可贴 + 碘伏棉签<br>
-    ☐ 防晒霜 + 墨镜 + 遮阳帽<br>
-    ☐ 驱蚊液（广西贵州蚊虫多）
+    ☐ 晕车药（最后65km县道弯多，必备）<br>
+    ☐ 提神：咖啡 / 功能饮料 / 风油精（长途关键）<br>
+    ☐ 肠胃药 + 感冒药<br>
+    ☐ 墨镜（山区紫外线强、隧道进出光线变化大）
   </div>
 </div>
 <div class="card" style="margin-bottom:10px">
   <div class="name">👕 衣物 & 穿戴</div>
   <div class="desc" style="line-height:1.8">
-    ☐ 薄外套/冲锋衣（山区早晚18°C左右）<br>
-    ☐ 速干T恤 2-3件（白天28°C，走路出汗）<br>
-    ☐ 长裤1条 + 短裤1条<br>
-    ☐ <strong>舒适运动鞋</strong>（city walk必备，古镇石板路多）<br>
-    ☐ 拖鞋（酒店用）
-  </div>
-</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="name">📱 电子设备</div>
-  <div class="desc" style="line-height:1.8">
-    ☐ 手机 + 充电器<br>
-    ☐ 车载充电器（长途必备）<br>
-    ☐ 充电宝（走路一天手机耗电快）<br>
-    ☐ 相机/运动相机（古镇/乡间很出片）
+    ☐ 薄外套（云南宣威10月 9-21°C，早晚凉）<br>
+    ☐ 短袖（广西段白天仍有28-32°C）<br>
+    ☐ 舒适平底鞋（开车+下车走路）<br>
+    ☐ 折叠伞（10月宣威约半数日子有雨）
   </div>
 </div>
 <div class="card" style="margin-bottom:10px">
   <div class="name">🚗 自驾相关</div>
   <div class="desc" style="line-height:1.8">
-    ☐ 出发前检查轮胎气压、机油、冷却液<br>
+    ☐ <strong>9/30 晚上加满油</strong>（05:30出发没时间加油）<br>
+    ☐ 检查轮胎气压、机油、冷却液、雨刮<br>
     ☐ 备胎 + 千斤顶 + 三角警示牌<br>
-    ☐ 车载手机支架（导航用）<br>
-    ☐ ETC确认正常（全程高速）<br>
-    ☐ 提前加满油再上高速<br>
-    ☐ 下载高德离线地图包（贵州部分路段无信号）
-  </div>
-</div>
-<div class="section-head">⚠️ 旅途注意事项</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="name">🛣️ 行车安全</div>
-  <div class="desc" style="line-height:1.8">
-    · 贵州山区高速弯道多、隧道多，控制车速<br>
-    · 连续驾驶2小时必须休息，两人轮换开车<br>
-    · 雨天路滑，贵州9月仍有阵雨<br>
-    · D5路程最长（~680km），建议7点前出发
-  </div>
-</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="name">🍜 饮食注意</div>
-  <div class="desc" style="line-height:1.8">
-    · 广西贵州饮食偏酸辣，肠胃敏感提前备药<br>
-    · 酸汤鱼、酸汤牛肉是贵州特色，值得一试<br>
-    · 路边摊卫生条件参差，选人多翻台快的店<br>
-    · 山区饮用水建议买瓶装水
-  </div>
-</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="name">💰 支付 & 通讯</div>
-  <div class="desc" style="line-height:1.8">
-    · 全程微信/支付宝基本覆盖，但备少量现金<br>
-    · 部分侗寨/苗寨信号弱，提前下载好离线内容<br>
-    · 住宿建议提前3天预订，9月底不算旺季
-  </div>
-</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="name">🌤️ 天气 & 穿搭</div>
-  <div class="desc" style="line-height:1.8">
-    · 9月底广西：25-33°C，闷热，注意防晒补水<br>
-    · 9月底贵州：18-28°C，早晚凉爽，带薄外套<br>
-    · 云南宣威：15-25°C，海拔较高，温差更大<br>
-    · 贵州"天无三日晴"，随身带伞<br>
-    · 紫外线强，即使阴天也要防晒
-  </div>
-</div>
-<div class="section-head">🆘 紧急联系</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="desc" style="line-height:1.8">
-    <strong>报警：</strong>110 &nbsp;&nbsp; <strong>急救：</strong>120 &nbsp;&nbsp; <strong>火警：</strong>119<br>
-    <strong>交通事故：</strong>122<br>
-    <strong>高速救援：</strong>12122<br>
-    <strong>保险报案：</strong>出发前记录保险公司电话<br>
-    <strong>沿途主要医院：</strong><br>
-    · 阳朔县人民医院：0773-8822120<br>
-    · 三江侗族自治县人民医院：0772-8612120<br>
-    · 黔东南州人民医院（凯里）：0855-8225555<br>
-    · 安顺市人民医院：0851-33224455<br>
-    · 兴义市人民医院：0859-3222777
+    ☐ 车载手机支架 + 车充（导航耗电快）<br>
+    ☐ ETC（免费通行也走ETC专用道，更快）<br>
+    ☐ 备少量现金（偏远加油站可能只收现金）
   </div>
 </div>
 
-<div class="section-head">⛽ 加油提醒</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="desc" style="line-height:1.8">
-    · D1 出发前加满油，黄姚古镇可补给<br>
-    · D3 三江→从江段山路加油站少，<strong>三江加满再走</strong><br>
-    · D4 凯里出发前加满，安顺沿线加油站充足<br>
-    · D5 凯里出发前加满，龙里服务区可补给，到安顺再加满
-    · D6 安顺出发前加满，盘州服务区可补给，进入云南前加满<br>
-    · 建议油量低于半箱就加，山区不要等油灯亮
-  </div>
-</div>
-
-
-<div class="section-head">🚗 自驾实用信息</div>
-<div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-orange)">
-  <div class="name" style="color:var(--tint-orange)">⛽ 加油策略</div>
-  <div class="desc" style="line-height:1.8">
-    <strong>D1</strong> 中山出发前加满 → 黄姚古镇有中石化加油站可补给 → 阳朔县城加油站多<br>
-    <strong>D2</strong> 阳朔县城内加油，当天不离开县城<br>
-    <strong>D3</strong> <span style="color:var(--tint-red)">⚠️ 三江出发前务必加满！</span>三江→从江段120km山路仅1个加油站<br>
-    <strong>D4</strong> 凯里出发前加满 → 从江可补给 → 凯里市区加油站多<br>
-    <strong>D5</strong> 凯里出发前加满 → 龙里服务区可补给 → 到安顺后加满<br>
-    <strong>D6</strong> <span style="color:var(--tint-red)">⚠️ 安顺出发前加满！</span>盘州服务区可补给 → 进入云南前加满 → 曲靖服务区可补给<br>
-    <strong>原则：</strong>油量低于半箱就加，山区不要等油灯亮！贵州山区服务区间距50-80km
-  </div>
-</div>
-<div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-blue)">
-  <div class="name" style="color:var(--tint-blue)">🅿️ 停车指南</div>
-  <div class="desc" style="line-height:1.8">
-    <strong>黄姚古镇：</strong>景区入口有停车场，10元/次<br>
-    <strong>阳朔：</strong>酒店免费停车 ⭐ | 漓江边有公共停车场，5元/小时<br>
-    <strong>兴坪古镇：</strong>古镇入口免费停车<br>
-    <strong>三江：</strong>酒店免费停车 ⭐ | 侗族老街路边可停<br>
-    <strong>凯里：</strong>酒店免费停车 ⭐ | 大十字街区有地下停车场，5元/小时<br>
-    <strong>安顺老城：</strong>路边划线车位免费 | 周边商场停车场3元/小时<br>
-    <strong>提示：</strong>连锁酒店基本都有免费停车场，这是选连锁的重要原因
-  </div>
-</div>
+<div class="section-head">🛣️ 路况提醒</div>
 <div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-green)">
-  <div class="name" style="color:var(--tint-green)">🛣️ 路况提醒</div>
-  <div class="desc" style="line-height:1.8">
-    <strong>D1 中山→黄姚→阳朔：</strong>全程高速为主，路况好 ✅<br>
-    <strong>D2 阳朔乡间：</strong>乡道+县道，路面好但窄，注意会车 ⚠️<br>
-    <strong>D3 阳朔→兴坪→三江：</strong>部分省道山路，弯道多 ⚠️<br>
-    <strong>D4 三江→凯里：</strong><span style="color:var(--tint-red)">隧道桥梁多！限速频繁！</span> 从江→凯里段多山路 🚨<br>
-    <strong>D5 凯里→安顺：</strong>沪昆高速，路况好 ✅<br>
-    <strong>D6 安顺→曲靖→宣威：</strong>沪昆高速（安顺→曲靖）+宣曲高速，隧道桥梁多，但全程白天 ⚠️<br>
-    <strong>通用提醒：</strong>贵州山区多团雾、暗冰（早晚），隧道内开灯减速
+  <div class="name" style="color:var(--tint-green)">分段路况</div>
+  <div class="desc" style="line-height:1.85">
+    <strong>D1 中山→百色（818km）：</strong>G80广昆高速全程，路况好 ✅<br>
+    &nbsp;&nbsp;唯一的敌人是<strong>车多</strong>，不是路况<br><br>
+    <strong>D2 百色→兴义（260km）：</strong>G78汕昆高速，<strong>约27个隧道</strong> ⚠️<br>
+    &nbsp;&nbsp;山区高速，隧道内开灯、降速、保持车距<br><br>
+    <strong>D2 兴义→宣威（215km）：</strong>S77水兴 + G60沪昆 + S13富宣<br>
+    &nbsp;&nbsp;连续山区高速，<strong>桥隧比高、服务区少</strong> ⚠️<br><br>
+    <strong>D2 宣威→姬榔德村（65km）：</strong><span style="color:var(--tint-red)">县道山路，全程最险</span> 🚨<br>
+    &nbsp;&nbsp;弯多坡陡、沿线村庄多、注意行人和牲畜<br><br>
+    <strong>通用：</strong>贵州云南山区多团雾，遇雾开雾灯降速，不要急刹
   </div>
 </div>
+
+<div class="section-head">⛽ 加油策略</div>
+<div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-orange)">
+  <div class="name" style="color:var(--tint-orange)">逐站加油点</div>
+  <div class="desc" style="line-height:1.85">
+    <strong>9/30 晚：</strong>中山加满（05:30出发没时间加油）<br>
+    <strong>D1 08:00：</strong>岑溪服务区（约250km）· 国庆可能排队，车多就跳过下一个<br>
+    <strong>D1 13:30：</strong>田东服务区（约730km）· <span style="color:var(--tint-red)">加满，明天直接用</span><br>
+    <strong>D2 08:00：</strong>田林服务区（约90km）· <span style="color:var(--tint-red)">进入山区前最后大站，务必加满</span><br>
+    <strong>D2 09:45：</strong>兴义东（约260km）· 补满，之后S77服务区少<br>
+    <strong>原则：</strong>过半箱就加，山区高速绝不赌下一个服务区
+  </div>
+</div>
+
+<div class="section-head">📱 离线准备（重要！）</div>
 <div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-purple)">
-  <div class="name" style="color:var(--tint-purple)">📱 离线准备（重要！）</div>
+  <div class="name" style="color:var(--tint-purple)">山区信号弱，提前下好</div>
   <div class="desc" style="line-height:1.8">
-    ☐ 高德地图下载<strong>离线地图</strong>：广西+贵州+云南（设置→离线地图）<br>
-    ☐ 提前下载好沿途酒店地址（山区可能无信号无法搜索）<br>
-    ☐ 保存本页面到手机收藏夹（支持离线查看）<br>
-    ☐ 截图保存关键路线和酒店信息（以防万一）<br>
-    ☐ ETC确认正常，备少量现金（部分偏远加油站只收现金）
+    ☐ 高德地图下载<strong>离线地图</strong>：广东+广西+贵州+云南<br>
+    ☐ 提前存好酒店地址（山区可能搜不了）<br>
+    ☐ <strong>把姬榔德村坐标存进收藏：26.016, 104.454</strong><br>
+    ☐ 截图保存本页面（支持离线查看）<br>
+    ☐ 出发前把终点一次设好，避免中途改导航
   </div>
 </div>
 
-<div class="section-head">💰 详细费用预估（2人）</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="name">📊 费用明细</div>
-  <div class="desc" style="line-height:2">
-    <strong>🚗 交通费用</strong><br>
-    · 油费：约¥800-1,000（全程1,600km，按8L/100km、油价7.5元/L估算）<br>
-    · 高速过路费：约¥600-700（全程高速约1,200km）<br>
-    · 停车费：约¥50-80（大部分酒店免费停车）<br>
-    <strong>交通小计：¥1,450-1,780</strong><br><br>
-    <strong>🏨 住宿费用（5晚）</strong><br>
-    · D1-D2 阳朔（2晚）：¥360-440（均价¥180-220/晚）<br>
-    · D3 三江（1晚）：¥120-160<br>
-    · D4 凯里（1晚）：¥160-200<br>
-    · D5 安顺（1晚）：¥140-180<br>
-    <strong>住宿小计：¥790-1,000</strong><br><br>
-    <strong>🍜 餐饮费用（5天）</strong><br>
-    · D1：黄姚午餐¥70 + 阳朔晚餐¥140 = ¥210<br>
-    · D2：早餐¥25 + 午餐¥100 + 晚餐¥140 + 小吃¥40 = ¥305<br>
-    · D3：午餐¥120 + 晚餐¥120 = ¥240<br>
-    · D4：午餐¥100 + 晚餐¥130 + 夜市¥45 = ¥275<br>
-    · D5：早餐¥35 + 午餐¥90 + 晚餐¥55 = ¥180<br>
-    · D6：早餐¥25 + 曲靖蒸饵丝午餐¥60 + 晚餐¥180（宣威火腿·烧烤大餐！）= ¥265<br>
-    <strong>餐饮小计：¥1,475</strong><br><br>
-    <strong>🎫 门票费用</strong><br>
-    · 黄姚古镇：¥80（40×2人）| 其他全部免费<br>
-    <strong>门票小计：¥80</strong><br><br>
-    <div style="background:var(--bg-grouped);border-radius:var(--radius-sm);padding:12px;margin-top:8px">
-      <strong style="font-size:16px">💰 总计：约¥3,760-4,755（2人）</strong><br>
-      <span style="color:var(--text-secondary)">人均约¥1,880-2,378 | 丰俭由人</span>
-    </div>
-  </div>
-</div>
-
-<div class="section-head">🌤️ 天气预报 & 穿衣建议</div>
-<div class="card" style="margin-bottom:10px">
-  <div class="name">9月底沿途天气参考</div>
-  <div class="desc" style="line-height:1.8">
-    <strong>广西段（D1-D3）：</strong>25-32°C，偶有阵雨，白天短袖+防晒<br>
-    <strong>贵州段（D4-D6）：</strong>18-26°C，山区早晚凉，需薄外套<br>
-    <strong>云南段（D6到达）：</strong>15-23°C，温差大，早晚需外套<br><br>
-    <strong>穿衣建议：</strong><br>
-    · 白天：短袖T恤+薄长裤（city walk舒适为主）<br>
-    · 早晚/山区：薄冲锋衣或卫衣外套<br>
-    · <strong>必带一件防风外套</strong>（贵州山区下雨就降温）<br>
-    · 舒适运动鞋（每天走路5000-15000步）<br>
-    · 折叠伞必带（9月是广西贵州雨季尾巴）
-  </div>
-</div>
-
-<div class="section-head">📞 紧急联系</div>
+<div class="section-head">🆘 紧急联系</div>
 <div class="card" style="margin-bottom:10px;border-left:3px solid var(--tint-red)">
-  <div class="name" style="color:var(--tint-red)">🆘 紧急电话</div>
-  <div class="desc" style="line-height:1.8">
-    <strong>通用急救：</strong><br>
-    · 报警：110 | 急救：120 | 火警：119<br>
-    · 交通事故：122<br>
-    · 高速公路救援：12122<br><br>
-    <strong>道路救援：</strong><br>
-    · 保险公司道路救援（出发前存好电话）<br>
-    · 中石化救援：95388<br>
-    · 中石油救援：95504<br><br>
-    <strong>沿途医院：</strong><br>
-    · 阳朔县人民医院：0773-8822120<br>
-    · 三江侗族自治县人民医院：0772-8612120<br>
-    · 黔东南州人民医院（凯里）：0855-8225555<br>
-    · 安顺市人民医院：0851-33224455<br>
-    · 宣威市第一人民医院：0874-7122431
+  <div class="name" style="color:var(--tint-red)">紧急电话 & 沿途医院</div>
+  <div class="desc" style="line-height:1.85">
+    <strong>报警：</strong>110 &nbsp; <strong>急救：</strong>120 &nbsp; <strong>火警：</strong>119<br>
+    <strong>交通事故：</strong>122 &nbsp; <strong>高速救援：</strong>12122<br>
+    <strong>中石化救援：</strong>95388 &nbsp; <strong>中石油救援：</strong>95504<br><br>
+    <strong>沿途主要医院：</strong><br>
+    · 百色市人民医院：0776-2836120<br>
+    · 兴义市人民医院：0859-3222777<br>
+    · 富源县人民医院：0874-4612120<br>
+    · 宣威市第一人民医院：0874-7122431<br>
+    · 宣威市中医医院：0874-7122120
+  </div>
+</div>
+
+<div class="section-head">🌤️ 天气 & 穿衣</div>
+<div class="card" style="margin-bottom:10px">
+  <div class="desc" style="line-height:1.85">
+    <strong>10/1 广西段：</strong>24-32°C，闷热，短袖+防晒<br>
+    <strong>10/2 贵州段：</strong>16-24°C，山区凉，薄外套<br>
+    <strong>10/2 云南宣威：</strong>9-21°C，<span style="color:var(--tint-red)">早晚接近10°C，务必带外套</span><br>
+    <strong>降雨：</strong>10月宣威约半数日子有雨，山路湿滑要减速<br>
+    <strong>日出日落：</strong>宣威 10/2 日出约06:56，<strong>日落约18:48</strong>
   </div>
 </div>
 
@@ -1047,7 +661,7 @@ function overviewContent() {
 </div>`;
 }
 
-const map = L.map('map', { center: [25.2, 108.5], zoom: 6, zoomControl: false, attributionControl: true });
+const map = L.map('map', { center: [24.3, 109.0], zoom: 6, zoomControl: false, attributionControl: true });
 L.control.zoom({ position: 'topright' }).addTo(map);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
 
@@ -1089,7 +703,7 @@ function icon(color, emoji) {
 if (HOTEL.lat) L.marker([HOTEL.lat, HOTEL.lng], { icon: icon('#ff9500','🏨'), zIndexOffset: 1000 }).addTo(map).bindPopup(`<b>${HOTEL.name}</b>`);
 
 /* ── Route Lines ── */
-const routeColors = ['#ff9500','#34c759','#af52de','#007aff','#ff2d55','#e60012'];
+const routeColors = ['#ff9500','#e60012'];
 DAYS.slice(1).forEach((d, i) => {
   const pts = d.locations.filter(l => l.lat && l.time !== '—').map(l => [l.lat, l.lng]);
   if (pts.length > 1) {
@@ -1208,20 +822,12 @@ function locCard(loc, dayIdx) {
 }
 
 const dayRoutes = {
-  1: ['中山','→ 黄姚古镇','→ 阳朔','🍴豆豉排骨·啤酒鱼'],
-  2: ['阳朔','🍴米粉·旧县农家菜·虾灯蟹'],
-  3: ['阳朔','→ 兴坪','→ 三江','🍴漓江鱼·侗族酸鱼'],
-  4: ['三江','→ 从江','→ 凯里','🍴从江香猪·酸汤鱼·米豆腐'],
-  5: ['凯里','→ 安顺','🍴裹卷·夺夺粉·丝娃娃'],
-  6: ['安顺','→ 盘州服务区','→ 曲靖','🍴蒸饵丝','→ 宣威','🏁 姬榔德村']
+  1: ['中山','→ 岑溪','→ 南宁绕城','→ 隆安午餐','→ 田东','→ 百色🏨'],
+  2: ['百色','→ 田林','→ 兴义东','→ 富源胜境关','→ 宣威🍴火腿','🏁 姬榔德村']
 };
 const dayTips = {
-  1: '🚶 City Walk日：黄姚古镇慢逛2h → 阳朔漓江边散步 · 🍜 豆豉排骨 + 啤酒鱼 · ☀️ 16:00前入住酒店',
-  2: '🚶 最轻松的一天：遇龙河乡间漫步 + 福利古镇 · 🍜 米粉 + 旧县农家菜 + 虾灯蟹 · ☀️ 16:30回酒店休息',
-  3: '🚶 City Walk日：兴坪古镇 + 三江侗族老街 · 🍜 漓江鱼 + 侗族酸鱼酸肉 · ☀️ 16:30前入住酒店',
-  4: '🚶 City Walk日：凯里大十字街区漫步 · 🍜 从江香猪 + 酸汤鱼 + 米豆腐 · ☀️ 16:30前入住酒店',
-  5: '🚶 轻松日：中午就到安顺，下午老城逛吃 · 🍜 裹卷 + 夺夺粉 + 丝娃娃 · ☀️ 14:00前入住',
-  6: '🏁 白天到达保障日：08:00出发 → 16:30前到达姬榔德村 · 🍜 曲靖蒸饵丝 + 宣威火腿烧烤 · ☀️ 日落约18:55，缓冲约2.5小时'
+  1: '⚡ 全程最长一天：818km / 约8.5h驾驶 · 05:30必须出发（国庆首日+高速免费）· ☀️ 15:00入住百色，日落约18:35缓冲3.5h',
+  2: '🏁 到达日：540km山路全白天 · 06:30出发 → 15:15到姬榔德村 · 🍜 宣威火腿午餐 · ☀️ 日落约18:48，缓冲3.5小时'
 };
 
 function renderDay(idx) {
@@ -1340,7 +946,7 @@ function toggleMap() {
   <button class="fab fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" data-page-node-id="UareRZEsVS4RYaqkzHTDbN">↑</button>
   <button class="fab fab-nav" id="fabMain" onclick="toggleFabMenu()" data-page-node-id="ciMusWOICMU8R40hjJqmby">🧭</button>
   <div class="fab-menu" id="fabMenu" data-page-node-id="26P7KLdxrSBivrQgG07MAI">
-    <button class="fab-menu-item" onclick="navToAmap('宣威市姬榔德村',26.228,104.098);closeFabMenu()" data-page-node-id="HJ4xJ0KtXX3HdRTgE3Aeji">🏁 导航到姬榔德村</button>
+    <button class="fab-menu-item" onclick="navToAmap('宣威市海岱镇姬榔德村',26.016,104.454);closeFabMenu()" data-page-node-id="HJ4xJ0KtXX3HdRTgE3Aeji">🏁 导航到姬榔德村</button>
     <button class="fab-menu-item" onclick="navSegment(cur);closeFabMenu()" data-page-node-id="Kc6HzSEjzbKDGpkwpAkjwH">🧭 导航当天路线</button>
     <button class="fab-menu-item" onclick="go(0);closeFabMenu()" data-page-node-id="AJ9at8sRDwRMujDYnrWpMe">📋 查看总览</button>
     <button class="fab-menu-item" onclick="go(cur);fitDayOnMap(cur);closeFabMenu()" data-page-node-id="MZ2VQ2sij2nHbgQjsZHwuD">🗺️ 定位当天路线</button>
@@ -1380,7 +986,7 @@ function navSegment(dayIdx) {
 // Fit map to current day's route
 function fitDayOnMap(idx) {
   if(idx === 0) {
-    map.setView([25.2, 108.5], 6);
+    map.setView([24.3, 109.0], 6);
     return;
   }
   const d = DAYS.find(x=>x.id===idx);
@@ -1406,9 +1012,9 @@ function downloadPDF() {
 
 // Share trip
 function shareTrip() {
-  const text = '中山→云南宣威 轻松6日 · City Walk+美食\n9/25-9/30\n路线：中山→黄姚古镇→阳朔→三江→凯里→安顺→曲靖→宣威姬榔德村\n主打：city walk + 本地美食，不赶热门景区\n每天入住不晚于16:30，D6下午16:30前到宣威姬榔德村，全程白天到达、不走夜路\n总里程约1600km';
+  const text = '中山→云南宣威 极速2日 · 10/1出发\n路线：中山→南宁→百色→兴义→富源→宣威→海岱镇姬榔德村\nD1 818km住百色（05:30出发）· D2 540km山路全白天，15:15到达\n日落约18:48，最后一段山路缓冲3.5小时，全程不走夜路\n总里程约1,360km · 国庆高速免费';
   if(navigator.share) {
-    navigator.share({title:'中山→宣威 轻松5日·City Walk+美食', text: text, url: window.location.href}).catch(()=>{});
+    navigator.share({title:'中山→宣威 极速2日·10/1出发', text: text, url: window.location.href}).catch(()=>{});
   } else {
     // Fallback: copy to clipboard
     const ta = document.createElement('textarea');
